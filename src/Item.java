@@ -3,16 +3,17 @@
  */
 public class Item {
 
-  private String pictureLink;
+  // TO BE ADDED
+  //private String description;
+  //private String googleMapsLink;
+  //private String pictureLink;
   private String websiteLink;
-  private String itemTitle;
-  private int itemTime;
+  private String itemTime;
 
-  public Item(String itemTitle, String websiteLink, String pictureLink, int itemTime) {
-    this.itemTitle = itemTitle;
+  public Item(String websiteLink, String itemTime) {
     this.websiteLink = websiteLink;
+    //this.pictureLink = pictureLink;
     this.itemTime = itemTime;
-    this.pictureLink = pictureLink;
 
   }
 }

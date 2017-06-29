@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -20,58 +19,53 @@ public class GimmeTheFreeStuff {
     // only show the stuff that is after the -----^
 
 
-
     String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+    // https://bloomington.craigslist.org/zip/6157287163.html
     Document doc = Jsoup.connect(html).get();
 
     Map<String, List<Item>> map = new HashMap<>();
 
     List<Item> list = new ArrayList<>();
+    Item templete = new Item("WEBSITELINK", "ITEMTIME");
 
+//  Title goes with MAP<Key
+    Elements linkAndTitleElement = doc.getElementsByClass(
+        "result-title hdrlnk"); //    <a href="/zip/6195172248.html" data-id="6195172248" class="result-title hdrlnk">curb alert FREE Child's Easel</a>
+    List<String> titleList = new ArrayList<>();
+    titleList = linkAndTitleElement
+        .eachText(); // [ISO: free unwanted wood furniture, Free wood, etc...
 
+    // Website goes with WEBSITELINK
+    List<String> websiteList = new ArrayList<>();
+    websiteList = linkAndTitleElement
+        .eachAttr("href");//   [/zip/6157287163.html, /zip/6196217563.html, etc...
+    // From user entered HTML link, get all the chars right after .org, and paste it in from of each array value
 
-    Item templete = new Item("","","",0);
-
-    // NEED TO GET PICTURE ELEMENT
-
-    // gets the result date
-    Elements timeElement = doc.getElementsByClass("result-date");
-
-    // gets the whole line
-    Elements linkAndTitleElement = doc.getElementsByClass("result-title hdrlnk");
-
-
-//    System.out.println(linkAndTitleElement);
-//    <a href="/zip/6195172248.html" data-id="6195172248" class="result-title hdrlnk">curb alert FREE Child's Easel</a>
-
-//    ListIterator litr = list.listIterator();
-
-//    int maximumItemsToGet = 10;
-//    while (true) {
-//      list.add(new Item (linkAndTitleElement.html(), "website_link","picture_link", 123));
-//    }
-
-    // How do i get each indivudal element in linkand title element?
-
-    System.out.println(list);
-
-//    for (Element e : linkAndTitleElement) {
-//      map.put()
-//      list.add(e.html());
-//    }
-
-// make a method that will add each string of the below code into a new item and for the other links as well
-    for (Element o : linkAndTitleElement) {
-      System.out.println(o.html() + "\n");
-    }
-
-    //Iterator here
-/*    for (Element e : timeElement) {
-      map.put(e.html(),)
-    }*/
-
-
-   // System.out.println(linkAndTitleElement.html());   // returns Bicycle for Free!
-//    System.out.println(timeElement.html());           // returns June 27 THIS IS GONNA BE KEY
+    //  Date/Time goes with ITEMTIME
+    Elements timeElement = doc.getElementsByClass(
+        "result-date");    //<time class="result-date" datetime="2017-06-28 15:45" title="Wed 28 Jun 03:45:58 PM">Jun 28</time>
+    List<String> dateTimeList = new ArrayList<>();
+    dateTimeList = timeElement.eachAttr(
+        "datetime");//   [2017-06-28 15:45, 2017-06-28 10:18, 2017-06-27 11:17, 2017-06-27 09:47,etc...
   }
 }
+
+/*
+
+    //  Picture link goes with PICTURELINK
+    // DELAY FOR NOW, ADD LATER
+    // There's the thumbnail picture and the actual picture, also some may posts may have multiple pictures
+    Elements pictureElement = doc.getElementsByTag(
+        "img");
+    System.out.println(pictureElement.outerHtml());
+    */
+/*<a href="/zip/6194742649.html" class="result-image gallery" data-ids="1:00909_bcr5WxpXUwA"><img alt="" class="" src="https://images.craigslist.org/00909_bcr5WxpXUwA_300x300.jpg" title="" style="">
+        </a>
+        *//*
+
+    List<String> pictureList = new ArrayList<>();
+    pictureList = pictureElement.eachAttr(
+        "src");
+    System.out.println(pictureElement);
+*/
+
