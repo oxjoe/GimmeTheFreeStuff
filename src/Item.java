@@ -6,7 +6,7 @@ public class Item {
   // TO BE ADDED
   //private String description;
   //private String googleMapsLink;
-  //private String pictureLink;
+  //private String pictureLiwebsiteList.get(i)nk;
   private String websiteLink;
   private String itemTime;
 
@@ -16,4 +16,10 @@ public class Item {
     this.itemTime = itemTime;
 
   }
+
+  @Override
+  public String toString() {
+    return websiteLink + ", " + itemTime;
+  }
+
 }

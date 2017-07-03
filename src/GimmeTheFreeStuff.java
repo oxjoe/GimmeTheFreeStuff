@@ -39,24 +39,20 @@ public class GimmeTheFreeStuff {
       System.out.println("link does not exist");
     }
 
-    Map<String, List<Item>> map = new HashMap<>();
-    List<Item> list = new ArrayList<>();
-    Item templete = new Item("WEBSITELINK", "ITEMTIME");
-
     Elements linkAndTitleElement = doc.getElementsByClass(
         "result-title hdrlnk"); //    <a href="/zip/6195172248.html" data-id="6195172248" class="result-title hdrlnk">curb alert FREE Child's Easel</a>
-    List<String> titleList = new ArrayList<>();
+    List<String> titleList;
     titleList = linkAndTitleElement
         .eachText(); // [ISO: free unwanted wood furniture, Free wood, etc...
 
-    List<String> websiteList = new ArrayList<>();
+    List<String> websiteList;
     websiteList = linkAndTitleElement
         .eachAttr("href");//   [/zip/6157287163.html, /zip/6196217563.html, etc...
 
     String[] split = userLink.split("/search");
     String mainLink = split[0];
     ListIterator<String> websiteItr = websiteList.listIterator();
-    String temp = "";
+    String temp;
     while (websiteItr.hasNext()) {
       temp = websiteItr.next();
       websiteItr.set(mainLink + temp);
@@ -64,28 +60,37 @@ public class GimmeTheFreeStuff {
 
     Elements timeElement = doc.getElementsByClass(
         "result-date");    //<time class="result-date" datetime="2017-06-28 15:45" title="Wed 28 Jun 03:45:58 PM">Jun 28</time>
-    List<String> dateTimeList = new ArrayList<>();
+    List<String> dateTimeList;
     dateTimeList = timeElement.eachAttr(
         "datetime");//   [2017-06-28 15:45, 2017-06-28 10:18, 2017-06-27 11:17, 2017-06-27 09:47,etc...
 
-    ListIterator<String> titleItr = titleList.listIterator();
-    ListIterator<String> dateItr = dateTimeList.listIterator();
     // Checks if all of the them are the same size by the transitive property, yay for math!
     if (!(titleList.size() == websiteList.size() && titleList.size() == dateTimeList.size())) {
       System.out.println("All lists are NOT the same size");
     }
 
-    while (titleItr.hasNext() && dateItr.hasNext() && websiteItr.hasNext()) {
-      list.add(new Item (websiteItr.next(), dateItr.next()));
-      map.put(titleItr.next(), list.get(0)); // pretty sure im mapping one value to the ENTIRE LIST? 
+    Map<String, Item> map = new HashMap<>();
+    List<Item> list = new ArrayList<>();
+
+    int size = titleList.size();
+
+    for (int i = 0; i < size; i++) {
+      list.add(new Item(websiteList.get(i), dateTimeList.get(i)));
+    }
+
+    int count = 0;
+    while (count < size) {
+      map.put(titleList.get(count), list.get(count));
+      count++;
     }
     for (Map.Entry x : map.entrySet()) {
-      System.out.println(x.getKey() + " " + x.getValue());
+      System.out.println(x.getKey() + ", " + x.getValue());
     }
-    System.out.println("it made it");
+   // convert the time in object Item to better readability
+//    2017-05-28 10:36
+//    SOrt it by Latest Item OR Item Name that is found
+
   }
-
-
 }
 
 /*
