@@ -1,5 +1,7 @@
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,9 +15,10 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String userLink = obj.getLink();
+    obj.firstStartup();
+    String userLink = obj.changeLink();
     obj.getData(userLink);
 
     // OVERALL PLAN
@@ -25,13 +28,17 @@ public class GimmeTheFreeStuff {
 
   }
 
-  public String getLink() {
+  public void firstStartup() {
+    //changeLink();
+  }
+
+  // Will ask user to input link from Craigslist
+  public String changeLink() {
     String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
-    // https://bloomington.craigslist.org/zip/6157287163.html
     return html;
   }
 
-  public void getData(String userLink) {
+  public void getData(String userLink) throws Exception {
     Document doc = null;
     try {
       doc = Jsoup.connect(userLink).get();
@@ -74,6 +81,18 @@ public class GimmeTheFreeStuff {
 
     int size = titleList.size();
 
+    //"yyyy-MM-dd HH:mm"
+    String dateStr = "2017-05-28 10:36";
+    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
+    String displayDate = new SimpleDateFormat("MMM, d '@' h:mm a").format(date);
+    System.out.println(displayDate); // May, 28 @ 10:36 AM
+
+    //"MMM, d '@' h:mm a"
+    // July 4 @ 2:30 PM
+
+    // Change dateTime to of type Date and convert it first to store in Map so its not of type String
+    // SORT IT BY HOW IT NORMALLY SHOWS IE 2017-06-28 15:45, then DISPLAY IT DIFFERENTLY
+
     for (int i = 0; i < size; i++) {
       list.add(new Item(websiteList.get(i), dateTimeList.get(i)));
     }
@@ -86,6 +105,8 @@ public class GimmeTheFreeStuff {
     for (Map.Entry x : map.entrySet()) {
       System.out.println(x.getKey() + ", " + x.getValue());
     }
+
+
    // convert the time in object Item to better readability
 //    2017-05-28 10:36
 //    SOrt it by Latest Item OR Item Name that is found
