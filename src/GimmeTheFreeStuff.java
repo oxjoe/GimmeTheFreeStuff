@@ -110,11 +110,8 @@ public class GimmeTheFreeStuff {
     Date currentDate = new Date();
     System.out.println(currentDate.toString());
     Timer timer = new Timer();
-    //List<Item> list = new ArrayList<>();
     List<Item> newList = new ArrayList<>();
     class timerTask extends TimerTask {
-
-     // List<Item> newList = new ArrayList<>();
 
       public void run() {
         try {
@@ -124,7 +121,7 @@ public class GimmeTheFreeStuff {
         } catch (ParseException e) {
           e.printStackTrace();
         }
-//        if user says stop then timer.cancel();
+// TODO       if user says stop then timer.cancel();
       }
     }
     timer.schedule(new timerTask(), minutes, (long) minutes / 60000);

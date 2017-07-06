@@ -55,7 +55,7 @@ public class Item implements Comparable<Item> {
 
   @Override
   public String toString() {
-    return name + " || " + date + " || " + urlLink + "\n";
+    return status + " || " + name + " || " + date + " || " + urlLink + "\n";
   }
 
   @Override

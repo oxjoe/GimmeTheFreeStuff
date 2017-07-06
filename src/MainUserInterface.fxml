@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainUserInterface">
+   <children>
+      <TextField layoutX="158.0" layoutY="30.0" prefHeight="25.0" prefWidth="212.0" text="Type Item Name" AnchorPane.leftAnchor="158.0" AnchorPane.topAnchor="30.0" />
+      <Label layoutX="115.0" layoutY="34.0" prefWidth="59.0" text="Find:" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="34.0" />
+      <Button layoutX="385.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Take me to Cragslist" AnchorPane.leftAnchor="385.0" AnchorPane.topAnchor="30.0" />
+      <Button layoutX="511.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="22.0" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Refresh List" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <AnchorPane layoutY="78.0" prefHeight="322.0" prefWidth="600.0">
+         <children>
+            <TableView layoutX="2.0" layoutY="-1.0" prefHeight="322.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <columns>
+                <TableColumn prefWidth="59.0" text="Status" />
+                <TableColumn prefWidth="91.0" text="Date Posted" />
+                  <TableColumn prefWidth="113.0" text="Name" />
+                  <TableColumn prefWidth="100.0" text="Distance from Location" />
+                  <TableColumn prefWidth="145.0" text="Websitelink" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

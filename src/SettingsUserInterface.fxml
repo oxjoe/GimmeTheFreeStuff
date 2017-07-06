@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SettingsUserInterface">
+   <children>
+      <TextField layoutX="172.0" layoutY="30.0" prefHeight="25.0" prefWidth="124.0" text="free guitar" />
+      <Label layoutX="99.0" layoutY="34.0" text="Notify me if" />
+      <Label layoutX="311.0" layoutY="34.0" text="appears" />
+      <Label layoutX="113.0" layoutY="75.0" text="Ignore" />
+      <TextField layoutX="162.0" layoutY="71.0" prefHeight="25.0" prefWidth="124.0" text="fire wood" />
+      <Label layoutX="123.0" layoutY="129.0" text="Refresh every" />
+      <TextField layoutX="203.0" layoutY="125.0" prefHeight="25.0" prefWidth="42.0" text="15" />
+      <Label layoutX="254.0" layoutY="125.0" prefHeight="25.0" prefWidth="56.0" text="minutes" />
+      <Label layoutX="54.0" layoutY="171.0" text="Change link from" />
+      <Text layoutX="159.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USER INPUTTED LINK" />
+      <Label layoutX="287.0" layoutY="171.0" text="to" />
+      <TextField layoutX="310.0" layoutY="167.0" text="new link " />
+      <CheckBox layoutX="157.0" layoutY="226.0" mnemonicParsing="false" text="Check for updates every" />
+      <TextField layoutX="310.0" layoutY="222.0" prefHeight="25.0" prefWidth="42.0" text="7" />
+      <Label layoutX="360.0" layoutY="226.0" text="days" />
+   </children>
+</AnchorPane>
