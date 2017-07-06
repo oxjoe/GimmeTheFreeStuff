@@ -12,11 +12,21 @@ public class Item implements Comparable<Item> {
   private String name;
   private Date date;
   private String urlLink;
+  private boolean status;
 
-  public Item(String name, Date date, String urlLink) {
+  public Item(String name, Date date, String urlLink, boolean status) {
     this.name = name;
     this.date = date;
     this.urlLink = urlLink;
+    this.status = status;
+  }
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
   }
 
   public String getName() {

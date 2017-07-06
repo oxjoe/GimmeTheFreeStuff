@@ -3,8 +3,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -13,17 +16,16 @@ import org.jsoup.select.Elements;
  * Created by Joseph on 6/26/2017.
  */
 public class GimmeTheFreeStuff {
-  
+
+
+  List<Item> list = new ArrayList<>();
+
   public static void main(String[] args) throws Exception {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     String userLink = obj.changeLink();
     List<Item> list = obj.getData(userLink);
     List<Item> mostRecentList = obj.sortByDate(list);
-    // OVERALL PLAN
-    // When you start up, show a giant list of all the free stuff
-    // if you hit repeat every hour then get the current time/date and when the next hour is here
-    // only show the stuff that is after the -----^
-
+    List<Item> refreshedList = obj.refreshCraigslist(userLink, 3000);
   }
 
   // firstStartup:
@@ -37,7 +39,6 @@ public class GimmeTheFreeStuff {
     String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
     return html;
   }
-
 
   // Catch exception for new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr)
   public List<Item> getData(String userLink) throws ParseException {
@@ -94,7 +95,8 @@ public class GimmeTheFreeStuff {
           // Converts each element of type string in dateTimeList
           // to type Date while adding it to the list so it can be sorted easier later as well
           // as be displayed more user friendly
-          itemLinkList.get(i)));
+          itemLinkList.get(i),
+          false));
     }
     return list;
   }
@@ -106,6 +108,41 @@ public class GimmeTheFreeStuff {
     System.out.println(list);
     return list;
   }
+
+  public List<Item> refreshCraigslist(String link, int minutes) {
+    Date currentDate = new Date();
+    System.out.println(currentDate.toString());
+    Timer timer = new Timer();
+    //List<Item> list = new ArrayList<>();
+
+    System.out.println("before timerTask");
+    class timerTask extends TimerTask {
+      List<Item> list = new ArrayList<>();
+      public void run() {
+        try {
+          list = sortByDate(getData(link));
+         // sortList = (list);
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+//        if user says stop then timer.cancel();
+      }
+
+
+    }
+
+    // Set a timer for 10 minutes.
+//    After 10 minutes check craigslist again, get the list and sort it again
+    // Compare each item in the list to the current time and if the item was posted after currentTime
+    // show it as green/add it as a new property
+
+    timer.schedule(new timerTask(), minutes, minutes); //(long) minutes / 60000
+    System.out.println("AFTER SCHEDULED");
+    System.out.println(list.toString());
+    return list;
+
+  }
+
 }
 
 /*
