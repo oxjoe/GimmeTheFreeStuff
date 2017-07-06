@@ -17,15 +17,12 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-
-  List<Item> list = new ArrayList<>();
-
   public static void main(String[] args) throws Exception {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     String userLink = obj.changeLink();
     List<Item> list = obj.getData(userLink);
     List<Item> mostRecentList = obj.sortByDate(list);
-    List<Item> refreshedList = obj.refreshCraigslist(userLink, 3000);
+    obj.refreshCraigslist(userLink, 10);
   }
 
   // firstStartup:
@@ -36,7 +33,7 @@ public class GimmeTheFreeStuff {
 
   // Will ask user to input link from Craigslist
   public String changeLink() {
-    String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+    String html = "https://chicago.craigslist.org/search/zip";
     return html;
   }
 
@@ -114,33 +111,35 @@ public class GimmeTheFreeStuff {
     System.out.println(currentDate.toString());
     Timer timer = new Timer();
     //List<Item> list = new ArrayList<>();
-
-    System.out.println("before timerTask");
+    List<Item> newList = new ArrayList<>();
     class timerTask extends TimerTask {
-      List<Item> list = new ArrayList<>();
+
+     // List<Item> newList = new ArrayList<>();
+
       public void run() {
         try {
-          list = sortByDate(getData(link));
-         // sortList = (list);
+          newList = sortByDate(getData(link));
+
+          // sortList = (list);
         } catch (ParseException e) {
           e.printStackTrace();
         }
 //        if user says stop then timer.cancel();
       }
-
-
     }
+    timer.schedule(new timerTask(), minutes, (long) minutes / 60000);
+    return compareLists(newList, currentDate);
+  }
 
-    // Set a timer for 10 minutes.
-//    After 10 minutes check craigslist again, get the list and sort it again
-    // Compare each item in the list to the current time and if the item was posted after currentTime
-    // show it as green/add it as a new property
-
-    timer.schedule(new timerTask(), minutes, minutes); //(long) minutes / 60000
-    System.out.println("AFTER SCHEDULED");
-    System.out.println(list.toString());
-    return list;
-
+  public List<Item> compareLists(List<Item> newList, Date currentDate) {
+    for (int i = 0; i < newList.size(); i++) {
+      if ((newList.get(i).getDate()).after(currentDate)) {
+        newList.get(i).setStatus(true);
+      } else if (((newList.get(i).getDate()).before(currentDate))) {// not sure if this line is needed
+        newList.get(i).setStatus(false);
+      }
+    }
+    return newList;
   }
 
 }
