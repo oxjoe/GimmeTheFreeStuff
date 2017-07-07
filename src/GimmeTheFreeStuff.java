@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Timer;
-import java.util.TimerTask;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -111,20 +110,20 @@ public class GimmeTheFreeStuff {
     System.out.println(currentDate.toString());
     Timer timer = new Timer();
     List<Item> newList = new ArrayList<>();
-    class timerTask extends TimerTask {
-
-      public void run() {
-        try {
-          newList = sortByDate(getData(link));
-
-          // sortList = (list);
-        } catch (ParseException e) {
-          e.printStackTrace();
-        }
-// TODO       if user says stop then timer.cancel();
-      }
-    }
-    timer.schedule(new timerTask(), minutes, (long) minutes / 60000);
+//    class timerTask extends TimerTask {
+//
+//      public void run() {
+//        try {
+//          newList = sortByDate(getData(link));
+//
+//          // sortList = (list);
+//        } catch (ParseException e) {
+//          e.printStackTrace();
+//        }
+//// TODO       if user says stop then timer.cancel();
+//      }
+//    }
+//    timer.schedule(new timerTask(), minutes, (long) minutes / 60000);
     return compareLists(newList, currentDate);
   }
 
