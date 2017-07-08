@@ -14,6 +14,8 @@ public class Item implements Comparable<Item> {
   private String urlLink;
   private boolean status;
 
+  // Default Constructor?
+
   public Item(String name, Date date, String urlLink, boolean status) {
     this.name = name;
     this.date = date;
