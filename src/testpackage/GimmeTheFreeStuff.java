@@ -1,3 +1,5 @@
+package testpackage;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,15 +26,9 @@ public class GimmeTheFreeStuff {
     obj.refreshCraigslist(userLink, 10);
   }
 
-  // firstStartup:
-  // get link from user and make sure it works
-  public void firstStartup() {
-    //getLinkFromUser();
-  }
-
-  // Will ask user to input link from Craigslist
+  // Get user input and confirm if the link works or not
   public String changeLink() {
-    String html = "https://chicago.craigslist.org/search/zip";
+    String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
     return html;
   }
 

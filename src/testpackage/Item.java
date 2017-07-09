@@ -1,3 +1,5 @@
+package testpackage;
+
 import java.util.Date;
 
 /**
@@ -14,7 +16,7 @@ public class Item implements Comparable<Item> {
   private String urlLink;
   private boolean status;
 
-  // Default Constructor?
+  // Default Constructor as an example
 
   public Item(String name, Date date, String urlLink, boolean status) {
     this.name = name;

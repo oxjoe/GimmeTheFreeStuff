@@ -1,4 +1,4 @@
-package com.example;
+package testpackage;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -25,6 +25,9 @@ public class Controller {
             */
   @FXML
   private ResourceBundle resources;
+
+  @FXML
+  private URL location;
 
   @FXML
   private TextField searchTextfield;
@@ -54,7 +57,10 @@ public class Controller {
 
   public List<Item> parseItemList() throws ParseException {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    System.out.println(obj.getData("https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405"));
+    System.out.println("reached parseItemList");
     return obj.getData("https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405");
+
   }
 
 //  public void refreshListClicked() {
