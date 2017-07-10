@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SettingsUserInterface">
    <children>
       <TextField layoutX="172.0" layoutY="30.0" prefHeight="25.0" prefWidth="124.0" text="free guitar" />
@@ -24,5 +23,6 @@
       <CheckBox layoutX="157.0" layoutY="226.0" mnemonicParsing="false" text="Check for updates every" />
       <TextField layoutX="310.0" layoutY="222.0" prefHeight="25.0" prefWidth="42.0" text="7" />
       <Label layoutX="360.0" layoutY="226.0" text="days" />
+      <Label layoutX="317.0" layoutY="192.0" text="Error link doesn't work" />
    </children>
 </AnchorPane>

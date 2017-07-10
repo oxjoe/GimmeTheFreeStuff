@@ -6,39 +6,24 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-  xmlns="http://javafx.com/javafx/8.0.111" fx:controller="testpackage.Controller">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
   <children>
-    <TextField AnchorPane.leftAnchor="158.0" AnchorPane.topAnchor="30.0" layoutX="158.0" layoutY="30.0"
-      prefHeight="25.0" prefWidth="212.0" text="Type testpackage.Item Name"
-      fx:id="searchTextfield"/>
-    <Label AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="34.0" layoutX="115.0" layoutY="34.0"
-      prefWidth="59.0" text="Find:"/>
-    <Button AnchorPane.leftAnchor="385.0" AnchorPane.topAnchor="30.0" layoutX="385.0" layoutY="30.0"
-      mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Take me to Cragslist"
-      fx:id="craigslistButton"/>
-    <Button AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="22.0" layoutX="511.0" layoutY="22.0"
-      mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Settings"
-      fx:id="settingsButton"/>
-    <Button AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" layoutX="14.0" layoutY="14.0"
-      mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Update list"
-      fx:id="updateListButton"/>
-    <AnchorPane layoutY="78.0" prefHeight="322.0" prefWidth="600.0">
-      <children>
-        <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" layoutX="2.0"
-          layoutY="-1.0" prefHeight="322.0" prefWidth="600.0"
-          fx:id="tableView">
-          <columns>
-            <TableColumn prefWidth="59.0" text="Status" fx:id="statusID"/>
-            <TableColumn prefWidth="91.0" text="Date Posted" fx:id="dateID"/>
-            <TableColumn prefWidth="113.0" text="Name" fx:id="nameID"/>
-            <!--
-            <TableColumn prefWidth="100.0" text="Distance from Location" fx:id="distanceID"/>
+    <TextField fx:id="searchTextfield" layoutX="158.0" layoutY="30.0" prefHeight="25.0" prefWidth="212.0" text="Type" AnchorPane.leftAnchor="158.0" AnchorPane.topAnchor="30.0" />
+    <Label layoutX="115.0" layoutY="34.0" prefWidth="59.0" text="Find:" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="34.0" />
+    <Button fx:id="craigslistButton" layoutX="385.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Take me to Cragslist" AnchorPane.leftAnchor="385.0" AnchorPane.topAnchor="30.0" />
+    <Button fx:id="settingsButton" layoutX="511.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="22.0" />
+    <Button fx:id="updateListButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Update list" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+  <TableView fx:id="tableView" layoutY="72.0" prefHeight="328.0" prefWidth="600.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
+    <columns>
+      <TableColumn fx:id="statusID" prefWidth="61.0" text="Status" />
+      <TableColumn fx:id="dateID" prefWidth="150.0" text="Date Posted" />
+      <TableColumn fx:id="nameID" prefWidth="244.0" text="Name" />
+      <!--
+      <TableColumn prefWidth="100.0" text="Distance from Location" fx:id="distanceID"/>
             -->
-            <TableColumn prefWidth="145.0" text="Websitelink" fx:id="urlID"/>
-          </columns>
-        </TableView>
-      </children>
-    </AnchorPane>
+      <TableColumn fx:id="urlID" prefWidth="129.0" text="Websitelink" />
+    </columns>
+  </TableView>
   </children>
 </AnchorPane>

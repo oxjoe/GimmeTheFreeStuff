@@ -90,6 +90,7 @@ public class GimmeTheFreeStuff {
           itemLinkList.get(i),
           false));
     }
+    System.out.println(list);
     return list;
   }
 
@@ -97,7 +98,7 @@ public class GimmeTheFreeStuff {
   // Takes a list of items and returns the list of items sorted by date (most recent)
   public List<Item> sortByDate(List<Item> list) {
     Collections.sort(list);
-    System.out.println(list);
+    //System.out.println(list);
     return list;
   }
 
@@ -163,4 +164,3 @@ public class GimmeTheFreeStuff {
         "src");
     System.out.println(pictureElement);
 */
-
