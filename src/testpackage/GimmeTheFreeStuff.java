@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Timer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -20,35 +19,33 @@ public class GimmeTheFreeStuff {
 
   public static void main(String[] args) throws Exception {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String userLink = obj.changeLink();
-    List<Item> list = obj.getData(userLink);
+    String userInput = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+    //changeLink(userInput); for when user wants to change outside of execution
+    Document document = obj.changeLink(userInput);
+    List<Item> list = obj.getData(document, userInput);
     List<Item> mostRecentList = obj.sortByDate(list);
-    obj.refreshCraigslist(userLink, 10);
+    //obj.refreshCraigslist(userLink, 10);
   }
 
-  // Get user input and confirm if the link works or not
-  public String changeLink() {
-    String html = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
-    return html;
+  // changeLink: String -> Document
+  // Takes user inputted Craigslist link and parses it with JSoup
+  public Document changeLink(String userInput) {
+    Document doc = null;
+    try {
+      doc = Jsoup.connect(userInput).get();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return doc;
   }
 
   // Catch exception for new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr)
-  public List<Item> getData(String userLink) throws ParseException {
-
-    // Takes the user input link and tries to parse it with jsoup
-    Document doc = null;
-    try {
-      doc = Jsoup.connect(userLink).get();
-    } catch (IOException e) {
-      System.out.println("link does not exist");
-    }
-
+  public List<Item> getData(Document doc, String userInput) {
     Elements linkAndTitleElement = doc.getElementsByClass("result-title hdrlnk");
     // <a href="/zip/6195172248.html" data-id="6195172248" class="result-title hdrlnk">curb alert
     // FREE Child's Easel</a>
     List<String> nameList = linkAndTitleElement.eachText();
     // [ISO: free unwanted wood furniture, Free wood, etc...
-
     List<String> itemLinkList = linkAndTitleElement.eachAttr("href");
     // [/zip/6157287163.html, /zip/6196217563.html, etc...
 
@@ -56,7 +53,7 @@ public class GimmeTheFreeStuff {
     // Split the /search part of the link:
     // https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405
     // and add it to the beginning of each element in the list
-    String[] split = userLink.split("/search");
+    String[] split = userInput.split("/search");
     String mainLink = split[0];
     ListIterator<String> websiteItr = itemLinkList.listIterator();
     String temp;
@@ -64,8 +61,9 @@ public class GimmeTheFreeStuff {
       temp = websiteItr.next();
       websiteItr.set(mainLink + temp);
     }
-    // websiteLink now shows : [https://bloomington.craigslist.org/zip/6202373846.html,
+    // websiteLink now shows: [https://bloomington.craigslist.org/zip/6202373846.html,
     // https://bloomington.craigslist.org/zip/6202308061.html, etc...
+    // instead of: [/zip/6202373846.html, /zip/6202308061.html, etc...
 
     Elements timeElement = doc.getElementsByClass("result-date");
     // <time class="result-date" datetime="2017-06-28 15:45" title="Wed 28 Jun 03:45:58 PM">Jun
@@ -79,18 +77,21 @@ public class GimmeTheFreeStuff {
     }
 
     List<Item> list = new ArrayList<>();
-    // Combines the other lists into one list of obj(Items)
+    // Combines the other lists into one list of Items
     for (int i = 0; i < nameList.size(); i++) {
-      list.add(new Item(
-          nameList.get(i),
-          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateList.get(i)),
-          // Converts each element of type string in dateTimeList
-          // to type Date while adding it to the list so it can be sorted easier later as well
-          // as be displayed more user friendly
-          itemLinkList.get(i),
-          false));
+      try {
+        list.add(new Item(
+            nameList.get(i),
+            new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateList.get(i)),
+            // Converts each element of type string in dateTimeList to type Date while adding it to
+            // the list so it can be sorted easier later as well + be displayed more user friendly
+            itemLinkList.get(i),
+            false));
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
     }
-    System.out.println(list);
+    //System.out.println(list);
     return list;
   }
 
@@ -102,38 +103,45 @@ public class GimmeTheFreeStuff {
     return list;
   }
 
-  public List<Item> refreshCraigslist(String link, int minutes) {
-    Date currentDate = new Date();
-    System.out.println(currentDate.toString());
-    Timer timer = new Timer();
-    List<Item> newList = new ArrayList<>();
-//    class timerTask extends TimerTask {
+//  public refreshCraigslistInXMin(String userLink, int minutes) {
+//    Date currentDate = new Date();
+//    System.out.println(currentDate.toString());
+//    Timer timer = new Timer();
+//    timer.schedule(new timerTask(), (long) minutes / 60000, (long) minutes / 60000);
 //
-//      public void run() {
-//        try {
-//          newList = sortByDate(getData(link));
+//    //return listWithNewStuff;
+//  }
+
+//  class timerTask extends TimerTask {
+//    GimmeTheFreeStuff objOne = new GimmeTheFreeStuff();
+//    @Override
+//    public void run() {
 //
-//          // sortList = (list);
-//        } catch (ParseException e) {
-//          e.printStackTrace();
-//        }
-//// TODO       if user says stop then timer.cancel();
-//      }
+//      List<Item> newList = new ArrayList<>();
+//      newList = sortByDate(getData(objOne.changeLink(userInput), userInput));
+//      compareLists(newList, currentDate)
+//      List<Item> listWithNewStuff = new ArrayList<>();
+//      listWithNewStuff = compareLists(newList, currentDate);
+//      List<Item> listWithNewStuff = new ArrayList<>();
+//
+////    if user says stop then timer.cancel();
 //    }
-//    timer.schedule(new timerTask(), minutes, (long) minutes / 60000);
-    return compareLists(newList, currentDate);
-  }
+//  }
 
   public List<Item> compareLists(List<Item> newList, Date currentDate) {
     for (int i = 0; i < newList.size(); i++) {
       if ((newList.get(i).getDate()).after(currentDate)) {
         newList.get(i).setStatus(true);
-      } else if (((newList.get(i).getDate()).before(currentDate))) {// not sure if this line is needed
+      } else if (((newList.get(i).getDate())
+          .before(currentDate))) {// not sure if this line is needed
         newList.get(i).setStatus(false);
       }
     }
     return newList;
   }
+
+
+
 
 }
 
@@ -148,6 +156,8 @@ public class GimmeTheFreeStuff {
 
 
 /* TODO to be added
+// Notify if guitar appears
+// Ignore firewood,
 // There's the thumbnail picture, actual picture and some may have multiple pictures
     Elements pictureElement = doc.getElementsByTag(
         "img");
@@ -164,3 +174,5 @@ public class GimmeTheFreeStuff {
         "src");
     System.out.println(pictureElement);
 */
+//</editor-fold>
+//endregion

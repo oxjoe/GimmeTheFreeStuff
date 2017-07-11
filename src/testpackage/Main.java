@@ -21,7 +21,8 @@ public class Main extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
-    primaryStage.setTitle("Welcome!");
+    primaryStage.setTitle("GimmeTheFreeStuff");
+    // i can set title in FXML document pretty sure
 
     primaryStage.show();
   }
