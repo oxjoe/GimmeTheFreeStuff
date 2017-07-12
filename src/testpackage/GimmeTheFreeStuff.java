@@ -1,5 +1,7 @@
 package testpackage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +10,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Properties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -18,22 +21,39 @@ import org.jsoup.select.Elements;
 public class GimmeTheFreeStuff {
 
   public static void startingUp() throws IOException {
-//// create and load default properties
-//    Properties defaultProps = new Properties();
-//    FileInputStream in = new FileInputStream("defaultProperties");
-//    defaultProps.load(in);
-//    in.close();
-//
-//// create application properties with default
-//    Properties applicationProps = new Properties(defaultProps);
-//
-//// now load properties
-//// from last invocation
-//    in = new FileInputStream("appProperties");
-//    applicationProps.load(in);
-//    in.close();
-  }
+    // Checks to see if userProperties exist, if it doesn't then proceed with default properties
+    try {
+      System.out.println("USER PROEPRTIES EXIST, SET UP PROGRAM WIHT USER PROPERITES");
+      FileInputStream in = new FileInputStream("user.properties");
+      Properties defaultProps = new Properties();
+      defaultProps.load(in);
+//      get stuff from user properteis
+      in.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("FIRST STARTUP EVER");
+      Properties defaultProps = new Properties();
+      FileInputStream in = new FileInputStream("default.properties");
+      defaultProps.load(in);
 
+      Properties userProps = new Properties(defaultProps);
+
+      String url = defaultProps.getProperty("craigslist");
+      int refresh = Integer.parseInt(defaultProps.getProperty("refresh"));
+      boolean refreshChecked = Boolean.parseBoolean(defaultProps.getProperty("refreshChecked"));
+      int update = Integer.parseInt(defaultProps.getProperty("update"));
+      boolean updateChecked = Boolean.parseBoolean(defaultProps.getProperty("updateChecked"));
+      in.close();
+    }
+
+
+
+////    FOR SAVING
+//    FileOutputStream out = new FileOutputStream("user.properties");
+//    userProps.setProperty("craigslist", "NEW SITE")
+//    userProps.store(out, null);
+//    out.close();
+
+  }
 
   public static void exiting() throws IOException {
   }

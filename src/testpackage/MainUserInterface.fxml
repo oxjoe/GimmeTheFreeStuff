@@ -7,12 +7,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.MainController">
   <children>
     <TextField fx:id="searchTextfield" layoutX="146.0" layoutY="16.0" onKeyPressed="#searchTextfieldEnter" prefHeight="38.0" prefWidth="212.0" text="Type" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="16.0" />
     <Label layoutX="116.0" layoutY="16.0" prefHeight="38.0" prefWidth="59.0" text="Find:" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="16.0" />
     <Button fx:id="craigslistButton" layoutX="368.0" layoutY="23.0" mnemonicParsing="false" onAction="#craigslistClicked" prefHeight="25.0" prefWidth="129.0" text="Take me to Cragslist" AnchorPane.leftAnchor="368.0" AnchorPane.topAnchor="23.0" />
-    <Button fx:id="settingsButton" layoutX="511.0" layoutY="23.0" mnemonicParsing="false" onAction="#switchScreens" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="23.0" />
+    <Button fx:id="settingsButton" layoutX="511.0" layoutY="23.0" mnemonicParsing="false" onAction="#gotoSettings" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="23.0" />
     <Button fx:id="updateListButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateListClicked" prefHeight="38.0" prefWidth="95.0" text="Update list" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
   <TableView fx:id="tableView" layoutY="72.0" prefHeight="328.0" prefWidth="600.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
     <columns>

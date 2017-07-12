@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="settings" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
    <children>
       <Label layoutX="188.0" layoutY="50.0" text="Change link from" />
       <Text fx:id="currentCraigslistText" layoutX="171.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEFAULT/PREVIOUS LINK" />
@@ -20,7 +20,7 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScreens" text="Go back to main screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#gotoMain" text="Go back to main screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <Button fx:id="enterNewLinkButton" layoutX="356.0" layoutY="107.0" mnemonicParsing="false" onAction="#changeLinkClicked" text="Enter" />
       <Text fx:id="statusText" layoutX="223.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="status" />
       <HBox layoutX="133.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0">
