@@ -9,20 +9,20 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
   <children>
-    <TextField fx:id="searchTextfield" layoutX="158.0" layoutY="30.0" prefHeight="25.0" prefWidth="212.0" text="Type" AnchorPane.leftAnchor="158.0" AnchorPane.topAnchor="30.0" />
-    <Label layoutX="115.0" layoutY="34.0" prefWidth="59.0" text="Find:" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="34.0" />
-    <Button fx:id="craigslistButton" layoutX="385.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Take me to Cragslist" AnchorPane.leftAnchor="385.0" AnchorPane.topAnchor="30.0" />
-    <Button fx:id="settingsButton" layoutX="511.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchScreens" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="22.0" />
-    <Button fx:id="updateListButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Update list" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <TextField fx:id="searchTextfield" layoutX="146.0" layoutY="16.0" onKeyPressed="#searchTextfieldEnter" prefHeight="38.0" prefWidth="212.0" text="Type" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="16.0" />
+    <Label layoutX="116.0" layoutY="16.0" prefHeight="38.0" prefWidth="59.0" text="Find:" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="16.0" />
+    <Button fx:id="craigslistButton" layoutX="368.0" layoutY="23.0" mnemonicParsing="false" onAction="#craigslistClicked" prefHeight="25.0" prefWidth="129.0" text="Take me to Cragslist" AnchorPane.leftAnchor="368.0" AnchorPane.topAnchor="23.0" />
+    <Button fx:id="settingsButton" layoutX="511.0" layoutY="23.0" mnemonicParsing="false" onAction="#switchScreens" prefHeight="25.0" prefWidth="75.0" text="Settings" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="23.0" />
+    <Button fx:id="updateListButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateListClicked" prefHeight="38.0" prefWidth="95.0" text="Update list" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
   <TableView fx:id="tableView" layoutY="72.0" prefHeight="328.0" prefWidth="600.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
     <columns>
-      <TableColumn fx:id="statusID" prefWidth="61.0" text="Status" />
-      <TableColumn fx:id="dateID" prefWidth="150.0" text="Date Posted" />
-      <TableColumn fx:id="nameID" prefWidth="244.0" text="Name" />
+      <TableColumn fx:id="statusCol" prefWidth="61.0" text="Status" />
+      <TableColumn fx:id="dateCol" prefWidth="150.0" text="Date Posted" />
+      <TableColumn fx:id="nameCol" prefWidth="244.0" text="Name" />
       <!--
       <TableColumn prefWidth="100.0" text="Distance from Location" fx:id="distanceID"/>
             -->
-      <TableColumn fx:id="urlID" prefWidth="129.0" text="Websitelink" />
+      <TableColumn fx:id="urlCol" prefWidth="129.0" text="Websitelink" />
     </columns>
   </TableView>
   </children>

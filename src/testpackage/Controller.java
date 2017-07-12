@@ -1,7 +1,6 @@
 package testpackage;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.event.ActionEvent;
@@ -10,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,8 +32,35 @@ public class Controller {
             <TableColumn prefWidth="145.0" text="Websitelink" fx:id="urlID"/>
             */
 
-  //
-  // TODO SETTINGS WINDOW ITSELF
+  // TODO - MAIN UI
+  @FXML // fx:id="searchTextfield"
+  private TextField searchTextfield; // Value injected by FXMLLoader
+
+  @FXML // fx:id="craigslistButton"
+  private Button craigslistButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="settingsButton"
+  private Button settingsButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="updateListButton"
+  private Button updateListButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="tableView"
+  private TableView<?> tableView; // Value injected by FXMLLoader
+
+  @FXML // fx:id="statusCol"
+  private TableColumn<?, ?> statusCol; // Value injected by FXMLLoader
+
+  @FXML // fx:id="dateCol"
+  private TableColumn<?, ?> dateCol; // Value injected by FXMLLoader
+
+  @FXML // fx:id="nameCol"
+  private TableColumn<?, ?> nameCol; // Value injected by FXMLLoader
+
+  @FXML // fx:id="urlCol"
+  private TableColumn<?, ?> urlCol; // Value injected by FXMLLoader
+
+  // TODO - SETTINGS UI
   @FXML // fx:id="settings"
   private AnchorPane settings; // Value injected by FXMLLoader
 
@@ -49,26 +76,48 @@ public class Controller {
   @FXML // fx:id="enterNewLinkButton"
   private Button enterNewLinkButton; // Value injected by FXMLLoader
 
+  @FXML // fx:id="statusText"
+  private Text statusText; // Value injected by FXMLLoader
+
+  @FXML // fx:id="refreshListCheckbox"
+  private CheckBox refreshListCheckbox; // Value injected by FXMLLoader
+
+  @FXML // fx:id="minutesTextfield"
+  private TextField minutesTextfield; // Value injected by FXMLLoader
+
+  @FXML // fx:id="updatesCheckbox"
+  private CheckBox updatesCheckbox; // Value injected by FXMLLoader
+
+  @FXML // fx:id="daysTextfield"
+  private TextField daysTextfield; // Value injected by FXMLLoader
+
+  //TODO - MAIN UI
   @FXML
-  private Text statusText;
+  void craigslistClicked(ActionEvent event) {
+  }
 
   @FXML
-  private Button settingsButton;
-  @FXML
-  private Button updateListButton;
-  @FXML
-  private TableView<Item> tableView;
-  @FXML
-  private TableColumn<Item, Date> dateID;
-  @FXML
-  private TableColumn<Item, String> nameID;
-  @FXML
-  private TableColumn<Item, Boolean> statusID;
-  //@FXML
-  //private TableColumn<Item, String> distanceID;
-  @FXML
-  private TableColumn<Item, String> urlID;
+  void searchTextfieldEnter(KeyEvent event) {
+  }
 
+  @FXML
+  void updateListClicked(ActionEvent event) {
+  }
+
+  //TODO - SETTINGS UI
+  @FXML
+  void refreshListChecked(ActionEvent event) {
+  }
+
+  @FXML
+  void updatesChecked(ActionEvent event) {
+  }
+
+  //  public void refreshListClicked() {
+//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+//    //obj.getData("life");
+//
+//  }
   void firstStartup() {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     currentCraigslistText.setText("obj.getUserInput");
@@ -76,7 +125,7 @@ public class Controller {
 
   // If user HITS enter gets the link from the textfield and tries to parse it with jSoup
   @FXML
-  void changeLinkEnter(KeyEvent e) {
+  void newCraigslistTextfieldEnter(KeyEvent e) {
     if (e.getCode() == KeyCode.ENTER) {
       testLink();
     }
@@ -112,13 +161,13 @@ public class Controller {
     Parent root;
     if (e.getSource() == settingsButton) {
       //currentScreen = false;
-      System.out.println("Settings Button Clicked");
+      System.out.println("settings button clicked");
 
       stage = (Stage) settingsButton.getScene().getWindow();
       root = FXMLLoader.load(getClass().getResource("SettingsUserInterface.fxml"));
     } else {
       // currentScreen = true;
-      System.out.println("going back to main");
+      System.out.println("back to main clicked");
 
       stage = (Stage) backButton.getScene().getWindow();
       root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
@@ -130,11 +179,11 @@ public class Controller {
 
 
   public void initialize() {
-    System.out.println("Reached Controller - initialize");
-//      statusID.setCellValueFactory(new PropertyValueFactory<>("status"));
-//      dateID.setCellValueFactory(new PropertyValueFactory<>("date"));
-//      nameID.setCellValueFactory(new PropertyValueFactory<>("name"));
-//      urlID.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
+    System.out.println("initialized");
+//      statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+//      dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+//      nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+//      urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
 //   // tableView.getItems().setAll(parseItemList());
 
   }
@@ -147,10 +196,5 @@ public class Controller {
 //
 //  }
 
-//  public void refreshListClicked() {
-//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-//    //obj.getData("life");
-//
-//  }
 
 }

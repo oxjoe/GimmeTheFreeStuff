@@ -22,7 +22,6 @@ public class Main extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.setTitle("GimmeTheFreeStuff");
-    // i can set title in FXML document pretty sure
 
     primaryStage.show();
   }
