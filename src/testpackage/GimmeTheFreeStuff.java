@@ -20,32 +20,110 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  public static void startingUp() throws IOException {
+  private Properties userProperties;
+  private String craigslist;
+  private int refresh;
+  private boolean refreshChecked;
+  private int update;
+  private boolean updateChecked;
+
+  public static void main(String[] args) throws Exception {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    obj.startup();
+//    String userInput = "https://bloomington.craigslist"
+//        + ".org/search/zip?search_distance=10&postal=47405";
+//    //changeLink(userInput); for when user wants to change outside of execution
+//    Document document = obj.changeLink(userInput);
+//    List<Item> list = obj.getData(document, userInput);
+//    List<Item> mostRecentList = obj.sortByDate(list);
+  }
+
+  public Properties getUserProperties() {
+    return userProperties;
+  }
+
+  public void setUserProperties(Properties userProperties) {
+    this.userProperties = userProperties;
+  }
+
+  public String getCraigslist() {
+    return craigslist;
+  }
+
+  public void setCraigslist(String craigslist) {
+    this.craigslist = craigslist;
+  }
+
+  public int getRefresh() {
+    return refresh;
+  }
+
+  public void setRefresh(int refresh) {
+    this.refresh = refresh;
+  }
+
+  public boolean isRefreshChecked() {
+    return refreshChecked;
+  }
+
+  public void setRefreshChecked(boolean refreshChecked) {
+    this.refreshChecked = refreshChecked;
+  }
+
+  public int getUpdate() {
+    return update;
+  }
+
+  public void setUpdate(int update) {
+    this.update = update;
+  }
+
+  public boolean isUpdateChecked() {
+    return updateChecked;
+  }
+
+  public void setUpdateChecked(boolean updateChecked) {
+    this.updateChecked = updateChecked;
+  }
+
+  private void startup() {
     // Checks to see if userProperties exist, if it doesn't then proceed with default properties
     try {
-      System.out.println("USER PROEPRTIES EXIST, SET UP PROGRAM WIHT USER PROPERITES");
       FileInputStream in = new FileInputStream("user.properties");
-      Properties defaultProps = new Properties();
-      defaultProps.load(in);
-//      get stuff from user properteis
-      in.close();
+      System.out.println("User properties DO exist, using user properties");
+      setInstanceVars(getUserProperties(), in);
     } catch (FileNotFoundException e) {
-      System.out.println("FIRST STARTUP EVER");
-      Properties defaultProps = new Properties();
-      FileInputStream in = new FileInputStream("default.properties");
-      defaultProps.load(in);
-
-      Properties userProps = new Properties(defaultProps);
-
-      String url = defaultProps.getProperty("craigslist");
-      int refresh = Integer.parseInt(defaultProps.getProperty("refresh"));
-      boolean refreshChecked = Boolean.parseBoolean(defaultProps.getProperty("refreshChecked"));
-      int update = Integer.parseInt(defaultProps.getProperty("update"));
-      boolean updateChecked = Boolean.parseBoolean(defaultProps.getProperty("updateChecked"));
-      in.close();
+      System.out.println("User properties DON'T exist, using default");
+      try {
+        setupWithDefaultProps();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
+  // Sets instance variables as default properties or user properties depending which one exists
+  private void setInstanceVars(Properties prop, FileInputStream in) throws IOException {
+    prop.load(in);
+    setCraigslist(prop.getProperty("craigslist"));
+    setRefresh(Integer.parseInt(prop.getProperty("refresh")));
+    setRefreshChecked(Boolean.parseBoolean(prop.getProperty("refreshChecked")));
+    setUpdate(Integer.parseInt(prop.getProperty("update")));
+    setUpdateChecked(
+        updateChecked = Boolean.parseBoolean(prop.getProperty("updateChecked")));
+    in.close();
+  }
 
+  private void setupWithDefaultProps() throws IOException {
+    Properties defaultProps = new Properties();
+    FileInputStream in = new FileInputStream("default.properties");
+    setInstanceVars(defaultProps, in);
+    // Set userproperties with 'default' as its original settings since userproperties doesn't exist
+    setUserProperties(defaultProps);
+    in.close();
+  }
 
 ////    FOR SAVING
 //    FileOutputStream out = new FileOutputStream("user.properties");
@@ -53,23 +131,6 @@ public class GimmeTheFreeStuff {
 //    userProps.store(out, null);
 //    out.close();
 
-  }
-
-  public static void exiting() throws IOException {
-  }
-
-  public static void main(String[] args) throws Exception {
-    startingUp();
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String userInput = "https://bloomington.craigslist"
-        + ".org/search/zip?search_distance=10&postal=47405";
-    //changeLink(userInput); for when user wants to change outside of execution
-    Document document = obj.changeLink(userInput);
-    List<Item> list = obj.getData(document, userInput);
-    List<Item> mostRecentList = obj.sortByDate(list);
-    //obj.refreshCraigslist(userLink, 10);
-    exiting();
-  }
 
   // changeLink: String -> Document
   // Takes user inputted Craigslist link and parses it with JSoup
@@ -216,5 +277,3 @@ public class GimmeTheFreeStuff {
         "src");
     System.out.println(pictureElement);
 */
-//</editor-fold>
-//endregion
