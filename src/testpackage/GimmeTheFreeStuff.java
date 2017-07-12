@@ -17,14 +17,38 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
+  public static void startingUp() throws IOException {
+//// create and load default properties
+//    Properties defaultProps = new Properties();
+//    FileInputStream in = new FileInputStream("defaultProperties");
+//    defaultProps.load(in);
+//    in.close();
+//
+//// create application properties with default
+//    Properties applicationProps = new Properties(defaultProps);
+//
+//// now load properties
+//// from last invocation
+//    in = new FileInputStream("appProperties");
+//    applicationProps.load(in);
+//    in.close();
+  }
+
+
+  public static void exiting() throws IOException {
+  }
+
   public static void main(String[] args) throws Exception {
+    startingUp();
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String userInput = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+    String userInput = "https://bloomington.craigslist"
+        + ".org/search/zip?search_distance=10&postal=47405";
     //changeLink(userInput); for when user wants to change outside of execution
     Document document = obj.changeLink(userInput);
     List<Item> list = obj.getData(document, userInput);
     List<Item> mostRecentList = obj.sortByDate(list);
     //obj.refreshCraigslist(userLink, 10);
+    exiting();
   }
 
   // changeLink: String -> Document
@@ -139,8 +163,6 @@ public class GimmeTheFreeStuff {
     }
     return newList;
   }
-
-
 
 
 }
