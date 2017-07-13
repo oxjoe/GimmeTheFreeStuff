@@ -2,6 +2,7 @@ package testpackage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,77 +21,58 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  private static Properties userProperties;
-  private static String craigslist;
+  public GimmeTheFreeStuff(){
+
+  }
+
+  // don't need getter for userProps b/c already have get value
+  private Properties userProps;
+  public void setUserProps(Properties userProps) {
+    this.userProps = userProps;
+  }
+  private String link;
   private int refresh;
   private boolean refreshChecked;
   private int update;
   private boolean updateChecked;
 
-  public GimmeTheFreeStuff(Properties userProperties, String craigslist, int refresh,
-      boolean refreshChecked, int update, boolean updateChecked) {
-    this.userProperties = userProperties;
-    this.craigslist = craigslist;
-    this.refresh = refresh;
-    this.refreshChecked = refreshChecked;
-    this.update = update;
-    this.updateChecked = updateChecked;
+  // GOOD
+  public String getLink() {
+    return link;
   }
-
-  public GimmeTheFreeStuff() {
-  }
-
-  public Properties getUserProperties() {
-    return userProperties;
-  }
-
-  public void setUserProperties(Properties userProperties) {
-    this.userProperties = userProperties;
-  }
-
-  public String getCraigslist() {
-    return craigslist;
-  }
-
-  public void setCraigslist(String craigslist) {
-    this.craigslist = craigslist;
-  }
-
   public int getRefresh() {
     return refresh;
   }
-
-  public void setRefresh(int refresh) {
-    this.refresh = refresh;
-  }
-
   public boolean isRefreshChecked() {
     return refreshChecked;
   }
-
-  public void setRefreshChecked(boolean refreshChecked) {
-    this.refreshChecked = refreshChecked;
-  }
-
   public int getUpdate() {
     return update;
   }
-
-  public void setUpdate(int update) {
-    this.update = update;
-  }
-
   public boolean isUpdateChecked() {
     return updateChecked;
   }
 
+  // These are all set
+  public void setLink(String link) {
+    this.link = link;
+  }
+  public void setRefresh(int refresh) {
+    this.refresh = refresh;
+  }
+  public void setRefreshChecked(boolean refreshChecked) {
+    this.refreshChecked = refreshChecked;
+  }
+  public void setUpdate(int update) {
+    this.update = update;
+  }
   public void setUpdateChecked(boolean updateChecked) {
     this.updateChecked = updateChecked;
   }
 
+
   public static void main(String[] args) throws Exception {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    obj.startup();
    // Document document = obj.changeLink("https://chicago.craigslist.org/search/zip");
   //  List<Item> list = obj.getData(document, "https://chicago.craigslist.org/search/zip");
 //    List<Item> mostRecentList = obj.sortByDate(list);
@@ -102,48 +84,70 @@ public class GimmeTheFreeStuff {
     defaultProps.load(in);
     in.close();
 
-// create application properties with default
-    setUserProperties(new Properties(defaultProps));
+    // create application properties with default
+    setUserProps(new Properties(defaultProps));
 
     try {
+      // If user props exist
       in = new FileInputStream("user.properties");
       System.out.println("User properties DO exist, using user properties");
-      setInstanceVars(getUserProperties(), in);
+      setInstanceVars(userProps, in);
     } catch (FileNotFoundException e) {
-      System.out.println("User properties DON'T exist, using default");
-        setInstanceVars(defaultProps, in);
+      System.out.println("User properties DOESN'T exist, using default");
+      setInstanceVars(defaultProps, in);
     }
   }
 
   // Sets instance variables as default properties or user properties depending which one exists
   private void setInstanceVars(Properties prop, FileInputStream in) throws IOException {
     prop.load(in);
-    setCraigslist(prop.getProperty("craigslist"));
-    setRefresh(Integer.parseInt(prop.getProperty("refresh")));
+    setLink(prop.getProperty("link"));
+    setRefresh(Integer.parseInt(prop.getProperty("refreshRate")));
     setRefreshChecked(Boolean.parseBoolean(prop.getProperty("refreshChecked")));
-    setUpdate(Integer.parseInt(prop.getProperty("update")));
+    setUpdate(Integer.parseInt(prop.getProperty("updateRate")));
     setUpdateChecked(
         updateChecked = Boolean.parseBoolean(prop.getProperty("updateChecked")));
     in.close();
   }
 
-  // make a method that will take inputs and save it to user properties
-////    FOR SAVING
-//    FileOutputStream out = new FileOutputStream("user.properties");
-//    userProps.setProperty("craigslist", "NEW SITE")
-//    userProps.store(out, null);
-//    out.close();
-
   // Takes user inputted Craigslist link and parses it with JSoup
   public Document changeLink(String link) {
-    Document doc = null;
+    Document doc;
     try {
       doc = Jsoup.connect(link).get();
     } catch (IOException e) {
+      System.err.print("changeLink() could not parse the given string");
+      doc = null;
       e.printStackTrace();
     }
     return doc;
   }
+
+  // Given a key returns its value
+  public String getPropertyValue(String key) throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    userProps.load(in);
+    String value = userProps.getProperty(key);
+    in.close();
+    return value;
+  }
+
+  // Given a key and its value change to its new value
+  public void changePropertyValue(String key, String value) throws IOException {
+    FileOutputStream out = new FileOutputStream("user.properties");
+    userProps.setProperty(key, value);
+    userProps.store(out, null);
+    out.close();
+  }
+
+  // NOT SURE IF FETCH IS NEEDED
+//  void fetchUserProps() throws IOException {
+//    getValue("link");
+//    getValue("refresh");
+//    getValue("refreshChecked");
+//    getValue("updateChecked");
+//    getValue("update");
+//  }
 
   // Catch exception for new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr)
   public List<Item> getData(Document doc, String userInput) {

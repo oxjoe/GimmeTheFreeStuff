@@ -7,7 +7,6 @@ import java.util.Date;
  */
 public class Item implements Comparable<Item> {
 
-  // TODO to be added
   //private String description;
   //private String mapsLink;
   //private String pictureLink
@@ -15,8 +14,6 @@ public class Item implements Comparable<Item> {
   private Date date;
   private String urlLink;
   private boolean status;
-
-  // Default Constructor as an example
 
   public Item(String name, Date date, String urlLink, boolean status) {
     this.name = name;

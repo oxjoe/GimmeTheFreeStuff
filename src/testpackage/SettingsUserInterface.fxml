@@ -14,19 +14,18 @@
    <children>
       <Label layoutX="188.0" layoutY="50.0" text="Change link from" />
       <Label layoutX="233.0" layoutY="90.0" text="to" />
-      <TextField fx:id="newCraigslistTextfield" layoutX="133.0" layoutY="107.0" onKeyPressed="#newCraigslistTextfieldEnter" prefHeight="25.0" prefWidth="214.0" promptText="Paste new Craigslist link here" />
+      <TextField fx:id="linkTextfield" alignment="CENTER" layoutX="49.0" layoutY="107.0" onKeyPressed="#craigslistTextfieldEnter" prefHeight="25.0" prefWidth="384.0" promptText="Paste Craigslist link here and hit Enter!" />
       <Label layoutX="203.0" layoutY="11.0" text="Settings">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#gotoMain" text="Go back to main screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
-      <Button fx:id="enterNewLinkButton" layoutX="356.0" layoutY="107.0" mnemonicParsing="false" onAction="#changeLinkClicked" text="Enter" />
       <Text fx:id="statusText" layoutX="181.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to submit" />
       <HBox layoutX="133.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0">
          <children>
-            <CheckBox fx:id="refreshListCheckbox" mnemonicParsing="false" onAction="#refreshListChecked" prefHeight="45.0" prefWidth="116.0" text="Refresh list every" />
-            <TextField fx:id="minutesTextfield" prefHeight="50.0" prefWidth="35.0" text="15" />
+            <CheckBox fx:id="refreshCheckbox" mnemonicParsing="false" onAction="#refreshListChecked" prefHeight="45.0" prefWidth="116.0" text="Refresh list every" />
+            <TextField fx:id="minTextfield" prefHeight="50.0" prefWidth="35.0" text="15" />
             <Label alignment="CENTER" prefHeight="57.0" prefWidth="51.0" text="minutes" />
          </children>
       </HBox>
@@ -37,6 +36,6 @@
             <Label alignment="CENTER" prefHeight="55.0" prefWidth="42.0" text="days" />
          </children>
       </HBox>
-      <Hyperlink fx:id="currentCraigslistLink" alignment="CENTER" layoutX="-2.0" layoutY="67.0" onAction="#currentCraiglistClicked" prefHeight="23.0" prefWidth="500.0" text="current link" />
+      <Hyperlink fx:id="currentLink" alignment="CENTER" layoutX="-2.0" layoutY="67.0" onAction="#openCraigslist" prefHeight="23.0" prefWidth="500.0" text="current link" />
    </children>
 </AnchorPane>

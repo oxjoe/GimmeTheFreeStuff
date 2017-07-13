@@ -1,6 +1,7 @@
 package testpackage;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
  */
-public class MainController{
+public class MainController {
 
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
@@ -45,12 +47,12 @@ public class MainController{
   @FXML // fx:id="urlCol"
   private TableColumn<?, ?> urlCol; // Value injected by FXMLLoader
 
+  // Opens Craigslist in browser
   @FXML
-  void craigslistClicked(ActionEvent event) {
+  void craigslistClicked() {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     Main main = new Main();
-    main.openUrl(obj.getCraigslist());
-    System.out.println("Clicked in MainController");
+    main.openUrl(obj.getLink());
   }
 
   @FXML
@@ -59,35 +61,38 @@ public class MainController{
 
   @FXML
   void updateListClicked(ActionEvent event) {
+//    populateTable()
   }
 
   @FXML
-  void gotoSettings(ActionEvent e) throws IOException {
+  void gotoSettings() throws IOException {
     Stage stage = (Stage) settingsButton.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("SettingsUserInterface.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
+    stage.setTitle("GimmeTheFreeStuff for CITYNAME");
+    // TODO stage.setTitle("GimmeTheFreeStuff for CITYNAME")
     stage.show();
     System.out.println("Switched to Settings page");
   }
 
-
-  public void initialize() {
-    System.out.println("*** MainController Initialized ***");
+  void populateTable() {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    try {
-      obj.startup();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    System.out.println(obj.getCraigslist() + " in MainController");
+    String link = obj.getLink();
+    Document doc = obj.changeLink(link);
+    List<Item> list = obj.getData(doc, link);
+        List<Item> correctList = obj.sortByDate(list);
+    System.out.println(correctList.toString());
+  }
+
+  // TABLE THINGS
 //      statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 //      dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 //      nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 //      urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
 //   // tableView.getItems().setAll(parseItemList());
 
-  }
+
 
 //  public List<Item> parseItemList() throws ParseException {
 //    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
@@ -97,5 +102,15 @@ public class MainController{
 //
 //  }
 
-
+  public void initialize() {
+    System.out.println("*** MainController Initialized ***");
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    // Setup MainUI with user properties if those exist, or default properties
+    try {
+      obj.startup();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    //populateTable();
+  }
 }

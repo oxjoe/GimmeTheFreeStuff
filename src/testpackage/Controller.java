@@ -1,7 +1,5 @@
 package testpackage;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,32 +17,27 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
  */
 public class Controller {
 
-  @FXML // fx:id="currentCraigslistLink"
-  private Hyperlink currentCraigslistLink; // Value injected by FXMLLoader
-
-  @FXML // fx:id="newCraigslistTextfield"
-  private TextField newCraigslistTextfield; // Value injected by FXMLLoader
+  @FXML // fx:id="linkTextfield"
+  private TextField linkTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="backButton"
   private Button backButton; // Value injected by FXMLLoader
 
-  @FXML // fx:id="enterNewLinkButton"
-  private Button enterNewLinkButton; // Value injected by FXMLLoader
-
   @FXML // fx:id="statusText"
   private Text statusText; // Value injected by FXMLLoader
 
-  @FXML // fx:id="refreshListCheckbox"
-  private CheckBox refreshListCheckbox; // Value injected by FXMLLoader
+  @FXML // fx:id="refreshCheckbox"
+  private CheckBox refreshCheckbox; // Value injected by FXMLLoader
 
-  @FXML // fx:id="minutesTextfield"
-  private TextField minutesTextfield; // Value injected by FXMLLoader
+  @FXML // fx:id="minTextfield"
+  private TextField minTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="updatesCheckbox"
   private CheckBox updatesCheckbox; // Value injected by FXMLLoader
@@ -52,87 +45,104 @@ public class Controller {
   @FXML // fx:id="daysTextfield"
   private TextField daysTextfield; // Value injected by FXMLLoader
 
-  @FXML
-  void refreshListChecked(ActionEvent event) {
-  }
+  @FXML // fx:id="currentLink"
+  private Hyperlink currentLink; // Value injected by FXMLLoader
 
   @FXML
-  void updatesChecked(ActionEvent event) {
+  void refreshListChecked(ActionEvent e) {
+
+  }
+  @FXML
+  void updatesChecked(ActionEvent e) {
+
   }
 
+  public void initialize() {
+    System.out.println("*** Controller Initialized ***");
+    try {
+      fillInUI();
+    } catch (IOException e) {
+      System.err.print("Couldn't fill in UI");
+      e.printStackTrace();
+    }
+  }
+
+  // Fills in ui with user.properties properties, doesn't matter if it was default b/c user.propers
+//  defaults to that
+  void fillInUI() throws IOException {
+    System.out.println("GOT TO FILL IN UI");
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    currentLink.setText(obj.getPropertyValue("link"));
+    minTextfield.setText(obj.getPropertyValue("updateRate"));
+    daysTextfield.setText(obj.getPropertyValue("refreshRate"));
+    refreshCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("refreshChecked")));
+    updatesCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("updateChecked")));
+  }
+
+  // Gets the link from the TextField and tries to parse it with jSoup
+  void testLink() {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    String url = linkTextfield.getText();
+    Document doc = obj.changeLink(url);
+    while (doc == null) {
+      // TODO - CONTROLLER
+      // display something to let the user know that it couldn't parse the link
+      // when its not null that means it successfully parsed
+    }
+    try {
+      obj.changePropertyValue("link", url);
+      success(url);
+    } catch (IOException e) {
+      System.err.print("obj.changeValue(\"url\", site) -> didn't work in testlink");
+      e.printStackTrace();
+    }
+  }
+
+
+  // TODO - CONTROLLER
+  // change "press enter to submit" to Success for 1.5 seconds then change it back to "press...
+  // Change previous hyperlink to new link
+  // clear texfield
+  void success(String url) {
+    statusText.setText("Success!");
+    statusText.setFill(Color.GREEN);
+    Timer timer = new Timer();
+    class timerTask extends TimerTask {
+      @Override
+      public void run() {
+        timer.cancel();
+      }
+    }
+    timer.schedule(new timerTask(), 1500);
+  }
+
+
+  // Button to switch UI's
   @FXML
-  void currentCraiglistClicked(ActionEvent event) {
+  void gotoMain() throws IOException {
+    Stage stage = (Stage) backButton.getScene().getWindow();
+    Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.setTitle("GimmeTheFreeStuff for CITYNAME");
+    // TODO stage.setTitle("GimmeTheFreeStuff for CITYNAME")
+    stage.show();
+    System.out.println("Switched to Main page");
+  }
+
+  // Opens Craigslist in browser
+  @FXML
+  void openCraigslist() {
     Main main = new Main();
-    main.openUrl(currentCraigslistLink.getText());
-    System.out.println("Clicked in Controller");
+    main.openUrl(currentLink.getText());
   }
 
-  // If user HITS enter then gets the link from the textfield and tries to parse it with jSoup
+  // If user HITS enter then it goes to testLink()
   @FXML
-  void newCraigslistTextfieldEnter(KeyEvent e) {
+  void craigslistTextfieldEnter(KeyEvent e) {
     if (e.getCode() == KeyCode.ENTER) {
       testLink();
     }
   }
 
-  // If user CLICKS enter gets the link from the textfield and tries to parse it with jSoup
-  @FXML
-  void changeLinkClicked(ActionEvent e) {
-    testLink();
-  }
-
-  void testLink() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String site = newCraigslistTextfield.getText();
-    obj.changeLink(site);
-    obj.setCraigslist();
-    try {
-      FileOutputStream out = new FileOutputStream("user.properties");
-      obj.getUserProperties().setProperty("craigslist", site);
-      obj.getUserProperties().store(out, null);
-      out.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    statusText.setText("Success!");
-    statusText.setFill(Color.GREEN);
-    Timer timer = new Timer();
-    class timerTask extends TimerTask {
-
-      @Override
-      public void run() {
-
-        timer.cancel();
-      }
-    }
-    timer.schedule(new timerTask(), 1500);
-
-//    statusText.setText("Press enter to submit");
-//    statusText.setFill(Color.BLACK);
-    currentCraigslistLink.setText(site);
-  }
-
-  @FXML
-  void gotoMain(ActionEvent e) throws IOException {
-    Stage stage = (Stage) backButton.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    System.out.println("Switched to Main page");
-  }
-
-  public void initialize() {
-    System.out.println("*** Controller Initialized ***");
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    try {
-      obj.startup();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    currentCraigslistLink.setText(obj.getCraigslist());
-    System.out.println("SHOWS: " + currentCraigslistLink.getText());
-  }
 }
