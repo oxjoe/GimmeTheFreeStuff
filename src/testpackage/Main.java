@@ -13,7 +13,10 @@ public class Main extends Application {
 
   public static void main(String[] args) {
     launch(args);
-    //GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+  }
+
+  void openUrl(String url) {
+    getHostServices().showDocument(url);
   }
 
   @Override
@@ -21,8 +24,7 @@ public class Main extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
-    primaryStage.setTitle("GimmeTheFreeStuff");
-
+    primaryStage.setTitle("GimmeTheFreeStuff in + SHOW CITY YOU PICKED");
     primaryStage.show();
   }
 

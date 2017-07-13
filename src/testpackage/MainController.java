@@ -47,6 +47,10 @@ public class MainController{
 
   @FXML
   void craigslistClicked(ActionEvent event) {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    Main main = new Main();
+    main.openUrl(obj.getCraigslist());
+    System.out.println("Clicked in MainController");
   }
 
   @FXML
@@ -70,6 +74,13 @@ public class MainController{
 
   public void initialize() {
     System.out.println("*** MainController Initialized ***");
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    try {
+      obj.startup();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.out.println(obj.getCraigslist() + " in MainController");
 //      statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 //      dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 //      nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

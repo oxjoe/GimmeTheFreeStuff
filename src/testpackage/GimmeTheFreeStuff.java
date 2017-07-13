@@ -20,22 +20,24 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  private Properties userProperties;
-  private String craigslist;
+  private static Properties userProperties;
+  private static String craigslist;
   private int refresh;
   private boolean refreshChecked;
   private int update;
   private boolean updateChecked;
 
-  public static void main(String[] args) throws Exception {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    obj.startup();
-//    String userInput = "https://bloomington.craigslist"
-//        + ".org/search/zip?search_distance=10&postal=47405";
-//    //changeLink(userInput); for when user wants to change outside of execution
-//    Document document = obj.changeLink(userInput);
-//    List<Item> list = obj.getData(document, userInput);
-//    List<Item> mostRecentList = obj.sortByDate(list);
+  public GimmeTheFreeStuff(Properties userProperties, String craigslist, int refresh,
+      boolean refreshChecked, int update, boolean updateChecked) {
+    this.userProperties = userProperties;
+    this.craigslist = craigslist;
+    this.refresh = refresh;
+    this.refreshChecked = refreshChecked;
+    this.update = update;
+    this.updateChecked = updateChecked;
+  }
+
+  public GimmeTheFreeStuff() {
   }
 
   public Properties getUserProperties() {
@@ -86,21 +88,30 @@ public class GimmeTheFreeStuff {
     this.updateChecked = updateChecked;
   }
 
-  private void startup() {
-    // Checks to see if userProperties exist, if it doesn't then proceed with default properties
+  public static void main(String[] args) throws Exception {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    obj.startup();
+   // Document document = obj.changeLink("https://chicago.craigslist.org/search/zip");
+  //  List<Item> list = obj.getData(document, "https://chicago.craigslist.org/search/zip");
+//    List<Item> mostRecentList = obj.sortByDate(list);
+  }
+
+  void startup() throws IOException {
+    Properties defaultProps = new Properties();
+    FileInputStream in = new FileInputStream("default.properties");
+    defaultProps.load(in);
+    in.close();
+
+// create application properties with default
+    setUserProperties(new Properties(defaultProps));
+
     try {
-      FileInputStream in = new FileInputStream("user.properties");
+      in = new FileInputStream("user.properties");
       System.out.println("User properties DO exist, using user properties");
       setInstanceVars(getUserProperties(), in);
     } catch (FileNotFoundException e) {
       System.out.println("User properties DON'T exist, using default");
-      try {
-        setupWithDefaultProps();
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
+        setInstanceVars(defaultProps, in);
     }
   }
 
@@ -116,28 +127,18 @@ public class GimmeTheFreeStuff {
     in.close();
   }
 
-  private void setupWithDefaultProps() throws IOException {
-    Properties defaultProps = new Properties();
-    FileInputStream in = new FileInputStream("default.properties");
-    setInstanceVars(defaultProps, in);
-    // Set userproperties with 'default' as its original settings since userproperties doesn't exist
-    setUserProperties(defaultProps);
-    in.close();
-  }
-
+  // make a method that will take inputs and save it to user properties
 ////    FOR SAVING
 //    FileOutputStream out = new FileOutputStream("user.properties");
 //    userProps.setProperty("craigslist", "NEW SITE")
 //    userProps.store(out, null);
 //    out.close();
 
-
-  // changeLink: String -> Document
   // Takes user inputted Craigslist link and parses it with JSoup
-  public Document changeLink(String userInput) {
+  public Document changeLink(String link) {
     Document doc = null;
     try {
-      doc = Jsoup.connect(userInput).get();
+      doc = Jsoup.connect(link).get();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -259,6 +260,8 @@ public class GimmeTheFreeStuff {
 
 
 /* TODO to be added
+// make the time when the program closes and next time it starts up compares the previous with the
+// new list, and have an option to not do that
 // Notify if guitar appears
 // Ignore firewood,
 // There's the thumbnail picture, actual picture and some may have multiple pictures
