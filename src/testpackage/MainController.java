@@ -2,6 +2,8 @@ package testpackage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
@@ -33,24 +37,26 @@ public class MainController {
   private Button updateListButton; // Value injected by FXMLLoader
 
   @FXML // fx:id="tableView"
-  private TableView<?> tableView; // Value injected by FXMLLoader
+  private TableView<Item> tableView; // Value injected by FXMLLoader
 
   @FXML // fx:id="statusCol"
-  private TableColumn<?, ?> statusCol; // Value injected by FXMLLoader
+  private TableColumn<Item, Boolean> statusCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="dateCol"
-  private TableColumn<?, ?> dateCol; // Value injected by FXMLLoader
+  private TableColumn<Item, Date> dateCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="nameCol"
-  private TableColumn<?, ?> nameCol; // Value injected by FXMLLoader
+  private TableColumn<Item, String> nameCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="urlCol"
-  private TableColumn<?, ?> urlCol; // Value injected by FXMLLoader
+  private TableColumn<Item, String> urlCol; // Value injected by FXMLLoader
 
   private GimmeTheFreeStuff obj;
+
   public GimmeTheFreeStuff getObj() {
     return obj;
   }
+
   public void setObj(GimmeTheFreeStuff obj) {
     this.obj = obj;
   }
@@ -83,34 +89,26 @@ public class MainController {
     System.out.println("Switched to Settings page");
   }
 
-  void populateTable() {
-//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-//    String link = obj.getLink();
-//    Document doc = obj.changeLink(link);
-//    List<Item> list = obj.getData(doc, link);
-//        List<Item> correctList = obj.sortByDate(list);
-//    System.out.println(correctList.toString());
+  void populateTable() throws IOException {
+    nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+    dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+    urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
+    statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+    tableView.getItems().setAll(parseItemList());
   }
 
-  // TABLE THINGS
-//      statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-//      dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-//      nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-//      urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
-//   // tableView.getItems().setAll(parseItemList());
-
-
-
-//  public List<Item> parseItemList() throws ParseException {
-//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-//    System.out.println("reached parseItemList");
-//    return obj.getData("https://bloomington.craigslist
-// .org/search/zip?search_distance=10&postal=47405");
-//
-//  }
+  public List<Item> parseItemList() throws IOException {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    String link = getLinkFromUserProperties();
+    Document doc = obj.changeLink(link);
+    List<Item> list = obj.getData(doc, link);
+    List<Item> sortedList = obj.sortByDate(list);
+    System.out.println(sortedList.toString());
+    return sortedList;
+  }
 
   private String getLinkFromUserProperties() throws IOException {
-    // Make another class to deal with properties or an interface?
+    // TODO - Make another class to deal with properties or an interface?
     Properties prop = new Properties();
     FileInputStream in = new FileInputStream("user.properties");
     prop.load(in);
@@ -121,7 +119,11 @@ public class MainController {
 
   public void initialize() {
     System.out.println("*** MainController Initialized ***");
-
-    //populateTable();
+    try {
+      populateTable();
+    } catch (IOException e) {
+      System.out.println("Enable to populate table");
+      e.printStackTrace();
+    }
   }
 }
