@@ -1,7 +1,8 @@
 package testpackage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
+import java.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
@@ -47,19 +47,18 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<?, ?> urlCol; // Value injected by FXMLLoader
 
+  private GimmeTheFreeStuff obj;
+  public GimmeTheFreeStuff getObj() {
+    return obj;
+  }
+  public void setObj(GimmeTheFreeStuff obj) {
+    this.obj = obj;
+  }
+
   @FXML
   void craigslistClicked(ActionEvent event) throws IOException {
-
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     Main main = new Main();
-    try {
-      System.out.println("obj.getPropertyValue(\"link\") = " + obj.getPropertyValue("link"));
-    } catch (NullPointerException e) {
-      System.err.print("caught null poitner from \n"
-          + "System.out.println(\"obj.getPropertyValue"
-          + "(\\\"link\\\") = \" + obj.getPropertyValue(\"link\"));\n");
-    }
-//    main.openUrl(obj.getPropertyValue("link"));
+    main.openUrl(getLinkFromUserProperties());
   }
 
   @FXML
@@ -85,12 +84,12 @@ public class MainController {
   }
 
   void populateTable() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String link = obj.getLink();
-    Document doc = obj.changeLink(link);
-    List<Item> list = obj.getData(doc, link);
-        List<Item> correctList = obj.sortByDate(list);
-    System.out.println(correctList.toString());
+//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+//    String link = obj.getLink();
+//    Document doc = obj.changeLink(link);
+//    List<Item> list = obj.getData(doc, link);
+//        List<Item> correctList = obj.sortByDate(list);
+//    System.out.println(correctList.toString());
   }
 
   // TABLE THINGS
@@ -110,16 +109,19 @@ public class MainController {
 //
 //  }
 
-  public void initialize() throws IOException {
+  private String getLinkFromUserProperties() throws IOException {
+    // Make another class to deal with properties or an interface?
+    Properties prop = new Properties();
+    FileInputStream in = new FileInputStream("user.properties");
+    prop.load(in);
+    String url = prop.getProperty("link");
+    in.close();
+    return url;
+  }
+
+  public void initialize() {
     System.out.println("*** MainController Initialized ***");
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    try {
-      System.out.println("obj.getPropertyValue(\"link\") = " + obj.getPropertyValue("link"));
-    } catch (NullPointerException e) {
-      System.err.print("caught null pointer from \n"
-          + "System.out.println(\"obj.getPropertyValue"
-          + "(\\\"link\\\") = \" + obj.getPropertyValue(\"link\"));\n");
-    }
+
     //populateTable();
   }
 }

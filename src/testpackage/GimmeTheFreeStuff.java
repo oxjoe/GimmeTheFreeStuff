@@ -25,7 +25,6 @@ import org.jsoup.select.Elements;
 public class GimmeTheFreeStuff {
 
   public GimmeTheFreeStuff() {
-
   }
 
   public GimmeTheFreeStuff(Properties userProps, String link, int refresh, boolean refreshChecked,
