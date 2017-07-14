@@ -47,16 +47,24 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<?, ?> urlCol; // Value injected by FXMLLoader
 
-  // Opens Craigslist in browser
   @FXML
-  void craigslistClicked() {
+  void craigslistClicked(ActionEvent event) throws IOException {
+
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     Main main = new Main();
-    main.openUrl(obj.getLink());
+    try {
+      System.out.println("obj.getPropertyValue(\"link\") = " + obj.getPropertyValue("link"));
+    } catch (NullPointerException e) {
+      System.err.print("caught null poitner from \n"
+          + "System.out.println(\"obj.getPropertyValue"
+          + "(\\\"link\\\") = \" + obj.getPropertyValue(\"link\"));\n");
+    }
+//    main.openUrl(obj.getPropertyValue("link"));
   }
 
   @FXML
   void searchTextfieldEnter(KeyEvent event) {
+
   }
 
   @FXML
@@ -102,14 +110,15 @@ public class MainController {
 //
 //  }
 
-  public void initialize() {
+  public void initialize() throws IOException {
     System.out.println("*** MainController Initialized ***");
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    // Setup MainUI with user properties if those exist, or default properties
     try {
-      obj.startup();
-    } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("obj.getPropertyValue(\"link\") = " + obj.getPropertyValue("link"));
+    } catch (NullPointerException e) {
+      System.err.print("caught null pointer from \n"
+          + "System.out.println(\"obj.getPropertyValue"
+          + "(\\\"link\\\") = \" + obj.getPropertyValue(\"link\"));\n");
     }
     //populateTable();
   }

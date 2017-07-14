@@ -67,16 +67,15 @@ public class Controller {
     }
   }
 
-  // Fills in ui with user.properties properties, doesn't matter if it was default b/c user.propers
-//  defaults to that
+  // Fills in ui with properties
   void fillInUI() throws IOException {
-    System.out.println("GOT TO FILL IN UI");
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     currentLink.setText(obj.getPropertyValue("link"));
     minTextfield.setText(obj.getPropertyValue("updateRate"));
     daysTextfield.setText(obj.getPropertyValue("refreshRate"));
     refreshCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("refreshChecked")));
     updatesCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("updateChecked")));
+    System.out.println("FINISHED FILL IN UI");
   }
 
   // Gets the link from the TextField and tries to parse it with jSoup

@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,15 +24,21 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  public GimmeTheFreeStuff(){
+  public GimmeTheFreeStuff() {
 
   }
 
-  // don't need getter for userProps b/c already have get value
-  private Properties userProps;
-  public void setUserProps(Properties userProps) {
+  public GimmeTheFreeStuff(Properties userProps, String link, int refresh, boolean refreshChecked,
+      int update, boolean updateChecked) {
     this.userProps = userProps;
+    this.link = link;
+    this.refresh = refresh;
+    this.refreshChecked = refreshChecked;
+    this.update = update;
+    this.updateChecked = updateChecked;
   }
+
+  private Properties userProps;
   private String link;
   private int refresh;
   private boolean refreshChecked;
@@ -37,6 +46,12 @@ public class GimmeTheFreeStuff {
   private boolean updateChecked;
 
   // GOOD
+  public void setUserProps(Properties userProps) {
+    this.userProps = userProps;
+  }
+  public Properties getUserProps() {
+    return userProps;
+  }
   public String getLink() {
     return link;
   }
@@ -78,28 +93,47 @@ public class GimmeTheFreeStuff {
 //    List<Item> mostRecentList = obj.sortByDate(list);
   }
 
+  public static String propToString(Properties prop) {
+    StringWriter writer = new StringWriter();
+    prop.list(new PrintWriter(writer));
+    return writer.getBuffer().toString();
+  }
+
   void startup() throws IOException {
     Properties defaultProps = new Properties();
     FileInputStream in = new FileInputStream("default.properties");
     defaultProps.load(in);
-    in.close();
 
-    // create application properties with default
     setUserProps(new Properties(defaultProps));
 
+    System.out.println("user.properties with default.properties values - FIRST TIME STARTING UP");
+//    System.out.println(propToString(getUserProps()));
+
+    // EVERYTHING ABOVE HERE IS FOR FIRST TIME
+
     try {
-      // If user props exist
+      // If user props FILE exist
       in = new FileInputStream("user.properties");
       System.out.println("User properties DO exist, using user properties");
-      setInstanceVars(userProps, in);
+      setInstanceVars(getUserProps(), "user.properties");
     } catch (FileNotFoundException e) {
+      //CREATE USER.PROPERTIES
+      createUserProps();
       System.out.println("User properties DOESN'T exist, using default");
-      setInstanceVars(defaultProps, in);
+      setInstanceVars(defaultProps, "default.properties");
+    } finally {
+      in.close();
     }
   }
 
+  private void createUserProps() throws FileNotFoundException, UnsupportedEncodingException {
+    PrintWriter writer = new PrintWriter("user.properties", "UTF-8");
+    writer.close();
+  }
+
   // Sets instance variables as default properties or user properties depending which one exists
-  private void setInstanceVars(Properties prop, FileInputStream in) throws IOException {
+  private void setInstanceVars(Properties prop, String filename) throws IOException {
+    FileInputStream in = new FileInputStream(filename);
     prop.load(in);
     setLink(prop.getProperty("link"));
     setRefresh(Integer.parseInt(prop.getProperty("refreshRate")));
@@ -123,11 +157,11 @@ public class GimmeTheFreeStuff {
     return doc;
   }
 
-  // Given a key returns its value
+  // Given a key returns its value from user.properties
   public String getPropertyValue(String key) throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
-    userProps.load(in);
-    String value = userProps.getProperty(key);
+    getUserProps().load(in);
+    String value = getUserProps().getProperty(key);
     in.close();
     return value;
   }
