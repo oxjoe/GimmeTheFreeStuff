@@ -36,17 +36,20 @@ public class Controller {
   @FXML // fx:id="refreshCheckbox"
   private CheckBox refreshCheckbox; // Value injected by FXMLLoader
 
-  @FXML // fx:id="minTextfield"
-  private TextField minTextfield; // Value injected by FXMLLoader
+  @FXML // fx:id="refreshTextfield"
+  private TextField refreshTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="updatesCheckbox"
   private CheckBox updatesCheckbox; // Value injected by FXMLLoader
 
-  @FXML // fx:id="daysTextfield"
-  private TextField daysTextfield; // Value injected by FXMLLoader
+  @FXML // fx:id="updatesTextfield"
+  private TextField updatesTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="currentLink"
   private Hyperlink currentLink; // Value injected by FXMLLoader
+
+  @FXML // fx:id="githubLink"
+  private Hyperlink githubLink; // Value injected by FXMLLoader
 
   @FXML
   void refreshListChecked(ActionEvent e) {
@@ -58,23 +61,31 @@ public class Controller {
   }
 
   public void initialize() {
-    System.out.println("*** Controller Initialized ***");
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    GetSetProps getSetProps = new GetSetProps();
+    try {
+      Main.getStage().setTitle("GimmeTheFreeStuff for " + obj.getTitle(getSetProps.getLink()));
+    } catch (IOException e) {
+      System.out.println("Unable to set the title");
+      e.printStackTrace();
+    }
     try {
       fillInUI();
     } catch (IOException e) {
       System.err.print("Couldn't fill in UI");
       e.printStackTrace();
     }
+    System.out.println("*** Controller Initialized ***");
   }
 
   // Fills in ui with properties
   void fillInUI() throws IOException {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    currentLink.setText(obj.getPropertyValue("link"));
-    minTextfield.setText(obj.getPropertyValue("updateRate"));
-    daysTextfield.setText(obj.getPropertyValue("refreshRate"));
-    refreshCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("refreshChecked")));
-    updatesCheckbox.setSelected(Boolean.parseBoolean(obj.getPropertyValue("updateChecked")));
+    GetSetProps getSetProps = new GetSetProps();
+    currentLink.setText(getSetProps.getLink());
+    refreshTextfield.setText(Integer.toString(getSetProps.getRefresh()));
+    refreshCheckbox.setSelected(getSetProps.isRefreshChecked());
+    updatesTextfield.setText(Integer.toString(getSetProps.getUpdates()));
+    updatesCheckbox.setSelected(getSetProps.isUpdatesChecked());
     System.out.println("FINISHED FILL IN UI");
   }
 
@@ -83,13 +94,14 @@ public class Controller {
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     String url = linkTextfield.getText();
     Document doc = obj.changeLink(url);
+    GetSetProps getSetProps = new GetSetProps();
     while (doc == null) {
       // TODO - CONTROLLER
       // display something to let the user know that it couldn't parse the link
       // when its not null that means it successfully parsed
     }
     try {
-      obj.changePropertyValue("link", url);
+      getSetProps.setLink(url);
       success(url);
     } catch (IOException e) {
       System.err.print("obj.changeValue(\"url\", site) -> didn't work in testlink");
@@ -123,10 +135,15 @@ public class Controller {
     Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
-    stage.setTitle("GimmeTheFreeStuff for CITYNAME");
-    // TODO stage.setTitle("GimmeTheFreeStuff for CITYNAME")
     stage.show();
     System.out.println("Switched to Main page");
+  }
+
+  // Opens GitHub in browser
+  @FXML
+  void openGithub(ActionEvent event) {
+    Main main = new Main();
+    main.openUrl("https://github.com/oxjoe/GimmeTheFreeStuff");
   }
 
   // Opens Craigslist in browser

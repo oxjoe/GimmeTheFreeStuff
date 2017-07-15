@@ -2,7 +2,6 @@ package testpackage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,6 +16,7 @@ import java.util.ListIterator;
 import java.util.Properties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -24,72 +24,15 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  public GimmeTheFreeStuff() {
-  }
-
-  public GimmeTheFreeStuff(Properties userProps, String link, int refresh, boolean refreshChecked,
-      int update, boolean updateChecked) {
-    this.userProps = userProps;
-    this.link = link;
-    this.refresh = refresh;
-    this.refreshChecked = refreshChecked;
-    this.update = update;
-    this.updateChecked = updateChecked;
-  }
-
-  private Properties userProps;
-  private String link;
-  private int refresh;
-  private boolean refreshChecked;
-  private int update;
-  private boolean updateChecked;
-
-  // GOOD
-  public void setUserProps(Properties userProps) {
-    this.userProps = userProps;
-  }
-  public Properties getUserProps() {
-    return userProps;
-  }
-  public String getLink() {
-    return link;
-  }
-  public int getRefresh() {
-    return refresh;
-  }
-  public boolean isRefreshChecked() {
-    return refreshChecked;
-  }
-  public int getUpdate() {
-    return update;
-  }
-  public boolean isUpdateChecked() {
-    return updateChecked;
-  }
-
-  // These are all set
-  public void setLink(String link) {
-    this.link = link;
-  }
-  public void setRefresh(int refresh) {
-    this.refresh = refresh;
-  }
-  public void setRefreshChecked(boolean refreshChecked) {
-    this.refreshChecked = refreshChecked;
-  }
-  public void setUpdate(int update) {
-    this.update = update;
-  }
-  public void setUpdateChecked(boolean updateChecked) {
-    this.updateChecked = updateChecked;
-  }
-
-
   public static void main(String[] args) throws Exception {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-   // Document document = obj.changeLink("https://chicago.craigslist.org/search/zip");
-  //  List<Item> list = obj.getData(document, "https://chicago.craigslist.org/search/zip");
-//    List<Item> mostRecentList = obj.sortByDate(list);
+  }
+
+  public String getTitle(String link) {
+    Document doc = changeLink(link);
+    Element titleE  = doc.select("title").first();
+    String temp = titleE.html();
+    String[] split = temp.split("free");
+    return split[0];
   }
 
   public static String propToString(Properties prop) {
@@ -103,7 +46,9 @@ public class GimmeTheFreeStuff {
     FileInputStream in = new FileInputStream("default.properties");
     defaultProps.load(in);
 
-    setUserProps(new Properties(defaultProps));
+    GetSetProps getSetProps = new GetSetProps();
+
+    getSetProps.setProps((new Properties(defaultProps)));
 
     System.out.println("user.properties with default.properties values - FIRST TIME STARTING UP");
 //    System.out.println(propToString(getUserProps()));
@@ -114,12 +59,12 @@ public class GimmeTheFreeStuff {
       // If user props FILE exist
       in = new FileInputStream("user.properties");
       System.out.println("User properties DO exist, using user properties");
-      setInstanceVars(getUserProps(), "user.properties");
+      //setInstanceVars(getSetProps.getProps(), "user.properties");
     } catch (FileNotFoundException e) {
       //CREATE USER.PROPERTIES
       createUserProps();
       System.out.println("User properties DOESN'T exist, using default");
-      setInstanceVars(defaultProps, "default.properties");
+      //setInstanceVars(defaultProps, "default.properties");
     } finally {
       in.close();
     }
@@ -131,17 +76,17 @@ public class GimmeTheFreeStuff {
   }
 
   // Sets instance variables as default properties or user properties depending which one exists
-  private void setInstanceVars(Properties prop, String filename) throws IOException {
-    FileInputStream in = new FileInputStream(filename);
-    prop.load(in);
-    setLink(prop.getProperty("link"));
-    setRefresh(Integer.parseInt(prop.getProperty("refreshRate")));
-    setRefreshChecked(Boolean.parseBoolean(prop.getProperty("refreshChecked")));
-    setUpdate(Integer.parseInt(prop.getProperty("updateRate")));
-    setUpdateChecked(
-        updateChecked = Boolean.parseBoolean(prop.getProperty("updateChecked")));
-    in.close();
-  }
+//  private void setInstanceVars(Properties prop, String filename) throws IOException {
+//    FileInputStream in = new FileInputStream(filename);
+//    prop.load(in);
+//    setLink(prop.getProperty("link"));
+//    setRefresh(Integer.parseInt(prop.getProperty("refreshRate")));
+//    setRefreshChecked(Boolean.parseBoolean(prop.getProperty("refreshChecked")));
+//    setUpdate(Integer.parseInt(prop.getProperty("updateRate")));
+//    setUpdateChecked(
+//        updateChecked = Boolean.parseBoolean(prop.getProperty("updateChecked")));
+//    in.close();
+//  }
 
   // Takes user inputted Craigslist link and parses it with JSoup
   public Document changeLink(String link) {
@@ -154,23 +99,6 @@ public class GimmeTheFreeStuff {
       e.printStackTrace();
     }
     return doc;
-  }
-
-  // Given a key returns its value from user.properties
-  public String getPropertyValue(String key) throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    getUserProps().load(in);
-    String value = getUserProps().getProperty(key);
-    in.close();
-    return value;
-  }
-
-  // Given a key and its value change to its new value
-  public void changePropertyValue(String key, String value) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    userProps.setProperty(key, value);
-    userProps.store(out, null);
-    out.close();
   }
 
   // NOT SURE IF FETCH IS NEEDED
@@ -220,6 +148,15 @@ public class GimmeTheFreeStuff {
     }
 
     List<Item> list = new ArrayList<>();
+
+// To be used for displaying the date
+//"yyyy-MM-dd HH:mm"
+
+//    String dateStr = "2017-05-28 10:36";
+//    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
+//    String displayDate = new SimpleDateFormat("MMM d '@' h:mm a").format(date);
+//    System.out.println(displayDate); // May, 28 @ 10:36 AM
+
     // Combines the other lists into one list of Items
     for (int i = 0; i < nameList.size(); i++) {
       try {
@@ -285,15 +222,6 @@ public class GimmeTheFreeStuff {
 
 
 }
-
-/*
-// To be used for displaying the date
-//"yyyy-MM-dd HH:mm"
-    String dateStr = "2017-05-28 10:36";
-    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
-    String displayDate = new SimpleDateFormat("MMM d '@' h:mm a").format(date);
-    System.out.println(displayDate); // May, 28 @ 10:36 AM
-    */
 
 
 /* TODO to be added

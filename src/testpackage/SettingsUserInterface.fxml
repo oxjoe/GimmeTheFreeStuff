@@ -25,17 +25,18 @@
       <HBox layoutX="133.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0">
          <children>
             <CheckBox fx:id="refreshCheckbox" mnemonicParsing="false" onAction="#refreshListChecked" prefHeight="45.0" prefWidth="116.0" text="Refresh list every" />
-            <TextField fx:id="minTextfield" prefHeight="50.0" prefWidth="35.0" text="15" />
+            <TextField fx:id="refreshTextfield" prefHeight="50.0" prefWidth="35.0" text="15" />
             <Label alignment="CENTER" prefHeight="57.0" prefWidth="51.0" text="minutes" />
          </children>
       </HBox>
       <HBox layoutX="133.0" layoutY="209.0" prefHeight="40.0" prefWidth="248.0">
          <children>
             <CheckBox fx:id="updatesCheckbox" mnemonicParsing="false" onAction="#updatesChecked" prefHeight="66.0" prefWidth="159.0" text="Check for updates every" />
-            <TextField fx:id="daysTextfield" prefHeight="56.0" prefWidth="35.0" text="15" />
+            <TextField fx:id="updatesTextfield" prefHeight="56.0" prefWidth="35.0" text="15" />
             <Label alignment="CENTER" prefHeight="55.0" prefWidth="42.0" text="days" />
          </children>
       </HBox>
       <Hyperlink fx:id="currentLink" alignment="CENTER" layoutX="-2.0" layoutY="67.0" onAction="#openCraigslist" prefHeight="23.0" prefWidth="500.0" text="current link" />
+      <Hyperlink fx:id="githubLink" layoutX="402.0" layoutY="11.0" onAction="#openGithub" text="GitHub page" />
    </children>
 </AnchorPane>
