@@ -1,8 +1,6 @@
 package testpackage;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
@@ -52,12 +49,29 @@ public class Controller {
   private Hyperlink githubLink; // Value injected by FXMLLoader
 
   @FXML
-  void refreshListChecked(ActionEvent e) {
-
+  void refreshListChecked() {
+    if (refreshCheckbox.isSelected()) {
+      GetSetProps obj = new GetSetProps();
+      try {
+        obj.setRefresh(Integer.parseInt(refreshTextfield.getText()));
+        obj.setRefreshChecked(true);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
-  @FXML
-  void updatesChecked(ActionEvent e) {
 
+  @FXML
+  void updatesChecked() {
+    if (updatesCheckbox.isSelected()) {
+      GetSetProps obj = new GetSetProps();
+      try {
+        obj.setUpdate(Integer.parseInt(updatesTextfield.getText()));
+        obj.setUpdatesChecked(true);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public void initialize() {
@@ -89,44 +103,6 @@ public class Controller {
     System.out.println("FINISHED FILL IN UI");
   }
 
-  // Gets the link from the TextField and tries to parse it with jSoup
-  void testLink() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    String url = linkTextfield.getText();
-    Document doc = obj.changeLink(url);
-    GetSetProps getSetProps = new GetSetProps();
-    while (doc == null) {
-      // TODO - CONTROLLER
-      // display something to let the user know that it couldn't parse the link
-      // when its not null that means it successfully parsed
-    }
-    try {
-      getSetProps.setLink(url);
-      success(url);
-    } catch (IOException e) {
-      System.err.print("obj.changeValue(\"url\", site) -> didn't work in testlink");
-      e.printStackTrace();
-    }
-  }
-
-
-  // TODO - CONTROLLER
-  // change "press enter to submit" to Success for 1.5 seconds then change it back to "press...
-  // Change previous hyperlink to new link
-  // clear texfield
-  void success(String url) {
-    statusText.setText("Success!");
-    statusText.setFill(Color.GREEN);
-    Timer timer = new Timer();
-    class timerTask extends TimerTask {
-      @Override
-      public void run() {
-        timer.cancel();
-      }
-    }
-    timer.schedule(new timerTask(), 1500);
-  }
-
 
   // Button to switch UI's
   @FXML
@@ -138,6 +114,25 @@ public class Controller {
     stage.show();
     System.out.println("Switched to Main page");
   }
+
+  // Gets the link from the TextField and tries to parse it with jSoup
+  void testLink() {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    GetSetProps getSetProps = new GetSetProps();
+    String url = linkTextfield.getText();
+    Document doc = obj.changeLink(url);
+    if (doc == null) {
+// TODO Let user knows that documetn couldn't parse by jSoup
+    }
+    try {
+      getSetProps.setLink(url);
+    } catch (IOException e) {
+      System.out.println("Couldn't save property");
+      e.printStackTrace();
+    }
+    currentLink.setText(url);
+  }
+
 
   // Opens GitHub in browser
   @FXML
@@ -160,5 +155,4 @@ public class Controller {
       testLink();
     }
   }
-
 }
