@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,91 +23,72 @@ import org.jsoup.select.Elements;
  */
 public class GimmeTheFreeStuff {
 
-  public static void main(String[] args) throws Exception {
-  }
-
-  public String getTitle(String link) {
-    Document doc = changeLink(link);
-    Element titleE  = doc.select("title").first();
-    String temp = titleE.html();
-    String[] split = temp.split("free");
-    return split[0];
-  }
-
-  public static String propToString(Properties prop) {
-    StringWriter writer = new StringWriter();
-    prop.list(new PrintWriter(writer));
-    return writer.getBuffer().toString();
-  }
-
-  void startup() throws IOException {
+  // startup: N/A -> N/A
+  // Runs the very first time when the application starts up. Checks to see if user.properties
+  // exist, if they don't then it creates them with "default.properties" as the template
+  public void startup() throws IOException {
+    GetSetProps getSetProps = new GetSetProps();
     Properties defaultProps = new Properties();
     FileInputStream in = new FileInputStream("default.properties");
     defaultProps.load(in);
 
-    GetSetProps getSetProps = new GetSetProps();
-
+    // Similar to
+    // Properties userProps = new Properties(defaultProps);
+    // but in GetSetProps class
     getSetProps.setProps((new Properties(defaultProps)));
 
-    System.out.println("user.properties with default.properties values - FIRST TIME STARTING UP");
-//    System.out.println(propToString(getUserProps()));
+    System.out.println("First time starting up");
 
-    // EVERYTHING ABOVE HERE IS FOR FIRST TIME
-
+    // If user.properties DO exist then don't do anything
+    // If user.properties DON'T exist then create them
     try {
-      // If user props FILE exist
       in = new FileInputStream("user.properties");
-      System.out.println("User properties DO exist, using user properties");
-      //setInstanceVars(getSetProps.getProps(), "user.properties");
+      System.out.println("User.properties DO exist");
     } catch (FileNotFoundException e) {
-      //CREATE USER.PROPERTIES
+      System.out.println("User.properties DON'T exist");
       createUserProps();
-      System.out.println("User properties DOESN'T exist, using default");
-      //setInstanceVars(defaultProps, "default.properties");
+      System.out.println("Created user.properties");
     } finally {
       in.close();
     }
   }
 
+  // createUserProps: N/A - > N/A
+  // Creates user.properties file
   private void createUserProps() throws FileNotFoundException, UnsupportedEncodingException {
     PrintWriter writer = new PrintWriter("user.properties", "UTF-8");
     writer.close();
   }
 
-  // Sets instance variables as default properties or user properties depending which one exists
-//  private void setInstanceVars(Properties prop, String filename) throws IOException {
-//    FileInputStream in = new FileInputStream(filename);
-//    prop.load(in);
-//    setLink(prop.getProperty("link"));
-//    setRefresh(Integer.parseInt(prop.getProperty("refreshRate")));
-//    setRefreshChecked(Boolean.parseBoolean(prop.getProperty("refreshChecked")));
-//    setUpdate(Integer.parseInt(prop.getProperty("updateRate")));
-//    setUpdateChecked(
-//        updateChecked = Boolean.parseBoolean(prop.getProperty("updateChecked")));
-//    in.close();
-//  }
+  // getTitle: String -> String
+  // Turns the link into a document so jsoup can parse it and get the title element in the head
+  // of the html document
+  public String getTitle(String link) {
+    Document doc = testLink(link);
+    Element element = doc.select("title").first();
+    String[] split = element.html().split("free");
+    return split[0];
+  }
 
-  // Takes user inputted Craigslist link and parses it with JSoup
-  public Document changeLink(String link) {
-    Document doc;
+  // testLink: String -> Document
+  // Tests to see if the given string can be parsed by jsoup, if it can then returns a Document
+  // object
+  public Document testLink(String link) {
+    Document doc = null;
     try {
       doc = Jsoup.connect(link).get();
     } catch (IOException e) {
-      System.err.print("changeLink() could not parse the given string");
+      System.out.println(
+          "Link couldn't be parsed in testlink, setting doc=null and let controller.java handle "
+              + "it");
       doc = null;
-      e.printStackTrace();
+      //e.printStackTrace();
+      System.out.println(
+          "does it reach here (commented out stacktrace before this), it caught the IOException "
+              + "and set doc=null");
     }
     return doc;
   }
-
-  // NOT SURE IF FETCH IS NEEDED
-//  void fetchUserProps() throws IOException {
-//    getValue("link");
-//    getValue("refresh");
-//    getValue("refreshChecked");
-//    getValue("updateChecked");
-//    getValue("update");
-//  }
 
   // Catch exception for new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr)
   public List<Item> getData(Document doc, String userInput) {

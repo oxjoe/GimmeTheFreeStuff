@@ -20,19 +20,19 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#gotoMain" text="Go back to main screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#gotoMain" text="Back to Main Screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <Text fx:id="statusText" layoutX="181.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to submit" />
       <HBox layoutX="133.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0">
          <children>
-            <CheckBox fx:id="refreshCheckbox" mnemonicParsing="false" onAction="#refreshListChecked" prefHeight="45.0" prefWidth="116.0" text="Refresh list every" />
-            <TextField fx:id="refreshTextfield" prefHeight="50.0" prefWidth="35.0" text="15" />
+            <CheckBox fx:id="refreshCheckbox" mnemonicParsing="false" onAction="#refreshChecked" prefHeight="45.0" prefWidth="116.0" text="Refresh list every" />
+            <TextField fx:id="refreshTextfield" prefHeight="40.0" prefWidth="65.0" />
             <Label alignment="CENTER" prefHeight="57.0" prefWidth="51.0" text="minutes" />
          </children>
       </HBox>
       <HBox layoutX="133.0" layoutY="209.0" prefHeight="40.0" prefWidth="248.0">
          <children>
-            <CheckBox fx:id="updatesCheckbox" mnemonicParsing="false" onAction="#updatesChecked" prefHeight="66.0" prefWidth="159.0" text="Check for updates every" />
-            <TextField fx:id="updatesTextfield" prefHeight="56.0" prefWidth="35.0" text="15" />
+            <CheckBox fx:id="updateCheckbox" mnemonicParsing="false" onAction="#updateChecked" prefHeight="66.0" prefWidth="159.0" text="Check for updates every" />
+            <TextField fx:id="updateTextfield" prefHeight="40.0" prefWidth="60.0" />
             <Label alignment="CENTER" prefHeight="55.0" prefWidth="42.0" text="days" />
          </children>
       </HBox>

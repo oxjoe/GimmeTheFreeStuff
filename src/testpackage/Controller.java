@@ -19,7 +19,6 @@ import org.jsoup.nodes.Document;
  * Created by Joseph on 7/6/2017.
  */
 
-
 // todo Bugs
 //  refreshTextfield and updateTextfield can't accept ""
 //  Numbers are all in ints
@@ -43,124 +42,119 @@ public class Controller {
   private TextField refreshTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="updatesCheckbox"
-  private CheckBox updatesCheckbox; // Value injected by FXMLLoader
+  private CheckBox updateCheckbox; // Value injected by FXMLLoader
 
   @FXML // fx:id="updatesTextfield"
-  private TextField updatesTextfield; // Value injected by FXMLLoader
+  private TextField updateTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="currentLink"
   private Hyperlink currentLink; // Value injected by FXMLLoader
 
-  @FXML // fx:id="githubLink"
-  private Hyperlink githubLink; // Value injected by FXMLLoader
-
-  // Set title
-  // Fill in UI
-  // Add listeners to textfields
   public void initialize() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-
     addListeners();
+
     try {
-      Main.getStage().setTitle("GimmeTheFreeStuff - " + obj.getTitle(getSetProps.getLink()));
+      Main.getStage()
+          .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
       fillInUI();
-      System.out.println("Success - Set title");
-      System.out.println("Success - Filled In UI");
+      System.out.println("Set title and filled in UI");
     } catch (IOException e) {
-      System.out.println("FAILED - Unable to set the title");
-      System.out.print("FAILED - Couldn't fill in UI");
       e.printStackTrace();
     }
     System.out.println("*** Controller Initialized ***");
   }
 
-  // Adds listeners to refreshTextField and updatesTextfield in case user changes them, but
-  // doesn't check the box
+  // Todo: only accept numbers in textfields
+  // addListeners: N/A -> N/A
+  // Adds listeners to the two textfields in case user changes the refreshRate (minutes) and
+  // updateRate (days)
   @FXML
   void addListeners() {
     GetSetProps obj = new GetSetProps();
-    // Listener for refreshTextfield
+
     refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
       try {
-        obj.setRefresh(Integer.parseInt(newValue));
+        obj.setAllProps("refreshRate", newValue);
         System.out.println("Success - Added refresh listener to textfield");
+
       } catch (IOException e) {
         e.printStackTrace();
       }
     });
-    // Listener for updatesTextfield
-    updatesTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
+    updateTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
       try {
-        obj.setUpdate(Integer.parseInt(newValue));
+        obj.setAllProps("updateRate", newValue);
         System.out.println("Success - Added update listener to textfield");
       } catch (IOException e) {
         e.printStackTrace();
       }
     });
-
   }
 
+  // refreshListChecked: N/A -> N/A
+  // If checkbox is checked or unchecked then set it to true or false in user.properties
+  // TODO ELSE MIGHT NEED TO BE ELSEIF
+  @FXML
+  void refreshChecked() throws IOException {
+    GetSetProps obj = new GetSetProps();
+    if (refreshCheckbox.isSelected()) {
+      obj.setAllProps("refreshStatus", "true");
+      System.out.println("refreshStatus set to true");
+    } else {
+      obj.setAllProps("refreshStatus", "false");
+      System.out.println("refreshStatus set to false");
+    }
+  }
+
+  // changeLink: N/A -> N/A
+  // Gets the link from the textfield to see if it works
+  @FXML
+  void changeLink() {
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+    GetSetProps getSetProps = new GetSetProps();
+
+    String url = linkTextfield.getText();
+    Document doc = gimmeTheFreeStuff.testLink(url);
+
+    if (doc == null) {
+      // Todo: Let user know that document couldn't parse by jSoup and show Failure! then quit
+      // the method so user can try another one
+      return;
+    }
+    // Todo: if its not null and it works then show Success!
+    currentLink.setText(url);
+  }
+
+  // fillInUI: N/A -> N/A
   // Fills in UI by getting properties from user.properties
   @FXML
   void fillInUI() throws IOException {
-    GetSetProps getSetProps = new GetSetProps();
-    currentLink.setText(getSetProps.getLink());
-    refreshTextfield.setText(Integer.toString(getSetProps.getRefresh()));
-    refreshCheckbox.setSelected(getSetProps.isRefreshChecked());
-    updatesTextfield.setText(Integer.toString(getSetProps.getUpdates()));
-    updatesCheckbox.setSelected(getSetProps.isUpdatesChecked());
+    GetSetProps obj = new GetSetProps();
+    currentLink.setText(obj.getLink());
+    refreshTextfield.setText(obj.getRefreshRate());
+    refreshCheckbox.setSelected(Boolean.parseBoolean(obj.getRefreshStatus()));
+    updateTextfield.setText(obj.getUpdateRate());
+    updateCheckbox.setSelected(Boolean.parseBoolean(obj.getUpdateStatus()));
   }
 
-  // If checkbox is checked then save number of minutes/days and set corresponding property to
-  // true in user.properties
+  // updatesChecked: N/A -> N/A
+  // Sets updateStatus to true or false if the checkbox is checked or not
   @FXML
-  void refreshListChecked() {
-    if (refreshCheckbox.isSelected()) {
-      GetSetProps obj = new GetSetProps();
-      try {
-        obj.setRefresh(Integer.parseInt(refreshTextfield.getText()));
-        obj.setRefreshChecked(true);
-        System.out.println("Success - refresh settings are changed in file");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+  void updateChecked() throws IOException {
+    GetSetProps obj = new GetSetProps();
+    if (updateCheckbox.isSelected()) {
+      obj.setAllProps("updateStatus", "true");
+      System.out.println("Update changed to TRUE");
+    } else {
+      obj.setAllProps("updateStatus", "false");
+      System.out.println("Update to FALSE");
     }
   }
 
-  @FXML
-  void updatesChecked() {
-    if (updatesCheckbox.isSelected()) {
-      GetSetProps obj = new GetSetProps();
-      try {
-        obj.setUpdate(Integer.parseInt(updatesTextfield.getText()));
-        obj.setUpdatesChecked(true);
-        System.out.println("Success - update settings are changed in file");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  // Gets the link from the TextField and tries to parse it with jSoup
-  void testLink() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-    GetSetProps getSetProps = new GetSetProps();
-    String url = linkTextfield.getText();
-    Document doc = obj.changeLink(url);
-    currentLink.setText(url);
-    if (doc == null) {
-    // Todo, Important - Let user know that document couldn't parse by jSoup
-    }
-    try {
-      getSetProps.setLink(url);
-    } catch (IOException e) {
-      System.out.println("FAILED - Couldn't save url property into file");
-      e.printStackTrace();
-    }
-  }
-
-  // Button to switch back to the Main UI
+  // gotoMain: N/A -> N/A
+  // When "Back to Main Screen" button is clicked, it switches stages
   @FXML
   void gotoMain() throws IOException {
     Stage stage = (Stage) backButton.getScene().getWindow();
@@ -185,11 +179,11 @@ public class Controller {
     main.openUrl(currentLink.getText());
   }
 
-  // If user HITS enter then it goes to testLink()
+  // If user hits enter in the
   @FXML
   void craigslistTextfieldEnter(KeyEvent e) {
     if (e.getCode() == KeyCode.ENTER) {
-      testLink();
+      changeLink();
     }
   }
 }

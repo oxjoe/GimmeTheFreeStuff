@@ -24,14 +24,8 @@ public class MainController {
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
 
-  @FXML // fx:id="craigslistButton"
-  private Button craigslistButton; // Value injected by FXMLLoader
-
   @FXML // fx:id="settingsButton"
   private Button settingsButton; // Value injected by FXMLLoader
-
-  @FXML // fx:id="updateListButton"
-  private Button updateListButton; // Value injected by FXMLLoader
 
   @FXML // fx:id="tableView"
   private TableView<Item> tableView; // Value injected by FXMLLoader
@@ -40,7 +34,7 @@ public class MainController {
   private TableColumn<Item, Boolean> statusCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="dateCol"
-  // USing string to display it becuase SimpleDateFormat.format returns a string
+  // USing string to display it because SimpleDateFormat.format returns a string
   private TableColumn<Item, String> dateCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="nameCol"
@@ -49,23 +43,28 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<Item, String> urlCol; // Value injected by FXMLLoader
 
-  @FXML
-  void craigslistClicked(ActionEvent event) throws IOException {
-    Main main = new Main();
+  // Todo:
+  // When updateListClicked is clicked show, Refreshed in green
+  // Make date posted user friendly
+  // searchTextField enter
+
+  public void initialize() {
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    main.openUrl(getSetProps.getLink());
+    try {
+      Main.getStage()
+          .setTitle("GimmeTheFreeStuff for " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+      populateTable();
+    } catch (IOException e) {
+      System.out.println("Unable to set the title OR Unable to populate table");
+      e.printStackTrace();
+    }
+    System.out.println("*** MainController Initialized ***");
   }
 
-  @FXML
-  void searchTextfieldEnter(KeyEvent event) {
 
-  }
-
-  @FXML
-  void updateListClicked(ActionEvent event) throws IOException {
-    populateTable();
-  }
-
+  // gotoSettings: N/A -> N/A
+  // When "Settings" button is clicked, it switches stages
   @FXML
   void gotoSettings() throws IOException {
     Stage stage = (Stage) settingsButton.getScene().getWindow();
@@ -76,6 +75,8 @@ public class MainController {
     System.out.println("Switched to Settings page");
   }
 
+  // populateTable:  List<Item> -> List<Item>
+  // Fills in the columns with data
   void populateTable() throws IOException {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -85,51 +86,37 @@ public class MainController {
     System.out.println("Populated Table");
   }
 
-//  private void makeDateUserFriendly(List<Item> list) throws ParseException {
-//  }
-
+  // parseItemList:  List<Item> ->  List<Item>
+  // Returns the list by using the url from user.properties
   public List<Item> parseItemList() throws IOException {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    String link = getSetProps.getLink();
-    Document doc = obj.changeLink(link);
-    List<Item> list = obj.getData(doc, link);
-    List<Item> sortedList = obj.sortByDate(list);
-    //System.out.println(sortedList.toString());
-//     TODO - make date userFriendly
+
+    String url = getSetProps.getLink();
+    Document doc = gimmeTheFreeStuff.testLink(url);
+    List<Item> list = gimmeTheFreeStuff.getData(doc, url);
+    List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 //    makeDataUserFriendly(sortedList);
     return sortedList;
   }
 
-//  private String getLinkFromUserProperties() throws IOException {
-//    Properties prop = new Properties();
-//    FileInputStream in = new FileInputStream("user.properties");
-//    prop.load(in);
-//    String url = prop.getProperty("link");
-//    in.close();
-//    return url;
-//  }
+  @FXML
+  void searchTextfieldEnter(KeyEvent event) {
+  }
 
-//  public void newTryEMailStage(Stage primaryStage) throws IOException {
-//    Stage newTryEMail = primaryStage;
-//  }
-
-  public void initialize() {
-    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+  // craigslistClicked: N/A -> N/A
+  // When "Take me to Craigslist" button is clicked, it takes you to Craigslist
+  @FXML
+  void craigslistClicked() throws IOException {
+    Main main = new Main();
     GetSetProps getSetProps = new GetSetProps();
-    try {
-      Main.getStage().setTitle("GimmeTheFreeStuff for " + obj.getTitle(getSetProps.getLink()));
-    } catch (IOException e) {
-      System.out.println("Unable to set the title");
-      e.printStackTrace();
-    }
+    main.openUrl(getSetProps.getLink());
+  }
 
-    try {
-      populateTable();
-    } catch (IOException e) {
-      System.out.println("Unable to populate table");
-      e.printStackTrace();
-    }
-    System.out.println("*** MainController Initialized ***");
+  // updateListClicked: N/A -> N/A
+  // When "Update List" button is clicked, it updates the list
+  @FXML
+  void updateListClicked(ActionEvent event) throws IOException {
+    populateTable();
   }
 }

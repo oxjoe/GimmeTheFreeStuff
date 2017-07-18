@@ -10,106 +10,110 @@ import java.util.Properties;
  */
 public class GetSetProps {
 
+  private Properties props;
+
   public GetSetProps() {
     props = new Properties();
   }
 
-  public GetSetProps(Properties props, String link, int refresh, boolean refreshChecked,
-      int updates, boolean updateCheckeds) {
-    this.props = props;
-    this.link = link;
-    this.refresh = refresh;
-    this.refreshChecked = refreshChecked;
-    this.updates = updates;
-    this.updateCheckeds = updateCheckeds;
-  }
-
-  private Properties props;
-  private String link;
-  private int refresh;
-  private boolean refreshChecked;
-  private int updates;
-  private boolean updateCheckeds;
-
-  public Properties getProps() {
-    return props;
-  }
   public void setProps(Properties props) {
     this.props = props;
+  }
+
+  public void setAllProps(String key, String value) throws IOException {
+    GetSetProps obj = new GetSetProps();
+
+    String link = obj.getLink();
+    String refreshRate = obj.getRefreshRate();
+    String refreshStatus = obj.getRefreshStatus();
+    String updateRate = obj.getUpdateRate();
+    String updateStatus = obj.getUpdateStatus();
+
+    FileOutputStream out = new FileOutputStream("user.properties");
+
+    switch (key) {
+      case "link":
+        props.setProperty("link", value);
+        props.setProperty("refreshRate", refreshRate);
+        props.setProperty("refreshChecked", refreshStatus);
+        props.setProperty("updateRate", updateRate);
+        props.setProperty("updateChecked", updateStatus);
+        System.out.println("Set link");
+        break;
+      case "refreshRate":
+        props.setProperty("link", link);
+        props.setProperty("refreshRate", value);
+        props.setProperty("refreshChecked", refreshStatus);
+        props.setProperty("updateRate", updateRate);
+        props.setProperty("updateChecked", updateStatus);
+        System.out.println("Set refreshRate");
+        break;
+      case "refreshStatus":
+        props.setProperty("link", link);
+        props.setProperty("refreshRate", refreshRate);
+        props.setProperty("refreshChecked", value);
+        props.setProperty("updateRate", updateRate);
+        props.setProperty("updateChecked", updateStatus);
+        System.out.println("Set refreshStatus");
+        break;
+      case "updateRate":
+        props.setProperty("link", link);
+        props.setProperty("refreshRate", refreshRate);
+        props.setProperty("refreshChecked", refreshStatus);
+        props.setProperty("updateRate", value);
+        props.setProperty("updateChecked", updateStatus);
+        System.out.println("Set updateRate");
+        break;
+      case "updateStatus":
+        props.setProperty("link", link);
+        props.setProperty("refreshRate", refreshRate);
+        props.setProperty("refreshChecked", refreshStatus);
+        props.setProperty("updateRate", updateRate);
+        props.setProperty("updateChecked", value);
+        System.out.println("Set updateStatus");
+        break;
+    }
+    props.store(out, null);
+    out.close();
   }
 
   public String getLink() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
-    String propLink = props.getProperty("link");
+    String temp = props.getProperty("link");
     in.close();
-    return propLink;
+    return temp;
   }
 
-  public void setLink(String link) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    props.setProperty("link", link);
-    props.store(out, null);
-    out.close();
-  }
-
-  public int getRefresh() throws IOException {
+  public String getRefreshRate() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
-    int propRefreshRate = Integer.parseInt(props.getProperty("refreshRate"));
+    String temp = props.getProperty("refreshRate");
     in.close();
-    return propRefreshRate;
+    return temp;
   }
 
-  public void setRefresh(int refresh) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    props.setProperty("refreshRate", Integer.toString(refresh));
-    props.store(out, null);
-    out.close();
-  }
-
-  public boolean isRefreshChecked() throws IOException {
+  public String getRefreshStatus() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
-    boolean refreshStatus = Boolean.parseBoolean(props.getProperty("refreshChecked"));
+    String temp = props.getProperty("refreshChecked");
     in.close();
-    return refreshStatus;
+    return temp;
   }
 
-  public void setRefreshChecked(boolean refreshChecked) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    props.setProperty("link", link);
-    props.store(out, String.valueOf(refreshChecked));
-    out.close();
-  }
-
-  public int getUpdates() throws IOException {
+  public String getUpdateRate() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
-    int propUpdateRate = Integer.parseInt(props.getProperty("updateRate"));
+    String temp = props.getProperty("updateRate");
     in.close();
-    return propUpdateRate;
+    return temp;
   }
 
-  public void setUpdate(int updates) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    props.setProperty("updateRate", Integer.toString(updates));
-    props.store(out, null);
-    out.close();
-  }
-
-  public boolean isUpdatesChecked() throws IOException {
+  public String getUpdateStatus() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
-    boolean updateStatus = Boolean.parseBoolean(props.getProperty("updateChecked"));
+    String temp = props.getProperty("updateChecked");
     in.close();
-    return updateStatus;
-  }
-
-  public void setUpdatesChecked(boolean updateCheckeds) throws IOException {
-    FileOutputStream out = new FileOutputStream("user.properties");
-    props.setProperty("updateChecked", String.valueOf(updateCheckeds));
-    props.store(out, null);
-    out.close();
+    return temp;
   }
 }
