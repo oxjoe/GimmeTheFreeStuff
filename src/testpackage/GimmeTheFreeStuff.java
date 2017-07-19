@@ -151,6 +151,7 @@ public class GimmeTheFreeStuff {
     return list;
   }
 
+  // TableView alreay has built in sort
   // sortByDate: List<Item> -> List<Item>
   // Takes a list of items and returns the list of items sorted by date (most recent)
   public List<Item> sortByDate(List<Item> list) {
@@ -184,19 +185,18 @@ public class GimmeTheFreeStuff {
 //    }
 //  }
 
+
   public List<Item> compareLists(List<Item> newList, Date currentDate) {
     for (int i = 0; i < newList.size(); i++) {
-      if ((newList.get(i).getDate()).after(currentDate)) {
+      if ((newList.get(i).getDate()).compareTo(currentDate) > 0) {
         newList.get(i).setStatus(true);
       } else if (((newList.get(i).getDate())
-          .before(currentDate))) {// not sure if this line is needed
+          .compareTo(currentDate)) < 0) {
         newList.get(i).setStatus(false);
       }
     }
     return newList;
   }
-
-
 }
 
 

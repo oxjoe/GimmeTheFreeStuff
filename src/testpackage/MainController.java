@@ -1,6 +1,7 @@
 package testpackage;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,7 +62,7 @@ public class MainController {
     try {
       Main.getStage()
           .setTitle("GimmeTheFreeStuff for " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
-      populateTable();
+      populateTable("");
     } catch (IOException e) {
       System.out.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
@@ -98,28 +99,37 @@ public class MainController {
 
   // populateTable:  List<Item> -> List<Item>
   // Fills in the columns with data
-  void populateTable() throws IOException {
+  void populateTable(String temp) throws IOException {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-    tableView.getItems().setAll(parseItemList());
+    tableView.getItems().setAll(parseItemList(temp));
     success();
     System.out.println("Populated Table");
   }
 
   // parseItemList:  List<Item> ->  List<Item>
   // Returns the list by using the url from user.properties
-  public List<Item> parseItemList() throws IOException {
+  public List<Item> parseItemList(String temp) throws IOException {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
+    Main main = new Main();
 
     String url = getSetProps.getLink();
     Document doc = gimmeTheFreeStuff.testLink(url);
     List<Item> list = gimmeTheFreeStuff.getData(doc, url);
-    List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
-//    makeDataUserFriendly(sortedList);
-    return sortedList;
+    //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
+
+    //    makeDataUserFriendly(sortedList);
+    if (temp.compareTo("useCompareLists") == 0) {
+      System.out.println("OLD = " + main.getCurrentTime().toString());
+      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
+      main.setCurrentTime(new Date());
+      System.out.println("NEW = " + main.getCurrentTime().toString());
+      return tempList;
+    }
+    return list;
   }
 
   @FXML
@@ -139,6 +149,6 @@ public class MainController {
   // When "Update List" button is clicked, it updates the list
   @FXML
   void updateListClicked(ActionEvent event) throws IOException {
-    populateTable();
+    populateTable("useCompareLists");
   }
 }

@@ -68,7 +68,6 @@ public class Controller {
     System.out.println("*** Controller Initialized ***");
   }
 
-  // Todo: only accept numbers in textfields
   // addListeners: N/A -> N/A
   // Adds listeners to the two textfields in case user changes the refreshRate (minutes) and
   // updateRate (days)
@@ -77,20 +76,23 @@ public class Controller {
     GetSetProps obj = new GetSetProps();
 
     refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      try {
-        obj.setAllProps("refreshRate", newValue);
-        System.out.println("Success - Added refresh listener to textfield");
-
-      } catch (IOException e) {
-        e.printStackTrace();
+      if (newValue.matches("\\d+")) {
+        try {
+          obj.setAllProps("refreshRate", newValue);
+          System.out.println("Success - Added refresh listener to textfield");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     });
     updateTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      try {
-        obj.setAllProps("updateRate", newValue);
-        System.out.println("Success - Added update listener to textfield");
-      } catch (IOException e) {
-        e.printStackTrace();
+      if (newValue.matches("\\d+")) {
+        try {
+          obj.setAllProps("updateRate", newValue);
+          System.out.println("Success - Added update listener to textfield");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     });
   }
