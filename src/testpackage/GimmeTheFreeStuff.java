@@ -78,16 +78,12 @@ public class GimmeTheFreeStuff {
     try {
       doc = Jsoup.connect(link).get();
     } catch (IOException e) {
-      System.out.println(
-          "Link couldn't be parsed in testlink, setting doc=null and let controller.java handle "
-              + "it");
-      doc = null;
-      //e.printStackTrace();
-      System.out.println(
-          "does it reach here (commented out stacktrace before this), it caught the IOException "
-              + "and set doc=null");
+      e.printStackTrace();
+      //doc = null;
+    } finally {
+      System.out.println("print no matter what happens in testlink");
+      return doc;
     }
-    return doc;
   }
 
   // Catch exception for new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr)

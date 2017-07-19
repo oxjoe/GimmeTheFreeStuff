@@ -2,6 +2,8 @@ package testpackage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
@@ -23,6 +27,9 @@ public class MainController {
 
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
+
+  @FXML // fx:id="successText"
+  private Text successText; // Value injected by FXMLLoader
 
   @FXML // fx:id="settingsButton"
   private Button settingsButton; // Value injected by FXMLLoader
@@ -44,13 +51,13 @@ public class MainController {
   private TableColumn<Item, String> urlCol; // Value injected by FXMLLoader
 
   // Todo:
-  // When updateListClicked is clicked show, Refreshed in green
   // Make date posted user friendly
   // searchTextField enter
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
+    // testLink is called twice in the try
     try {
       Main.getStage()
           .setTitle("GimmeTheFreeStuff for " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
@@ -60,6 +67,20 @@ public class MainController {
       e.printStackTrace();
     }
     System.out.println("*** MainController Initialized ***");
+  }
+
+  void success() {
+    Timer timer = new Timer();
+    successText.setText("REFRESHED LIST");
+    successText.setFill(Color.GREEN);
+    TimerTask task = new TimerTask() {
+      @Override
+      public void run() {
+        successText.setText("");
+        timer.cancel();
+      }
+    };
+    timer.schedule(task, 2000);
   }
 
 
@@ -83,6 +104,7 @@ public class MainController {
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
     tableView.getItems().setAll(parseItemList());
+    success();
     System.out.println("Populated Table");
   }
 

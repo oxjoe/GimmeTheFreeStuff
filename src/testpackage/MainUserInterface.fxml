@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.MainController">
   <children>
@@ -25,5 +26,6 @@
       <TableColumn fx:id="urlCol" prefWidth="129.0" text="Websitelink" />
     </columns>
   </TableView>
+      <Text fx:id="successText" layoutX="264.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" />
   </children>
 </AnchorPane>

@@ -1,6 +1,8 @@
 package testpackage;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +13,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
@@ -31,7 +34,6 @@ public class Controller {
   @FXML // fx:id="backButton"
   private Button backButton; // Value injected by FXMLLoader
 
-  // Todo - change status text to show if input was accepted or not
   @FXML // fx:id="statusText"
   private Text statusText; // Value injected by FXMLLoader
 
@@ -95,7 +97,6 @@ public class Controller {
 
   // refreshListChecked: N/A -> N/A
   // If checkbox is checked or unchecked then set it to true or false in user.properties
-  // TODO ELSE MIGHT NEED TO BE ELSEIF
   @FXML
   void refreshChecked() throws IOException {
     GetSetProps obj = new GetSetProps();
@@ -109,7 +110,8 @@ public class Controller {
   }
 
   // changeLink: N/A -> N/A
-  // Gets the link from the textfield to see if it works
+  // Gets the link from the textfield to see if it does or doesn't work and displays the
+  // appropriate text using passOrFailed
   @FXML
   void changeLink() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -119,12 +121,42 @@ public class Controller {
     Document doc = gimmeTheFreeStuff.testLink(url);
 
     if (doc == null) {
-      // Todo: Let user know that document couldn't parse by jSoup and show Failure! then quit
-      // the method so user can try another one
+      passOrFailed("Failed");
       return;
+    } else {
+      passOrFailed("Success");
+      currentLink.setText(url);
+      try {
+        getSetProps.setAllProps("link", url);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
-    // Todo: if its not null and it works then show Success!
-    currentLink.setText(url);
+  }
+
+  // passOrFailed: String -> N/A
+  // Sets text to either Success or Failed after a short delay if the link was successfully
+  // parsed in changeLink
+  void passOrFailed(String status) {
+    Timer timer = new Timer();
+
+    if (status.compareTo("Failed") == 0) {
+      statusText.setText("Failed");
+      statusText.setFill(Color.RED);
+    } else {
+      statusText.setText("Success");
+      statusText.setFill(Color.GREEN);
+    }
+
+    TimerTask task = new TimerTask() {
+      @Override
+      public void run() {
+        statusText.setText("Press enter to submit");
+        statusText.setFill(Color.BLACK);
+        timer.cancel();
+      }
+    };
+    timer.schedule(task, 2000);
   }
 
   // fillInUI: N/A -> N/A
