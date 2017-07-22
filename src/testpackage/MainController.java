@@ -1,16 +1,21 @@
 package testpackage;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,7 +54,7 @@ public class MainController {
   private TableColumn<Item, String> nameCol; // Value injected by FXMLLoader
 
   @FXML // fx:id="urlCol"
-  private TableColumn<Item, String> urlCol; // Value injected by FXMLLoader
+  private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
   // Todo:
   // Make date posted user friendly
@@ -58,6 +63,9 @@ public class MainController {
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
+    Main main = new Main();
+    System.out.println(
+        "MainController Init prints main.getCurrentTime = " + main.getCurrentTime().toString());
     // testLink is called twice in the try
     try {
       Main.getStage()
@@ -67,6 +75,12 @@ public class MainController {
       System.out.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
     }
+
+
+
+
+
+
     System.out.println("*** MainController Initialized ***");
   }
 
@@ -104,9 +118,27 @@ public class MainController {
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-    tableView.getItems().setAll(parseItemList(temp));
+    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
+
+//    tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//      @Override
+//      public void handle(MouseEvent event) {
+//        ObservableList<TablePosition> a = tableView.getSelectionModel().getSelectedCells();
+//        System.out.println(a);
+
+////tableView.getSelectionModel().getSelectedItem().getUrlLink()
+
+//      }
+//    });
+
+    tableView.getItems().setAll(oList);
+
     success();
     System.out.println("Populated Table");
+  }
+  @FXML
+  void openItemUrl() {
+
   }
 
   // parseItemList:  List<Item> ->  List<Item>
@@ -119,6 +151,19 @@ public class MainController {
     String url = getSetProps.getLink();
     Document doc = gimmeTheFreeStuff.testLink(url);
     List<Item> list = gimmeTheFreeStuff.getData(doc, url);
+
+    for (Item e : list) {
+      Hyperlink link = e.getUrlLink();
+      link.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          String a = e.getUrlLink().toString();
+          String[] split = a.split("'");
+          System.out.println(Arrays.toString(split));
+          main.openUrl(split[1]);
+        }
+      });
+    }
     //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 
     //    makeDataUserFriendly(sortedList);
