@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Properties;
+import javafx.scene.control.Hyperlink;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,6 +23,43 @@ import org.jsoup.select.Elements;
  * Created by Joseph on 6/26/2017.
  */
 public class GimmeTheFreeStuff {
+
+  public static void main(String[] args) throws ParseException {
+//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+//
+//    // To be used for displaying the date
+////"yyyy-MM-dd HH:mm"
+//
+////    String dateStr = "2017-05-28 10:36";
+////    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
+////    String displayDate = new SimpleDateFormat("MMM d '@' h:mm a").format(date);
+////    System.out.println(displayDate); // May, 28 @ 10:36 AM
+//    String first = "2017-05-28 10:36";
+//    String second = "2017-05-28 11:36";
+//    String third = "2017-08-28 10:36";
+//    String fourth = "2017-08-28 11:36";
+//    Date one = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(first);
+//    Date two = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(second);
+//    Date three = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(third);
+//    Date four = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fourth);
+//    Date currentDate = new Date();
+//    System.out.println("CURRENT TIME: " + currentDate);
+//    List<Date> newList = new ArrayList<>();
+//    newList.add(one);
+//    newList.add(two);
+//    newList.add(three);
+//    newList.add(four);
+//
+//
+//    for (int i = 0; i < newList.size(); i++) {
+//      if ((newList.get(i)).before(currentDate)) {
+//        System.out.println(true);
+//      } else if (newList.get(i).after(currentDate)) {
+//        System.out.println(false);
+//      }
+//    }
+//
+  }
 
   // startup: N/A -> N/A
   // Runs the very first time when the application starts up. Checks to see if user.properties
@@ -141,17 +179,17 @@ public class GimmeTheFreeStuff {
             new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateList.get(i)),
             // Converts each element of type string in dateTimeList to type Date while adding it to
             // the list so it can be sorted easier later as well + be displayed more user friendly
-            itemLinkList.get(i),
+            new Hyperlink(itemLinkList.get(i)),
             false));
       } catch (ParseException e) {
         e.printStackTrace();
       }
     }
-    //System.out.println(list);
+  //System.out.println(list);
     return list;
-  }
+}
 
-  // TableView alreay has built in sort
+  // TableView already has built in sort
   // sortByDate: List<Item> -> List<Item>
   // Takes a list of items and returns the list of items sorted by date (most recent)
   public List<Item> sortByDate(List<Item> list) {
@@ -160,38 +198,13 @@ public class GimmeTheFreeStuff {
     return list;
   }
 
-//  public refreshCraigslistInXMin(String userLink, int minutes) {
-//    Date currentDate = new Date();
-//    System.out.println(currentDate.toString());
-//    Timer timer = new Timer();
-//    timer.schedule(new timerTask(), (long) minutes / 60000, (long) minutes / 60000);
-//
-//    //return listWithNewStuff;
-//  }
-
-//  class timerTask extends TimerTask {
-//    GimmeTheFreeStuff objOne = new GimmeTheFreeStuff();
-//    @Override
-//    public void run() {
-//
-//      List<Item> newList = new ArrayList<>();
-//      newList = sortByDate(getData(objOne.changeLink(userInput), userInput));
-//      compareLists(newList, currentDate)
-//      List<Item> listWithNewStuff = new ArrayList<>();
-//      listWithNewStuff = compareLists(newList, currentDate);
-//      List<Item> listWithNewStuff = new ArrayList<>();
-//
-////    if user says stop then timer.cancel();
-//    }
-//  }
-
 
   public List<Item> compareLists(List<Item> newList, Date currentDate) {
     for (int i = 0; i < newList.size(); i++) {
-      if ((newList.get(i).getDate()).compareTo(currentDate) > 0) {
+      if ((newList.get(i).getDate()).after(currentDate)) {
+        System.out.println(newList.get(i).getDate().toString() + "is after " + currentDate);
         newList.get(i).setStatus(true);
-      } else if (((newList.get(i).getDate())
-          .compareTo(currentDate)) < 0) {
+      } else if ((newList.get(i).getDate()).before(currentDate)) {
         newList.get(i).setStatus(false);
       }
     }

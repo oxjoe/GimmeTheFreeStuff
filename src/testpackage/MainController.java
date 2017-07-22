@@ -1,7 +1,6 @@
 package testpackage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -20,7 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -57,7 +55,7 @@ public class MainController {
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
   // Todo:
-  // Make date posted user friendly
+  // CONVERT TO DATE TIME
   // searchTextField enter
 
   public void initialize() {
@@ -75,12 +73,6 @@ public class MainController {
       System.out.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
     }
-
-
-
-
-
-
     System.out.println("*** MainController Initialized ***");
   }
 
@@ -152,6 +144,7 @@ public class MainController {
     Document doc = gimmeTheFreeStuff.testLink(url);
     List<Item> list = gimmeTheFreeStuff.getData(doc, url);
 
+    // If the URL link is clicked then it will open it in the browser
     for (Item e : list) {
       Hyperlink link = e.getUrlLink();
       link.setOnAction(new EventHandler<ActionEvent>() {
@@ -159,7 +152,6 @@ public class MainController {
         public void handle(ActionEvent event) {
           String a = e.getUrlLink().toString();
           String[] split = a.split("'");
-          System.out.println(Arrays.toString(split));
           main.openUrl(split[1]);
         }
       });
@@ -177,9 +169,31 @@ public class MainController {
     return list;
   }
 
-  @FXML
-  void searchTextfieldEnter(KeyEvent event) {
+  //todo where to put it
+  void refreshListWithTimer() throws IOException {
+    GetSetProps getSetProps = new GetSetProps();
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+    if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
+      long minutes = Long.parseLong(getSetProps.getRefreshRate());
+      Timer timer = new Timer();
+      TimerTask task = new TimerTask(){
+        @Override
+        public void run() {
+          try {
+            populateTable("");
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      };
+      timer.scheduleAtFixedRate(task, minutes / 60000, minutes / 60000);
+    }
   }
+
+
+//  @FXML
+//  void searchTextfieldEnter(KeyEvent event) {
+//  }
 
   // craigslistClicked: N/A -> N/A
   // When "Take me to Craigslist" button is clicked, it takes you to Craigslist

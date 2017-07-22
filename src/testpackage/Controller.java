@@ -23,6 +23,7 @@ import org.jsoup.nodes.Document;
  */
 
 // todo Bugs
+//  Gets the lastest Postings not including updates which is why if u open craigslist and compare it to the app it will look different
 //  refreshTextfield and updateTextfield can't accept ""
 //  Numbers are all in ints
 

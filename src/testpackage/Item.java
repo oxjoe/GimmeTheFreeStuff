@@ -1,21 +1,22 @@
 package testpackage;
 
 import java.util.Date;
+import javafx.scene.control.Hyperlink;
 
 /**
  * Created by Joseph on 6/27/2017.
  */
-public class Item implements Comparable<Item> {
+public class Item implements Comparable<Item>{
 
   //private String description;
   //private String mapsLink;
   //private String pictureLink
   private String name;
   private Date date;
-  private String urlLink;
+  private Hyperlink urlLink;
   private boolean status;
 
-  public Item(String name, Date date, String urlLink, boolean status) {
+  public Item(String name, Date date, Hyperlink urlLink, boolean status) {
     this.name = name;
     this.date = date;
     this.urlLink = urlLink;
@@ -42,15 +43,15 @@ public class Item implements Comparable<Item> {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void SimpleDateFormat(Date date) {
     this.date = date;
   }
 
-  public String getUrlLink() {
+  public Hyperlink getUrlLink() {
     return urlLink;
   }
 
-  public void setUrlLink(String urlLink) {
+  public void setUrlLink(Hyperlink urlLink) {
     this.urlLink = urlLink;
   }
 
