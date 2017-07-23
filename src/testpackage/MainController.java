@@ -1,7 +1,6 @@
 package testpackage;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -54,9 +54,7 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
-  // Todo:
-  // CONVERT TO DATE TIME
-  // searchTextField enter
+  // Todo: searchTextField enter
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -159,13 +157,13 @@ public class MainController {
     //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 
     //    makeDataUserFriendly(sortedList);
-    if (temp.compareTo("useCompareLists") == 0) {
-      System.out.println("OLD = " + main.getCurrentTime().toString());
-      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
-      main.setCurrentTime(new Date());
-      System.out.println("NEW = " + main.getCurrentTime().toString());
-      return tempList;
-    }
+//    if (temp.compareTo("useCompareLists") == 0) {
+//      System.out.println("OLD = " + main.getCurrentTime().toString());
+//      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
+//      main.setCurrentTime(new Date());
+//      System.out.println("NEW = " + main.getCurrentTime().toString());
+//      return tempList;
+//    }
     return list;
   }
 
@@ -191,9 +189,9 @@ public class MainController {
   }
 
 
-//  @FXML
-//  void searchTextfieldEnter(KeyEvent event) {
-//  }
+  @FXML
+  void searchTextfieldEnter(KeyEvent event) {
+  }
 
   // craigslistClicked: N/A -> N/A
   // When "Take me to Craigslist" button is clicked, it takes you to Craigslist

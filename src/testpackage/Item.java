@@ -1,6 +1,5 @@
 package testpackage;
 
-import java.util.Date;
 import javafx.scene.control.Hyperlink;
 
 /**
@@ -12,11 +11,11 @@ public class Item implements Comparable<Item>{
   //private String mapsLink;
   //private String pictureLink
   private String name;
-  private Date date;
+  private String date;
   private Hyperlink urlLink;
   private boolean status;
 
-  public Item(String name, Date date, Hyperlink urlLink, boolean status) {
+  public Item(String name, String date, Hyperlink urlLink, boolean status) {
     this.name = name;
     this.date = date;
     this.urlLink = urlLink;
@@ -39,11 +38,11 @@ public class Item implements Comparable<Item>{
     this.name = name;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void SimpleDateFormat(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -62,7 +61,7 @@ public class Item implements Comparable<Item>{
 
   @Override
   public int compareTo(Item compareItem) {
-    Date compareDate = compareItem.getDate();
+    String compareDate = compareItem.getDate();
 
     return compareDate.compareTo(this.date);
   }

@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Properties;
@@ -25,40 +25,13 @@ import org.jsoup.select.Elements;
 public class GimmeTheFreeStuff {
 
   public static void main(String[] args) throws ParseException {
-//    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
-//
-//    // To be used for displaying the date
-////"yyyy-MM-dd HH:mm"
-//
-////    String dateStr = "2017-05-28 10:36";
-////    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
-////    String displayDate = new SimpleDateFormat("MMM d '@' h:mm a").format(date);
-////    System.out.println(displayDate); // May, 28 @ 10:36 AM
-//    String first = "2017-05-28 10:36";
-//    String second = "2017-05-28 11:36";
-//    String third = "2017-08-28 10:36";
-//    String fourth = "2017-08-28 11:36";
-//    Date one = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(first);
-//    Date two = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(second);
-//    Date three = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(third);
-//    Date four = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fourth);
-//    Date currentDate = new Date();
-//    System.out.println("CURRENT TIME: " + currentDate);
-//    List<Date> newList = new ArrayList<>();
-//    newList.add(one);
-//    newList.add(two);
-//    newList.add(three);
-//    newList.add(four);
-//
-//
-//    for (int i = 0; i < newList.size(); i++) {
-//      if ((newList.get(i)).before(currentDate)) {
-//        System.out.println(true);
-//      } else if (newList.get(i).after(currentDate)) {
-//        System.out.println(false);
-//      }
-//    }
-//
+/*  //This block of code throws error when testing getData through this class but not after the
+application has started
+    String a = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    Document doc = obj.testLink(a);
+    obj.getData(doc, a);
+    */
   }
 
   // startup: N/A -> N/A
@@ -156,6 +129,20 @@ public class GimmeTheFreeStuff {
     List<String> dateList = timeElement.eachAttr("datetime");
     // [2017-06-28 15:45, 2017-06-28 10:18, 2017-06-27 11:17, 2017-06-27 09:47, etc...
 
+  // Format in List
+  //"yyyy-MM-dd HH:mm"
+  // New Format
+  // MMM d '@' h:mm a
+    DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM d '@' h:mm a");
+
+    // Makes the date/time more user friendly
+    ListIterator<String> dateItr = dateList.listIterator();
+    while (dateItr.hasNext()) {
+      LocalDateTime date = LocalDateTime.parse(dateItr.next(), oldFormat);
+      dateItr.set(date.format(newFormat));
+    }
+
     // Checks if all of the them are the same size by the transitive property, yay for math!
     if (!(nameList.size() == itemLinkList.size() && nameList.size() == dateList.size())) {
       System.out.println("All lists are NOT the same size");
@@ -163,31 +150,24 @@ public class GimmeTheFreeStuff {
 
     List<Item> list = new ArrayList<>();
 
-// To be used for displaying the date
-//"yyyy-MM-dd HH:mm"
-
 //    String dateStr = "2017-05-28 10:36";
 //    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateStr);
-//    String displayDate = new SimpleDateFormat("MMM d '@' h:mm a").format(date);
+//    String displayDate = new SimpleDateFormat("").format(date);
 //    System.out.println(displayDate); // May, 28 @ 10:36 AM
 
     // Combines the other lists into one list of Items
     for (int i = 0; i < nameList.size(); i++) {
-      try {
-        list.add(new Item(
-            nameList.get(i),
-            new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateList.get(i)),
-            // Converts each element of type string in dateTimeList to type Date while adding it to
-            // the list so it can be sorted easier later as well + be displayed more user friendly
-            new Hyperlink(itemLinkList.get(i)),
-            false));
-      } catch (ParseException e) {
-        e.printStackTrace();
-      }
+      list.add(new Item(
+          nameList.get(i),
+          dateList.get(i),
+          // Converts each element of type string in dateTimeList to type Date while adding it to
+          // the list so it can be sorted easier later as well + be displayed more user friendly
+          new Hyperlink(itemLinkList.get(i)),
+          false));
     }
-  //System.out.println(list);
+    //System.out.println(list);
     return list;
-}
+  }
 
   // TableView already has built in sort
   // sortByDate: List<Item> -> List<Item>
@@ -198,18 +178,17 @@ public class GimmeTheFreeStuff {
     return list;
   }
 
-
-  public List<Item> compareLists(List<Item> newList, Date currentDate) {
-    for (int i = 0; i < newList.size(); i++) {
-      if ((newList.get(i).getDate()).after(currentDate)) {
-        System.out.println(newList.get(i).getDate().toString() + "is after " + currentDate);
-        newList.get(i).setStatus(true);
-      } else if ((newList.get(i).getDate()).before(currentDate)) {
-        newList.get(i).setStatus(false);
-      }
-    }
-    return newList;
-  }
+//  public List<Item> compareLists(List<Item> newList, Date currentDate) {
+//    for (int i = 0; i < newList.size(); i++) {
+//      if ((newList.get(i).getDate()).after(currentDate)) {
+//        System.out.println(newList.get(i).getDate().toString() + "is after " + currentDate);
+//        newList.get(i).setStatus(true);
+//      } else if ((newList.get(i).getDate()).before(currentDate)) {
+//        newList.get(i).setStatus(false);
+//      }
+//    }
+//    return newList;
+//  }
 }
 
 
