@@ -22,9 +22,8 @@ import org.jsoup.nodes.Document;
  * Created by Joseph on 7/6/2017.
  */
 
-// todo Bugs
-//  Gets the lastest Postings not including updates which is why if u open craigslist and compare it to the app it will look different
-//  refreshTextfield and updateTextfield can't accept ""
+// bugs
+//  Gets the lastest Postings, not UPDATES updates which is why if u open craigslist and compare it to the app it will look different
 //  Numbers are all in ints
 
 public class Controller {
@@ -102,12 +101,18 @@ public class Controller {
   // If checkbox is checked or unchecked then set it to true or false in user.properties
   @FXML
   void refreshChecked() throws IOException {
-    GetSetProps obj = new GetSetProps();
+    GetSetProps getSetProps = new GetSetProps();
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     if (refreshCheckbox.isSelected()) {
-      obj.setAllProps("refreshStatus", "true");
+      getSetProps.setAllProps("refreshStatus", "true");
+      System.out.println("***********************STARTED TIMER");
+      Main.refreshListWithTimer(Long.parseLong(getSetProps.getRefreshRate()));
       System.out.println("refreshStatus set to true");
     } else {
-      obj.setAllProps("refreshStatus", "false");
+      getSetProps.setAllProps("refreshStatus", "false");
+      // Shutdown timer
+      System.out.println("***********************SHUTDOWN TIMER");
+      Main.getScheduler().shutdownNow();
       System.out.println("refreshStatus set to false");
     }
   }

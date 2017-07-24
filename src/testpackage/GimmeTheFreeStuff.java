@@ -2,9 +2,12 @@ package testpackage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,7 +63,8 @@ application has started
     } catch (FileNotFoundException e) {
       System.out.println("User.properties DON'T exist");
       createUserProps();
-      System.out.println("Created user.properties");
+      copyToUserProps("default.properties", "user.properties");
+      System.out.println("Created user.properties and copied contents of default.properties to it");
     } finally {
       in.close();
     }
@@ -71,6 +75,11 @@ application has started
   private void createUserProps() throws FileNotFoundException, UnsupportedEncodingException {
     PrintWriter writer = new PrintWriter("user.properties", "UTF-8");
     writer.close();
+  }
+
+  // Question: How/do I need to close Files.copy, something about java.io.Flushable
+  private void copyToUserProps(String defaultProps, String userProps) throws IOException {
+    Files.copy(Paths.get(defaultProps), new FileOutputStream(userProps));
   }
 
   // getTitle: String -> String
@@ -180,17 +189,6 @@ application has started
     return list;
   }
 
-
-  /*
-  *     // Format in List
-    //"yyyy-MM-dd HH:mm"
-    // New Format
-    // MMM d '@' h:mm a
-    DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM d '@' h:mm a");
-
-    */
-
   public List<Item> compareLists(List<Item> newList, LocalDateTime currentDate) {
     String pattern = "M-d-y @ h:mm a";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
@@ -207,7 +205,7 @@ application has started
 }
 
 
-/* todo: to be added
+/* tba
 // make the time when the program closes and next time it starts up compares the previous with the
 // new list, and have an option to not do that
 // Notify if guitar appears

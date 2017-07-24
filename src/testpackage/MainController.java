@@ -1,6 +1,7 @@
 package testpackage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,8 +54,6 @@ public class MainController {
 
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
-
-  // Todo: searchTextField enter
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -109,26 +108,10 @@ public class MainController {
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
     ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
-
-//    tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//      @Override
-//      public void handle(MouseEvent event) {
-//        ObservableList<TablePosition> a = tableView.getSelectionModel().getSelectedCells();
-//        System.out.println(a);
-
-////tableView.getSelectionModel().getSelectedItem().getUrlLink()
-
-//      }
-//    });
-
     tableView.getItems().setAll(oList);
 
     success();
     System.out.println("Populated Table");
-  }
-  @FXML
-  void openItemUrl() {
-
   }
 
   // parseItemList:  List<Item> ->  List<Item>
@@ -156,39 +139,16 @@ public class MainController {
     }
     //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 
-    //    makeDataUserFriendly(sortedList);
-//    if (temp.compareTo("useCompareLists") == 0) {
-//      System.out.println("OLD = " + main.getCurrentTime().toString());
-//      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
-//      main.setCurrentTime(new Date());
-//      System.out.println("NEW = " + main.getCurrentTime().toString());
-//      return tempList;
-//    }
+    if (temp.compareTo("useCompareLists") == 0) {
+      System.out.println("OLD VERSION = " + main.getCurrentTime());
+      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
+      main.setCurrentTime(LocalDateTime.now());
+      return tempList;
+    }
     return list;
   }
 
-  //todo where to put it
-  void refreshListWithTimer() throws IOException {
-    GetSetProps getSetProps = new GetSetProps();
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
-    if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
-      long minutes = Long.parseLong(getSetProps.getRefreshRate());
-      Timer timer = new Timer();
-      TimerTask task = new TimerTask(){
-        @Override
-        public void run() {
-          try {
-            populateTable("");
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      };
-      timer.scheduleAtFixedRate(task, minutes / 60000, minutes / 60000);
-    }
-  }
-
-
+  // todo searchTextfieldEnter
   @FXML
   void searchTextfieldEnter(KeyEvent event) {
   }
