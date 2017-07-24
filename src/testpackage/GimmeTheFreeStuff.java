@@ -25,6 +25,8 @@ import org.jsoup.select.Elements;
 public class GimmeTheFreeStuff {
 
   public static void main(String[] args) throws ParseException {
+
+
 /*  //This block of code throws error when testing getData through this class but not after the
 application has started
     String a = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
@@ -129,12 +131,12 @@ application has started
     List<String> dateList = timeElement.eachAttr("datetime");
     // [2017-06-28 15:45, 2017-06-28 10:18, 2017-06-27 11:17, 2017-06-27 09:47, etc...
 
-  // Format in List
-  //"yyyy-MM-dd HH:mm"
-  // New Format
-  // MMM d '@' h:mm a
+    // Format in List
+    //"yyyy-MM-dd HH:mm"
+    // New Format
+    // MMM d '@' h:mm a
     DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM d '@' h:mm a");
+    DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("M-d-y @ h:mm a");
 
     // Makes the date/time more user friendly
     ListIterator<String> dateItr = dateList.listIterator();
@@ -178,21 +180,34 @@ application has started
     return list;
   }
 
-//  public List<Item> compareLists(List<Item> newList, Date currentDate) {
-//    for (int i = 0; i < newList.size(); i++) {
-//      if ((newList.get(i).getDate()).after(currentDate)) {
-//        System.out.println(newList.get(i).getDate().toString() + "is after " + currentDate);
-//        newList.get(i).setStatus(true);
-//      } else if ((newList.get(i).getDate()).before(currentDate)) {
-//        newList.get(i).setStatus(false);
-//      }
-//    }
-//    return newList;
-//  }
+
+  /*
+  *     // Format in List
+    //"yyyy-MM-dd HH:mm"
+    // New Format
+    // MMM d '@' h:mm a
+    DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM d '@' h:mm a");
+
+    */
+
+  public List<Item> compareLists(List<Item> newList, LocalDateTime currentDate) {
+    String pattern = "M-d-y @ h:mm a";
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+    for (int i = 0; i < newList.size(); i++) {
+      LocalDateTime dateTime = LocalDateTime.parse(newList.get(i).getDate(), formatter);
+      if (dateTime.isAfter(currentDate) || dateTime.isEqual(currentDate)) {
+        newList.get(i).setStatus(true);
+      } else if (dateTime.isBefore(currentDate)) {
+        newList.get(i).setStatus(false);
+      }
+    }
+    return newList;
+  }
 }
 
 
-/* TODO to be added
+/* todo: to be added
 // make the time when the program closes and next time it starts up compares the previous with the
 // new list, and have an option to not do that
 // Notify if guitar appears
