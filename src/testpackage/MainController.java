@@ -58,9 +58,8 @@ public class MainController {
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    Main main = new Main();
     System.out.println(
-        "MainController Init prints main.getCurrentTime = " + main.getCurrentTime().toString());
+        "MainController Init prints main.getCurrentTime = " + Main.getCurrentTime().toString());
     // testLink is called twice in the try
     try {
       Main.getStage()
@@ -140,9 +139,9 @@ public class MainController {
     //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 
     if (temp.compareTo("useCompareLists") == 0) {
-      System.out.println("OLD VERSION = " + main.getCurrentTime());
-      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, main.getCurrentTime());
-      main.setCurrentTime(LocalDateTime.now());
+      System.out.println("OLD VERSION = " + Main.getCurrentTime());
+      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, Main.getCurrentTime());
+      Main.setCurrentTime(LocalDateTime.now());
       return tempList;
     }
     return list;

@@ -23,7 +23,8 @@ import org.jsoup.nodes.Document;
  */
 
 // bugs
-//  Gets the lastest Postings, not UPDATES updates which is why if u open craigslist and compare it to the app it will look different
+//  Gets the lastest Postings, not UPDATES updates which is why if u open craigslist and compare
+// it to the app it will look different
 //  Numbers are all in ints
 
 public class Controller {
@@ -55,7 +56,6 @@ public class Controller {
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    addListeners();
 
     try {
       Main.getStage()
@@ -65,6 +65,7 @@ public class Controller {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    addListeners();
     System.out.println("*** Controller Initialized ***");
   }
 
@@ -76,20 +77,26 @@ public class Controller {
     GetSetProps obj = new GetSetProps();
 
     refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d+")) {
+      if (newValue.matches("\\d+") && newValue.compareTo(oldValue) != 0) {
         try {
           obj.setAllProps("refreshRate", newValue);
-          System.out.println("Success - Added refresh listener to textfield");
+          if (obj.getRefreshStatus().compareTo("true") == 0) {
+            System.out
+                .println("About to shutdown timer and start it again with the new RefreshRate");
+            Refresh.shutdownScheduler();
+            Refresh.createScheduler();
+            Refresh.refreshListWithTimer();
+          }
         } catch (IOException e) {
           e.printStackTrace();
         }
       }
     });
+
     updateTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d+")) {
+      if (newValue.matches("\\d+") && newValue.compareTo(oldValue) != 0) {
         try {
           obj.setAllProps("updateRate", newValue);
-          System.out.println("Success - Added update listener to textfield");
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -103,17 +110,16 @@ public class Controller {
   void refreshChecked() throws IOException {
     GetSetProps getSetProps = new GetSetProps();
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+
     if (refreshCheckbox.isSelected()) {
       getSetProps.setAllProps("refreshStatus", "true");
-      System.out.println("***********************STARTED TIMER");
-      Main.refreshListWithTimer(Long.parseLong(getSetProps.getRefreshRate()));
-      System.out.println("refreshStatus set to true");
+      Refresh.shutdownScheduler();
+      Refresh.createScheduler();
+      Refresh.refreshListWithTimer();
     } else {
+      System.out.println("REFRESHCHECKBOX NOT SELECTED");
       getSetProps.setAllProps("refreshStatus", "false");
-      // Shutdown timer
-      System.out.println("***********************SHUTDOWN TIMER");
-      Main.getScheduler().shutdownNow();
-      System.out.println("refreshStatus set to false");
+      Refresh.shutdownScheduler();
     }
   }
 
@@ -122,6 +128,7 @@ public class Controller {
   // appropriate text using passOrFailed
   @FXML
   void changeLink() {
+    // todo If user changes link then pretend its like the first time starting up
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
 
