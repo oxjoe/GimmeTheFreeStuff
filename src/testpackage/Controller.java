@@ -20,12 +20,8 @@ import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
+ * Purpose of Controller.java: Handles I/O for SettingsUserInterface.fxml
  */
-
-// bugs
-//  Gets the lastest Postings, not UPDATES updates which is why if u open craigslist and compare
-// it to the app it will look different
-//  Numbers are all in ints
 
 public class Controller {
 
@@ -61,7 +57,6 @@ public class Controller {
       Main.getStage()
           .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
       fillInUI();
-      System.out.println("Set title and filled in UI");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -73,7 +68,7 @@ public class Controller {
   // Adds listeners to the two textfields in case user changes the refreshRate (minutes) and
   // updateRate (days)
   @FXML
-  void addListeners() {
+  private void addListeners() {
     GetSetProps obj = new GetSetProps();
 
     refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -81,8 +76,6 @@ public class Controller {
         try {
           obj.setAllProps("refreshRate", newValue);
           if (obj.getRefreshStatus().compareTo("true") == 0) {
-            System.out
-                .println("About to shutdown timer and start it again with the new RefreshRate");
             Refresh.shutdownScheduler();
             Refresh.createScheduler();
             Refresh.refreshListWithTimer();
@@ -111,15 +104,17 @@ public class Controller {
     GetSetProps getSetProps = new GetSetProps();
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
 
+    // bugs when set to false and check to true on startup
     if (refreshCheckbox.isSelected()) {
       getSetProps.setAllProps("refreshStatus", "true");
       Refresh.shutdownScheduler();
       Refresh.createScheduler();
       Refresh.refreshListWithTimer();
-    } else {
-      System.out.println("REFRESHCHECKBOX NOT SELECTED");
+      System.out.println("refreshCheckbox is True");
+    } else if (!refreshCheckbox.isSelected()){
       getSetProps.setAllProps("refreshStatus", "false");
       Refresh.shutdownScheduler();
+      System.out.println("refreshCheckbox is False");
     }
   }
 
@@ -127,8 +122,7 @@ public class Controller {
   // Gets the link from the textfield to see if it does or doesn't work and displays the
   // appropriate text using passOrFailed
   @FXML
-  void changeLink() {
-    // todo If user changes link then pretend its like the first time starting up
+  private void changeLink() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
 
@@ -137,12 +131,16 @@ public class Controller {
 
     if (doc == null) {
       passOrFailed("Failed");
-      return;
     } else {
       passOrFailed("Success");
       currentLink.setText(url);
       try {
         getSetProps.setAllProps("link", url);
+        if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
+          Refresh.shutdownScheduler();
+          Refresh.createScheduler();
+          Refresh.refreshListWithTimer();
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -152,7 +150,7 @@ public class Controller {
   // passOrFailed: String -> N/A
   // Sets text to either Success or Failed after a short delay if the link was successfully
   // parsed in changeLink
-  void passOrFailed(String status) {
+  private void passOrFailed(String status) {
     Timer timer = new Timer();
 
     if (status.compareTo("Failed") == 0) {
@@ -177,7 +175,7 @@ public class Controller {
   // fillInUI: N/A -> N/A
   // Fills in UI by getting properties from user.properties
   @FXML
-  void fillInUI() throws IOException {
+  private void fillInUI() throws IOException {
     GetSetProps obj = new GetSetProps();
     currentLink.setText(obj.getLink());
     refreshTextfield.setText(obj.getRefreshRate());
@@ -193,10 +191,10 @@ public class Controller {
     GetSetProps obj = new GetSetProps();
     if (updateCheckbox.isSelected()) {
       obj.setAllProps("updateStatus", "true");
-      System.out.println("Update changed to TRUE");
+      System.out.println("updateCheckbox changed to TRUE");
     } else {
       obj.setAllProps("updateStatus", "false");
-      System.out.println("Update to FALSE");
+      System.out.println("updateCheckbox changed to FALSE");
     }
   }
 
@@ -226,7 +224,7 @@ public class Controller {
     main.openUrl(currentLink.getText());
   }
 
-  // If user hits enter in the
+  // Listener for Enter key being hit in link textfield
   @FXML
   void craigslistTextfieldEnter(KeyEvent e) {
     if (e.getCode() == KeyCode.ENTER) {

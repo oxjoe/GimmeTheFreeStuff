@@ -1,25 +1,39 @@
 package testpackage;
 /**
- * Created by Joseph on 7/6/2017.
+ * Created by Joseph on 7/6/2017. Purpose of Main.java: Starting point of JavaFX application
  */
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/*bugs
+* Whenever it changes stages (between the Main UI and the Settings UI) including when it starts
+* up the following exception occurs: javafx.fxml.FXMLLoader$ValueElement processValue
+*
+* When I run the code in GimmeTheFreeStuff main, the follow exception occurs:
+* Exception in thread "main" java.lang.ExceptionInInitializerError
+*/
+
+/* tba
+ Get the item description
+ Calculate how long it would take to get to the place
+ Notify if "guitar" appears
+ Ignore "firewood"*/
+
+/* notes
+ Gets the latest new postings (doesn't include updates) which is why if you open Craigslist
+ and compare the items, the application will look different.
+ */
+
 public class Main extends Application {
 
   private static Stage stage;
   private static LocalDateTime currentTime;
-
-  public Main() {
-  }
 
   public static void main(String[] args) {
     launch(args);
@@ -29,7 +43,7 @@ public class Main extends Application {
     return stage;
   }
 
-  public static void setStage(Stage stage) {
+  private static void setStage(Stage stage) {
     Main.stage = stage;
   }
 
@@ -57,24 +71,21 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
     setStage(primaryStage);
-    // todo current time ofr when it updates and delete the other 3 lines
-    //setCurrentTime(LocalDateTime.now());
-    LocalDate aDate = LocalDate.now().minusDays(0);
-    LocalTime aTime = LocalTime.of(14, 35, 0); // 6 PM
-    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
-    setCurrentTime(temp);
+    setCurrentTime(LocalDateTime.now());
 
+/*//    Used for testing timer
+    LocalDate aDate = LocalDate.now().minusDays(0);
+    LocalTime aTime = LocalTime.of(14, 35, 0);
+    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
+        setCurrentTime(temp);*/
 
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-
 
     gimmeTheFreeStuff.startup();
     // Checks to see if refresh rate status is true so it can start a timer to get a get updated
     // Craigslist data
     if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
-      //todo TRYING IT WITHOUT CREATING OBJECTS BUT JUST USING STATIC
-      // Refresh refresh = new Refresh();
       Refresh.createScheduler();
       Refresh.refreshListWithTimer();
     }

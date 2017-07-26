@@ -1,17 +1,20 @@
 package testpackage;
 
+/**
+ * Created by Joseph on 7/15/2017. Purpose of GetSetProps.java: To get the keys and set the values
+ * in user.properties
+ */
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * Created by Joseph on 7/15/2017.
- */
-public class GetSetProps {
+class GetSetProps {
 
   private Properties props;
 
+  // Default constructor so when I create a GetSetProps, props will automatically be initialized
   public GetSetProps() {
     props = new Properties();
   }
@@ -20,6 +23,49 @@ public class GetSetProps {
     this.props = props;
   }
 
+  public String getLink() throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    props.load(in);
+    String temp = props.getProperty("link");
+    in.close();
+    return temp;
+  }
+
+  public String getRefreshRate() throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    props.load(in);
+    String temp = props.getProperty("refreshRate");
+    in.close();
+    return temp;
+  }
+
+  public String getRefreshStatus() throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    props.load(in);
+    String temp = props.getProperty("refreshChecked");
+    in.close();
+    return temp;
+  }
+
+  public String getUpdateRate() throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    props.load(in);
+    String temp = props.getProperty("updateRate");
+    in.close();
+    return temp;
+  }
+
+  public String getUpdateStatus() throws IOException {
+    FileInputStream in = new FileInputStream("user.properties");
+    props.load(in);
+    String temp = props.getProperty("updateChecked");
+    in.close();
+    return temp;
+  }
+
+  // setAllProps: (String, String) -> N/A
+  // Given a key and a value, sets all the properties in user.properties again since you can't
+  // change one value without wiping user.properties
   public void setAllProps(String key, String value) throws IOException {
     GetSetProps obj = new GetSetProps();
 
@@ -75,45 +121,5 @@ public class GetSetProps {
     }
     props.store(out, null);
     out.close();
-  }
-
-  public String getLink() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    props.load(in);
-    String temp = props.getProperty("link");
-    in.close();
-    return temp;
-  }
-
-  public String getRefreshRate() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    props.load(in);
-    String temp = props.getProperty("refreshRate");
-    in.close();
-    return temp;
-  }
-
-  public String getRefreshStatus() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    props.load(in);
-    String temp = props.getProperty("refreshChecked");
-    in.close();
-    return temp;
-  }
-
-  public String getUpdateRate() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    props.load(in);
-    String temp = props.getProperty("updateRate");
-    in.close();
-    return temp;
-  }
-
-  public String getUpdateStatus() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
-    props.load(in);
-    String temp = props.getProperty("updateChecked");
-    in.close();
-    return temp;
   }
 }

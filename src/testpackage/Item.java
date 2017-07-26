@@ -1,15 +1,13 @@
 package testpackage;
 
+/**
+ * Created by Joseph on 6/27/2017. Purpose of Item.java: Class to store each Craigslist item
+ */
+
 import javafx.scene.control.Hyperlink;
 
-/**
- * Created by Joseph on 6/27/2017.
- */
-public class Item implements Comparable<Item>{
+public class Item {
 
-  //private String description;
-  //private String mapsLink;
-  //private String pictureLink
   private String name;
   private String date;
   private Hyperlink urlLink;
@@ -57,12 +55,5 @@ public class Item implements Comparable<Item>{
   @Override
   public String toString() {
     return status + " || " + name + " || " + date + " || " + urlLink + "\n";
-  }
-
-  @Override
-  public int compareTo(Item compareItem) {
-    String compareDate = compareItem.getDate();
-
-    return compareDate.compareTo(this.date);
   }
 }

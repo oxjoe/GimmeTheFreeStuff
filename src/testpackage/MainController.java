@@ -1,5 +1,10 @@
 package testpackage;
 
+/**
+ * Created by Joseph on 7/6/2017. Purpose of MainController.java: Handles I/O for
+ * MainUserInterface.fxml
+ */
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,9 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
-/**
- * Created by Joseph on 7/6/2017.
- */
+
 public class MainController {
 
   @FXML // fx:id="searchTextfield"
@@ -66,13 +69,13 @@ public class MainController {
           .setTitle("GimmeTheFreeStuff for " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
       populateTable("");
     } catch (IOException e) {
-      System.out.println("Unable to set the title OR Unable to populate table");
+      System.err.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
     }
     System.out.println("*** MainController Initialized ***");
   }
 
-  void success() {
+  private void success() {
     Timer timer = new Timer();
     successText.setText("REFRESHED LIST");
     successText.setFill(Color.GREEN);
@@ -101,7 +104,7 @@ public class MainController {
 
   // populateTable:  List<Item> -> List<Item>
   // Fills in the columns with data
-  void populateTable(String temp) throws IOException {
+  private void populateTable(String temp) throws IOException {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
@@ -115,7 +118,8 @@ public class MainController {
 
   // parseItemList:  List<Item> ->  List<Item>
   // Returns the list by using the url from user.properties
-  public List<Item> parseItemList(String temp) throws IOException {
+  private List<Item> parseItemList(String temp) throws IOException {
+
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     Main main = new Main();
@@ -148,6 +152,7 @@ public class MainController {
   }
 
   // todo searchTextfieldEnter
+  @SuppressWarnings("EmptyMethod")
   @FXML
   void searchTextfieldEnter(KeyEvent event) {
   }
