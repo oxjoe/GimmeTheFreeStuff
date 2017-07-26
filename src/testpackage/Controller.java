@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
 /**
- * Created by Joseph on 7/6/2017.
- * Purpose of Controller.java: Handles I/O for SettingsUserInterface.fxml
+ * Created by Joseph on 7/6/2017. Purpose of Controller.java: Handles I/O for
+ * SettingsUserInterface.fxml
  */
 
 public class Controller {
@@ -77,8 +77,7 @@ public class Controller {
           obj.setAllProps("refreshRate", newValue);
           if (obj.getRefreshStatus().compareTo("true") == 0) {
             Refresh.shutdownScheduler();
-            Refresh.createScheduler();
-            Refresh.refreshListWithTimer();
+            Refresh.createAndStartScheduler();
           }
         } catch (IOException e) {
           e.printStackTrace();
@@ -100,18 +99,14 @@ public class Controller {
   // refreshListChecked: N/A -> N/A
   // If checkbox is checked or unchecked then set it to true or false in user.properties
   @FXML
-  void refreshChecked() throws IOException {
+  private void refreshChecked() throws IOException {
     GetSetProps getSetProps = new GetSetProps();
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
 
-    // bugs when set to false and check to true on startup
     if (refreshCheckbox.isSelected()) {
       getSetProps.setAllProps("refreshStatus", "true");
-      Refresh.shutdownScheduler();
-      Refresh.createScheduler();
-      Refresh.refreshListWithTimer();
+      Refresh.createAndStartScheduler();
       System.out.println("refreshCheckbox is True");
-    } else if (!refreshCheckbox.isSelected()){
+    } else if (!refreshCheckbox.isSelected()) {
       getSetProps.setAllProps("refreshStatus", "false");
       Refresh.shutdownScheduler();
       System.out.println("refreshCheckbox is False");
@@ -138,8 +133,7 @@ public class Controller {
         getSetProps.setAllProps("link", url);
         if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
           Refresh.shutdownScheduler();
-          Refresh.createScheduler();
-          Refresh.refreshListWithTimer();
+          Refresh.createAndStartScheduler();
         }
       } catch (IOException e) {
         e.printStackTrace();
@@ -187,7 +181,7 @@ public class Controller {
   // updatesChecked: N/A -> N/A
   // Sets updateStatus to true or false if the checkbox is checked or not
   @FXML
-  void updateChecked() throws IOException {
+  private void updateChecked() throws IOException {
     GetSetProps obj = new GetSetProps();
     if (updateCheckbox.isSelected()) {
       obj.setAllProps("updateStatus", "true");
@@ -201,7 +195,7 @@ public class Controller {
   // gotoMain: N/A -> N/A
   // When "Back to Main Screen" button is clicked, it switches stages
   @FXML
-  void gotoMain() throws IOException {
+  private void gotoMain() throws IOException {
     Stage stage = (Stage) backButton.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
     Scene scene = new Scene(root);
@@ -212,21 +206,21 @@ public class Controller {
 
   // Opens GitHub in browser
   @FXML
-  void openGithub() {
+  private void openGithub() {
     Main main = new Main();
     main.openUrl("https://github.com/oxjoe/GimmeTheFreeStuff");
   }
 
   // Opens Craigslist in browser
   @FXML
-  void openCraigslist() {
+  private void openCraigslist() {
     Main main = new Main();
     main.openUrl(currentLink.getText());
   }
 
   // Listener for Enter key being hit in link textfield
   @FXML
-  void craigslistTextfieldEnter(KeyEvent e) {
+  private void craigslistTextfieldEnter(KeyEvent e) {
     if (e.getCode() == KeyCode.ENTER) {
       changeLink();
     }

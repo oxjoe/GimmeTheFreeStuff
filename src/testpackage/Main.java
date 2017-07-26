@@ -39,7 +39,7 @@ public class Main extends Application {
     launch(args);
   }
 
-  public static Stage getStage() {
+  static Stage getStage() {
     return stage;
   }
 
@@ -47,11 +47,11 @@ public class Main extends Application {
     Main.stage = stage;
   }
 
-  public static LocalDateTime getCurrentTime() {
+  static LocalDateTime getCurrentTime() {
     return currentTime;
   }
 
-  public static void setCurrentTime(LocalDateTime currentTime) {
+  static void setCurrentTime(LocalDateTime currentTime) {
     Main.currentTime = currentTime;
   }
 
@@ -86,8 +86,7 @@ public class Main extends Application {
     // Checks to see if refresh rate status is true so it can start a timer to get a get updated
     // Craigslist data
     if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
-      Refresh.createScheduler();
-      Refresh.refreshListWithTimer();
+      Refresh.createAndStartScheduler();
     }
     Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
     Scene scene = new Scene(root);

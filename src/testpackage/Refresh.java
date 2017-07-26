@@ -14,25 +14,20 @@ class Refresh {
 
   private static ScheduledExecutorService scheduler;
 
-  // Question: Could be optimized
-  public static void createScheduler() {
-    scheduler = Executors.newScheduledThreadPool(3);
-    System.out.println("**** createScheduler **** ");
-  }
-
-  public static void shutdownScheduler() throws IOException {
-    GetSetProps getSetProps = new GetSetProps();
-    if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
-      scheduler.shutdown();
-    }
+  static void shutdownScheduler() {
+    scheduler.shutdownNow();
     System.out.println("**** shutdownScheduler **** ");
   }
 
+  // Question: Could be optimized
   // refreshListWithTimer: N/A -> N/A
   // Repopulates table every "refreshRate from user.properties" amount of minutes
-  public static void refreshListWithTimer() throws IOException {
+  static void createAndStartScheduler() throws IOException {
     GetSetProps getSetProps = new GetSetProps();
     MainController obj = new MainController();
+
+    scheduler = Executors.newScheduledThreadPool(3);
+    System.out.println("**** createAndStartScheduler **** ");
 
     long delay = Long.parseLong(getSetProps.getRefreshRate());
 

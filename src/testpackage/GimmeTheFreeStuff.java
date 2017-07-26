@@ -31,20 +31,22 @@ class GimmeTheFreeStuff {
   private final String dP = "default.properties";
   private final String niceDate = "M/d/y @ h:mm a";
 
-/*  public static void main(String[] args) {
-//    This block of code throws error when testing getData through this class but not after the
-//    application has started
-    String a = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
+  @SuppressWarnings("EmptyMethod")
+  public static void main(String[] args) {
+//    This block of code throws: Exception in thread "main" java.lang.ExceptionInInitializerError
+//    when testing getData through this class but not after the application has started
+
+/*    String a = "https://bloomington.craigslist.org/search/zip?search_distance=10&postal=47405";
     GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
     Document doc = obj.testLink(a);
-    obj.getData(doc, a);
-  }*/
+    obj.getData(doc, a);*/
+  }
 
   // startup: N/A -> N/A
   // Runs the very first time when the application starts up. Checks to see if user.properties
   // exist, if they don't then it copies over the contents of default.properties to a newly
   // created user.properties
-  public void startup() throws IOException {
+  void startup() throws IOException {
     GetSetProps obj = new GetSetProps();
     Properties defaultProps = new Properties();
 
@@ -84,7 +86,7 @@ class GimmeTheFreeStuff {
   // getTitle: String -> String
   // Turns the link into a document so jsoup can parse it and get the title element in the head
   // of the html document
-  public String getTitle(String link) {
+  String getTitle(String link) {
     Document doc = testLink(link);
     Element element = doc.select("title").first();
     String[] split = element.html().split("free");
@@ -94,7 +96,7 @@ class GimmeTheFreeStuff {
   // testLink: String -> Document
   // Tests to see if the given string can be parsed by jsoup, if it can then returns a Document
   // object
-  public Document testLink(String link) {
+  Document testLink(String link) {
     Document doc = null;
     try {
       doc = Jsoup.connect(link).get();
@@ -107,7 +109,7 @@ class GimmeTheFreeStuff {
   // getData: (Document, String) -> List<Item>
   // Main function that gets the data from Craigslist and converts each listing into a list of
   // object Items
-  public List<Item> getData(Document doc, String userInput) {
+  List<Item> getData(Document doc, String userInput) {
     Elements linkAndTitleElement = doc.getElementsByClass("result-title hdrlnk");
     // <a href="/zip/6195172248.html" data-id="6195172248" class="result-title hdrlnk">curb alert
     // FREE Child's Easel</a>
@@ -174,7 +176,7 @@ class GimmeTheFreeStuff {
   // compareLists: (List<Item>, LocalDateTime) -> List<Item>
   // Compares each element in the list with the LocalDateTime object to see if the listing
   // appeared after (true) or before (false) the LocalDateTime object
-  public List<Item> compareLists(List<Item> newList, LocalDateTime currentDate) {
+  List<Item> compareLists(List<Item> newList, LocalDateTime currentDate) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(niceDate);
     for (Item aNewList : newList) {
       LocalDateTime dateTime = LocalDateTime.parse(aNewList.getDate(), formatter);

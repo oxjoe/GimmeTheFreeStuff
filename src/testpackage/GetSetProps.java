@@ -15,15 +15,15 @@ class GetSetProps {
   private Properties props;
 
   // Default constructor so when I create a GetSetProps, props will automatically be initialized
-  public GetSetProps() {
+  GetSetProps() {
     props = new Properties();
   }
 
-  public void setProps(Properties props) {
+  void setProps(Properties props) {
     this.props = props;
   }
 
-  public String getLink() throws IOException {
+  String getLink() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
     String temp = props.getProperty("link");
@@ -31,7 +31,7 @@ class GetSetProps {
     return temp;
   }
 
-  public String getRefreshRate() throws IOException {
+  String getRefreshRate() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
     String temp = props.getProperty("refreshRate");
@@ -39,7 +39,7 @@ class GetSetProps {
     return temp;
   }
 
-  public String getRefreshStatus() throws IOException {
+  String getRefreshStatus() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
     String temp = props.getProperty("refreshChecked");
@@ -47,7 +47,7 @@ class GetSetProps {
     return temp;
   }
 
-  public String getUpdateRate() throws IOException {
+  String getUpdateRate() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
     String temp = props.getProperty("updateRate");
@@ -55,7 +55,7 @@ class GetSetProps {
     return temp;
   }
 
-  public String getUpdateStatus() throws IOException {
+  String getUpdateStatus() throws IOException {
     FileInputStream in = new FileInputStream("user.properties");
     props.load(in);
     String temp = props.getProperty("updateChecked");
@@ -66,7 +66,7 @@ class GetSetProps {
   // setAllProps: (String, String) -> N/A
   // Given a key and a value, sets all the properties in user.properties again since you can't
   // change one value without wiping user.properties
-  public void setAllProps(String key, String value) throws IOException {
+  void setAllProps(String key, String value) throws IOException {
     GetSetProps obj = new GetSetProps();
 
     String link = obj.getLink();

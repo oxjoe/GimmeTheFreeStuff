@@ -89,11 +89,10 @@ public class MainController {
     timer.schedule(task, 2000);
   }
 
-
   // gotoSettings: N/A -> N/A
   // When "Settings" button is clicked, it switches stages
   @FXML
-  void gotoSettings() throws IOException {
+  private void gotoSettings() throws IOException {
     Stage stage = (Stage) settingsButton.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("SettingsUserInterface.fxml"));
     Scene scene = new Scene(root);
@@ -113,7 +112,6 @@ public class MainController {
     tableView.getItems().setAll(oList);
 
     success();
-    System.out.println("Populated Table");
   }
 
   // parseItemList:  List<Item> ->  List<Item>
@@ -140,7 +138,6 @@ public class MainController {
         }
       });
     }
-    //List<Item> sortedList = gimmeTheFreeStuff.sortByDate(list);
 
     if (temp.compareTo("useCompareLists") == 0) {
       System.out.println("OLD VERSION = " + Main.getCurrentTime());
@@ -148,19 +145,20 @@ public class MainController {
       Main.setCurrentTime(LocalDateTime.now());
       return tempList;
     }
+    System.out.println(list.toString());
     return list;
   }
 
-  // todo searchTextfieldEnter
   @SuppressWarnings("EmptyMethod")
   @FXML
-  void searchTextfieldEnter(KeyEvent event) {
+  // todo searchTextfieldEnter
+  private void searchTextfieldEnter(KeyEvent event) {
   }
 
   // craigslistClicked: N/A -> N/A
   // When "Take me to Craigslist" button is clicked, it takes you to Craigslist
   @FXML
-  void craigslistClicked() throws IOException {
+  private void craigslistClicked() throws IOException {
     Main main = new Main();
     GetSetProps getSetProps = new GetSetProps();
     main.openUrl(getSetProps.getLink());
@@ -169,7 +167,7 @@ public class MainController {
   // updateListClicked: N/A -> N/A
   // When "Update List" button is clicked, it updates the list
   @FXML
-  void updateListClicked(ActionEvent event) throws IOException {
+  private void updateListClicked() throws IOException {
     populateTable("useCompareLists");
   }
 }
