@@ -153,10 +153,10 @@ class GimmeTheFreeStuff {
       dateItr.set(date.format(newFormat));
     }
 
-    // If this happens then something really bad happened, so bad that the program must exit
+    // If this happens then something really bad happened...
     if (!(nameList.size() == itemLinkList.size() && nameList.size() == dateList.size())) {
       System.err.println("All lists are NOT the same size, something has gone horribly wrong");
-      System.exit(4);
+      throw new RuntimeException("OH NOOOOOOOO");
     }
 
     List<Item> list = new ArrayList<>();

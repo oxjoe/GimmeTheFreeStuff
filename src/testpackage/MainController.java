@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,6 +57,35 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
+//  public Main runMain(Main main) {
+//    return main;
+//  }
+
+  public void testABC() {
+    System.out.println("Reached TESTABC in MainController");
+    System.out.println("Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread());
+    successText.setText("YAY FINSIHED TESTABC");
+
+    //success();
+
+    //settingsButton.setText("IT CHANGED");
+  }
+
+  public void runLater() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        testABC();
+//        try {
+//          populateTable("");
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+
+      }
+    });
+  }
+
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
@@ -103,14 +131,13 @@ public class MainController {
 
   // populateTable:  List<Item> -> List<Item>
   // Fills in the columns with data
-  private void populateTable(String temp) throws IOException {
+  public void populateTable(String temp) throws IOException {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
-    tableView.getItems().setAll(oList);
-
+//    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
+    tableView.getItems().setAll(parseItemList(temp));
     success();
   }
 
@@ -145,7 +172,6 @@ public class MainController {
       Main.setCurrentTime(LocalDateTime.now());
       return tempList;
     }
-    System.out.println(list.toString());
     return list;
   }
 
