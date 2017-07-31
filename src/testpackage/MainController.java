@@ -38,6 +38,10 @@ public class MainController {
   @FXML // fx:id="successText"
   private Text successText; // Value injected by FXMLLoader
 
+  public Text getSuccessText() {
+    return successText;
+  }
+
   @FXML // fx:id="settingsButton"
   private Button settingsButton; // Value injected by FXMLLoader
 
@@ -57,31 +61,15 @@ public class MainController {
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
-//  public Main runMain(Main main) {
-//    return main;
-//  }
 
   public void testABC() {
-    System.out.println("Reached TESTABC in MainController");
-    System.out.println("Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread());
-    successText.setText("YAY FINSIHED TESTABC");
+    System.out.println("OUT OF : Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns False
 
-    //success();
-
-    //settingsButton.setText("IT CHANGED");
-  }
-
-  public void runLater() {
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
-        testABC();
-//        try {
-//          populateTable("");
-//        } catch (IOException e) {
-//          e.printStackTrace();
-//        }
-
+        System.out.println("Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns True
+        success();
       }
     });
   }
@@ -132,6 +120,7 @@ public class MainController {
   // populateTable:  List<Item> -> List<Item>
   // Fills in the columns with data
   public void populateTable(String temp) throws IOException {
+
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));

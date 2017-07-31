@@ -25,23 +25,20 @@ class Refresh {
   static void createAndStartScheduler() throws IOException {
     GetSetProps getSetProps = new GetSetProps();
     MainController mainController = new MainController();
+    Main main = new Main();
 
     scheduler = Executors.newScheduledThreadPool(3);
     System.out.println("**** createAndStartScheduler **** ");
 
 //    long delay = Long.parseLong(getSetProps.getRefreshRate());
-    long delay = 3;
+    long delay = 2;
 
     scheduler.scheduleAtFixedRate(new Runnable() {
       @Override
       public void run() {
         System.out.println("repeat every " + delay);
-        mainController.runLater();
-//        try {
-//          mainController.populateTable("");
-//        } catch (IOException e) {
-//          e.printStackTrace();
-//        }
+
+//        mainController.testABC();
       }
     }, delay, delay, TimeUnit.SECONDS);
   }

@@ -6,6 +6,7 @@ package testpackage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +36,20 @@ public class Main extends Application {
   private static Stage stage;
   private static LocalDateTime currentTime;
 
+  public void testMain() {
+    System.out.println("OUT OF : Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns False
+
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        MainController mainController = new MainController();
+        System.out.println("Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns True
+        System.out.println("Should about to change text");
+        mainController.getSuccessText().setText("CHANGE PLZ");
+
+      }
+    });
+  }
 
   public static void main(String[] args) {
     launch(args);
