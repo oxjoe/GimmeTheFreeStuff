@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.application.Platform;
 
 class Refresh {
 
@@ -23,23 +24,24 @@ class Refresh {
   // refreshListWithTimer: N/A -> N/A
   // Repopulates table every "refreshRate from user.properties" amount of minutes
   static void createAndStartScheduler() throws IOException {
-    GetSetProps getSetProps = new GetSetProps();
-    MainController mainController = new MainController();
-    Main main = new Main();
+//    GetSetProps getSetProps = new GetSetProps();
 
-    scheduler = Executors.newScheduledThreadPool(3);
+    scheduler = Executors.newSingleThreadScheduledExecutor();
     System.out.println("**** createAndStartScheduler **** ");
 
 //    long delay = Long.parseLong(getSetProps.getRefreshRate());
     long delay = 2;
 
-    scheduler.scheduleAtFixedRate(new Runnable() {
-      @Override
-      public void run() {
-        System.out.println("repeat every " + delay);
-
-//        mainController.testABC();
+    scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
+      MainController mainController = new MainController();
+      System.out.println("repeat every " + delay);
+      System.out.println("Platform.isFxApplicationThread() = " + Platform
+          .isFxApplicationThread()); // returns True
+      try {
+        mainController.populateTable("");
+      } catch (IOException e) {
+        e.printStackTrace();
       }
-    }, delay, delay, TimeUnit.SECONDS);
+    }), delay, delay, TimeUnit.SECONDS);
   }
 }

@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,10 +39,6 @@ public class MainController {
   @FXML // fx:id="successText"
   private Text successText; // Value injected by FXMLLoader
 
-  public Text getSuccessText() {
-    return successText;
-  }
-
   @FXML // fx:id="settingsButton"
   private Button settingsButton; // Value injected by FXMLLoader
 
@@ -60,19 +57,6 @@ public class MainController {
 
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
-
-
-  public void testABC() {
-    System.out.println("OUT OF : Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns False
-
-    Platform.runLater(new Runnable() {
-      @Override
-      public void run() {
-        System.out.println("Platform.isFxApplicationThread() = " + Platform.isFxApplicationThread()); // returns True
-        success();
-      }
-    });
-  }
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -120,13 +104,12 @@ public class MainController {
   // populateTable:  List<Item> -> List<Item>
   // Fills in the columns with data
   public void populateTable(String temp) throws IOException {
-
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-//    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
-    tableView.getItems().setAll(parseItemList(temp));
+    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
+    tableView.getItems().setAll(oList);
     success();
   }
 
