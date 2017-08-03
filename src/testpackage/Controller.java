@@ -197,7 +197,13 @@ public class Controller {
   @FXML
   private void gotoMain() throws IOException {
     Stage stage = (Stage) backButton.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("MainUserInterface.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
+    Parent root = loader.load();
+
+    // Sets the current instance of the Controller so Refresh can update it if needed
+    MainController controller = loader.getController();
+    Refresh.setMainController(controller);
+
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

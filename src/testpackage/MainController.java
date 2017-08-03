@@ -86,7 +86,7 @@ public class MainController {
         timer.cancel();
       }
     };
-    timer.schedule(task, 2000);
+    timer.schedule(task, 1500);
   }
 
   // gotoSettings: N/A -> N/A
@@ -111,6 +111,7 @@ public class MainController {
     ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
     tableView.getItems().setAll(oList);
     success();
+    System.out.println("POPULATED TABLE");
   }
 
   // parseItemList:  List<Item> ->  List<Item>

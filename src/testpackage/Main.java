@@ -64,35 +64,33 @@ public class Main extends Application {
 
   // openUrl: String -> Opens string of url in browser
   // Must be in Main b/c only main extends application
-  void openUrl(String url) {
-    getHostServices().showDocument(url);
-  }
+  void openUrl(String url) { getHostServices().showDocument(url); }
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    setStage(primaryStage);
-    setCurrentTime(LocalDateTime.now());
-
-/*//    Used for testing timer
-    LocalDate aDate = LocalDate.now().minusDays(0);
-    LocalTime aTime = LocalTime.of(14, 35, 0);
-    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
-        setCurrentTime(temp);*/
-
+////    Used for testing timer
+//    LocalDate aDate = LocalDate.now().minusDays(0);
+//    LocalTime aTime = LocalTime.of(14, 35, 0);
+//    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
+//    setCurrentTime(temp);
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-
-    gimmeTheFreeStuff.startup();
+    setStage(primaryStage);
+    setCurrentTime(LocalDateTime.now());
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
     Parent root = loader.load();
 
-//    Main mainObj = new Main();
-//    MainController mainController = new MainController(mainObj);
-
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
+
+    // First time starting up! Does stuff with properties files
+    gimmeTheFreeStuff.startup();
+
+    // Sets the current instance of the Controller so Refresh can update it if needed
+    MainController controller = loader.getController();
+    Refresh.setMainController(controller);
 
     // Checks to see if refresh rate status is true so it can start a timer to get a get updated
     // Craigslist data

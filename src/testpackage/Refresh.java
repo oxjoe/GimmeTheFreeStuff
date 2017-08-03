@@ -14,10 +14,19 @@ import javafx.application.Platform;
 class Refresh {
 
   private static ScheduledExecutorService scheduler;
+  private static MainController mainController;
+
+  public static MainController getMainController() {
+    return mainController;
+  }
+
+  public static void setMainController(MainController mainController) {
+    Refresh.mainController = mainController;
+  }
 
   static void shutdownScheduler() {
-    scheduler.shutdownNow();
-    System.out.println("**** shutdownScheduler **** ");
+    scheduler.shutdown();
+    System.out.println("**** shutdownscheduler **** ");
   }
 
   // Question: Could be optimized
@@ -25,20 +34,19 @@ class Refresh {
   // Repopulates table every "refreshRate from user.properties" amount of minutes
   static void createAndStartScheduler() throws IOException {
 //    GetSetProps getSetProps = new GetSetProps();
-
-    scheduler = Executors.newSingleThreadScheduledExecutor();
+//    long delay = Long.parseLong(getSetProps.getRefreshRate());
     System.out.println("**** createAndStartScheduler **** ");
 
-//    long delay = Long.parseLong(getSetProps.getRefreshRate());
-    long delay = 2;
+    long delay = 3;
+
+    scheduler = Executors.newSingleThreadScheduledExecutor();
 
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
-      MainController mainController = new MainController();
       System.out.println("repeat every " + delay);
       System.out.println("Platform.isFxApplicationThread() = " + Platform
           .isFxApplicationThread()); // returns True
       try {
-        mainController.populateTable("");
+        getMainController().populateTable("");
       } catch (IOException e) {
         e.printStackTrace();
       }
