@@ -13,6 +13,7 @@ import java.util.Properties;
 class GetSetProps {
 
   private Properties props;
+  private final String uP = "user.properties";
 
   // Default constructor so when I create a GetSetProps, props will automatically be initialized
   GetSetProps() {
@@ -24,7 +25,7 @@ class GetSetProps {
   }
 
   String getLink() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
+    FileInputStream in = new FileInputStream(uP);
     props.load(in);
     String temp = props.getProperty("link");
     in.close();
@@ -32,7 +33,7 @@ class GetSetProps {
   }
 
   String getRefreshRate() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
+    FileInputStream in = new FileInputStream(uP);
     props.load(in);
     String temp = props.getProperty("refreshRate");
     in.close();
@@ -40,25 +41,25 @@ class GetSetProps {
   }
 
   String getRefreshStatus() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
+    FileInputStream in = new FileInputStream(uP);
     props.load(in);
     String temp = props.getProperty("refreshChecked");
     in.close();
     return temp;
   }
 
-  String getUpdateRate() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
+  String getUpdateStatus() throws IOException {
+    FileInputStream in = new FileInputStream(uP);
     props.load(in);
-    String temp = props.getProperty("updateRate");
+    String temp = props.getProperty("updateChecked");
     in.close();
     return temp;
   }
 
-  String getUpdateStatus() throws IOException {
-    FileInputStream in = new FileInputStream("user.properties");
+  String getRunOnStartupStatus() throws IOException {
+    FileInputStream in = new FileInputStream(uP);
     props.load(in);
-    String temp = props.getProperty("updateChecked");
+    String temp = props.getProperty("runOnStartup");
     in.close();
     return temp;
   }
@@ -72,34 +73,34 @@ class GetSetProps {
     String link = obj.getLink();
     String refreshRate = obj.getRefreshRate();
     String refreshStatus = obj.getRefreshStatus();
-    String updateRate = obj.getUpdateRate();
     String updateStatus = obj.getUpdateStatus();
+    String runOnStartupStatus = obj.getRunOnStartupStatus();
 
-    FileOutputStream out = new FileOutputStream("user.properties");
+    FileOutputStream out = new FileOutputStream(uP);
 
     switch (key) {
       case "link":
         props.setProperty("link", value);
         props.setProperty("refreshRate", refreshRate);
         props.setProperty("refreshChecked", refreshStatus);
-        props.setProperty("updateRate", updateRate);
         props.setProperty("updateChecked", updateStatus);
+        props.setProperty("runOnStartup", runOnStartupStatus);
         System.out.println("Set link");
         break;
       case "refreshRate":
         props.setProperty("link", link);
         props.setProperty("refreshRate", value);
         props.setProperty("refreshChecked", refreshStatus);
-        props.setProperty("updateRate", updateRate);
         props.setProperty("updateChecked", updateStatus);
+        props.setProperty("runOnStartup", runOnStartupStatus);
         System.out.println("Set refreshRate");
         break;
       case "refreshStatus":
         props.setProperty("link", link);
         props.setProperty("refreshRate", refreshRate);
         props.setProperty("refreshChecked", value);
-        props.setProperty("updateRate", updateRate);
         props.setProperty("updateChecked", updateStatus);
+        props.setProperty("runOnStartup", runOnStartupStatus);
         System.out.println("Set refreshStatus");
         break;
       case "updateRate":
@@ -108,15 +109,24 @@ class GetSetProps {
         props.setProperty("refreshChecked", refreshStatus);
         props.setProperty("updateRate", value);
         props.setProperty("updateChecked", updateStatus);
+        props.setProperty("runOnStartup", runOnStartupStatus);
         System.out.println("Set updateRate");
         break;
       case "updateStatus":
         props.setProperty("link", link);
         props.setProperty("refreshRate", refreshRate);
         props.setProperty("refreshChecked", refreshStatus);
-        props.setProperty("updateRate", updateRate);
         props.setProperty("updateChecked", value);
+        props.setProperty("runOnStartup", runOnStartupStatus);
         System.out.println("Set updateStatus");
+        break;
+      case "runOnStartup":
+        props.setProperty("link", link);
+        props.setProperty("refreshRate", refreshRate);
+        props.setProperty("refreshChecked", refreshStatus);
+        props.setProperty("updateChecked", updateStatus);
+        props.setProperty("runOnStartup", value);
+        System.out.println("Set runOnStartup");
         break;
     }
     props.store(out, null);

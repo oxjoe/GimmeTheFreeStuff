@@ -33,11 +33,11 @@ class Refresh {
   // refreshListWithTimer: N/A -> N/A
   // Repopulates table every "refreshRate from user.properties" amount of minutes
   static void createAndStartScheduler() throws IOException {
-//    GetSetProps getSetProps = new GetSetProps();
-//    long delay = Long.parseLong(getSetProps.getRefreshRate());
+    GetSetProps getSetProps = new GetSetProps();
+    long delay = Long.parseLong(getSetProps.getRefreshRate());
     System.out.println("**** createAndStartScheduler **** ");
 
-    long delay = 3;
+//    long delay = 20;
 
     scheduler = Executors.newSingleThreadScheduledExecutor();
 

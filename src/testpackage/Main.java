@@ -17,18 +17,23 @@ import javafx.stage.Stage;
 *
 * When I run the code in GimmeTheFreeStuff main, the follow exception occurs:
 * Exception in thread "main" java.lang.ExceptionInInitializerError
+*
 */
 
-/* tba
- Get the item description
- Calculate how long it would take to get to the place
- Notify if "guitar" appears
- Ignore "firewood"*/
+/*todo
+* If user enters invalid link, it doesn't show "failure" in testLink (GimmeTheFreeStuff)
+*
+* Doesn't populate table eventide it switches, if user hits refresh list then updates timer with it
+*
+* MAIN
+* Search TextField
+* Have row highlight green if new
+*
+* SETTINGS
+* Check for app updates every day
+* Start on computer startup
 
-/* notes
- Gets the latest new postings (doesn't include updates) which is why if you open Craigslist
- and compare the items, the application will look different.
- */
+*/
 
 public class Main extends Application {
 
@@ -64,12 +69,14 @@ public class Main extends Application {
 
   // openUrl: String -> Opens string of url in browser
   // Must be in Main b/c only main extends application
-  void openUrl(String url) { getHostServices().showDocument(url); }
+  void openUrl(String url) {
+    getHostServices().showDocument(url);
+  }
 
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
-//    LocalDate aDate = LocalDate.now().minusDays(0);
+//    LocalDate aDate = LocalDate.now().minusDays(1);
 //    LocalTime aTime = LocalTime.of(14, 35, 0);
 //    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
 //    setCurrentTime(temp);

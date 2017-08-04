@@ -12,8 +12,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,22 +23,26 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
-
 
 public class MainController {
 
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
 
-  @FXML // fx:id="successText"
-  private Text successText; // Value injected by FXMLLoader
+  @FXML // fx:id="craigslistButton"
+  private Button craigslistButton; // Value injected by FXMLLoader
 
   @FXML // fx:id="settingsButton"
   private Button settingsButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="updateListButton"
+  private Button updateListButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="successText"
+  private Text successText; // Value injected by FXMLLoader
 
   @FXML // fx:id="tableView"
   private TableView<Item> tableView; // Value injected by FXMLLoader
@@ -66,8 +68,8 @@ public class MainController {
     // testLink is called twice in the try
     try {
       Main.getStage()
-          .setTitle("GimmeTheFreeStuff for " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
-      populateTable("");
+          .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+      populateTable("useCompareLists");
     } catch (IOException e) {
       System.err.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
@@ -75,18 +77,79 @@ public class MainController {
     System.out.println("*** MainController Initialized ***");
   }
 
+  // populateTable:  List<Item> -> List<Item>
+  // Fills in the columns with data
+  void populateTable(String temp) throws IOException {
+    Main main = new Main();
+    nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+    dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+    urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
+    statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
+
+    // If the URL link is clicked then it will open it in the browser
+    for (Item e : oList) {
+      Hyperlink link = e.getUrlLink();
+      link.setOnAction(event -> {
+        String a = e.getUrlLink().toString();
+        String[] split = a.split("'");
+        main.openUrl(split[1]);
+      });
+
+//      final PseudoClass newItem = PseudoClass.getPseudoClass("newItem");
+//      final PseudoClass oldItem = PseudoClass.getPseudoClass("oldItem");
+//      tableView.setRowFactory(tableView -> {
+//        TableRow<Item> row = new TableRow<>();
+//        row.pseudoClassStateChanged(newItem, e.isStatus());
+//        row.pseudoClassStateChanged(oldItem, e.isStatus());
+//        return row;
+//      });
+    }
+
+    tableView.getItems().setAll(oList);
+    success();
+    System.out.println("POPULATED TABLE");
+  }
+
+  // parseItemList:  List<Item> ->  List<Item>
+  // Returns the list by using the url from user.properties
+  private List<Item> parseItemList(String temp) throws IOException {
+
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+    GetSetProps getSetProps = new GetSetProps();
+
+    String url = getSetProps.getLink();
+    Document doc = gimmeTheFreeStuff.testLink(url);
+    List<Item> list = gimmeTheFreeStuff.getData(doc, url);
+
+    if (temp.compareTo("useCompareLists") == 0) {
+      System.out.println("OLD VERSION = " + Main.getCurrentTime());
+      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, Main.getCurrentTime());
+      Main.setCurrentTime(LocalDateTime.now());
+      return tempList;
+    }
+    return list;
+  }
+
+  // success:  N/A -> N/A
+  // Shows "Refreshed List!" for a few seconds if table is populated
   private void success() {
+    successText.setVisible(true);
     Timer timer = new Timer();
-    successText.setText("REFRESHED LIST");
-    successText.setFill(Color.GREEN);
     TimerTask task = new TimerTask() {
       @Override
       public void run() {
-        successText.setText("");
+        successText.setVisible(false);
+        ;
         timer.cancel();
       }
     };
     timer.schedule(task, 1500);
+  }
+
+  @SuppressWarnings("EmptyMethod")
+  @FXML
+  private void searchTextfieldEnter(KeyEvent event) {
   }
 
   // gotoSettings: N/A -> N/A
@@ -99,59 +162,6 @@ public class MainController {
     stage.setScene(scene);
     stage.show();
     System.out.println("Switched to Settings page");
-  }
-
-  // populateTable:  List<Item> -> List<Item>
-  // Fills in the columns with data
-  public void populateTable(String temp) throws IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-    dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-    urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
-    statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-    ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
-    tableView.getItems().setAll(oList);
-    success();
-    System.out.println("POPULATED TABLE");
-  }
-
-  // parseItemList:  List<Item> ->  List<Item>
-  // Returns the list by using the url from user.properties
-  private List<Item> parseItemList(String temp) throws IOException {
-
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
-    GetSetProps getSetProps = new GetSetProps();
-    Main main = new Main();
-
-    String url = getSetProps.getLink();
-    Document doc = gimmeTheFreeStuff.testLink(url);
-    List<Item> list = gimmeTheFreeStuff.getData(doc, url);
-
-    // If the URL link is clicked then it will open it in the browser
-    for (Item e : list) {
-      Hyperlink link = e.getUrlLink();
-      link.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-          String a = e.getUrlLink().toString();
-          String[] split = a.split("'");
-          main.openUrl(split[1]);
-        }
-      });
-    }
-
-    if (temp.compareTo("useCompareLists") == 0) {
-      System.out.println("OLD VERSION = " + Main.getCurrentTime());
-      List<Item> tempList = gimmeTheFreeStuff.compareLists(list, Main.getCurrentTime());
-      Main.setCurrentTime(LocalDateTime.now());
-      return tempList;
-    }
-    return list;
-  }
-
-  @SuppressWarnings("EmptyMethod")
-  @FXML
-  // todo searchTextfieldEnter
-  private void searchTextfieldEnter(KeyEvent event) {
   }
 
   // craigslistClicked: N/A -> N/A

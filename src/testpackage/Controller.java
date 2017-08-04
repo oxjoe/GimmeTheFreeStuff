@@ -25,11 +25,17 @@ import org.jsoup.nodes.Document;
 
 public class Controller {
 
-  @FXML // fx:id="linkTextfield"
-  private TextField linkTextfield; // Value injected by FXMLLoader
-
   @FXML // fx:id="backButton"
   private Button backButton; // Value injected by FXMLLoader
+
+  @FXML // fx:id="githubLink"
+  private Hyperlink githubLink; // Value injected by FXMLLoader
+
+  @FXML // fx:id="currentLink"
+  private Hyperlink currentLink; // Value injected by FXMLLoader
+
+  @FXML // fx:id="linkTextfield"
+  private TextField linkTextfield; // Value injected by FXMLLoader
 
   @FXML // fx:id="statusText"
   private Text statusText; // Value injected by FXMLLoader
@@ -40,14 +46,12 @@ public class Controller {
   @FXML // fx:id="refreshTextfield"
   private TextField refreshTextfield; // Value injected by FXMLLoader
 
-  @FXML // fx:id="updatesCheckbox"
+  @FXML // fx:id="runOnStartupCheckbox"
+  private CheckBox runOnStartupCheckbox; // Value injected by FXMLLoader
+
+  @FXML // fx:id="updateCheckbox"
   private CheckBox updateCheckbox; // Value injected by FXMLLoader
 
-  @FXML // fx:id="updatesTextfield"
-  private TextField updateTextfield; // Value injected by FXMLLoader
-
-  @FXML // fx:id="currentLink"
-  private Hyperlink currentLink; // Value injected by FXMLLoader
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -60,57 +64,8 @@ public class Controller {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    addListeners();
+    addListener();
     System.out.println("*** Controller Initialized ***");
-  }
-
-  // addListeners: N/A -> N/A
-  // Adds listeners to the two textfields in case user changes the refreshRate (minutes) and
-  // updateRate (days)
-  @FXML
-  private void addListeners() {
-    GetSetProps obj = new GetSetProps();
-
-    refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d+") && newValue.compareTo(oldValue) != 0) {
-        try {
-          obj.setAllProps("refreshRate", newValue);
-          if (obj.getRefreshStatus().compareTo("true") == 0) {
-            Refresh.shutdownScheduler();
-            Refresh.createAndStartScheduler();
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    });
-
-    updateTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d+") && newValue.compareTo(oldValue) != 0) {
-        try {
-          obj.setAllProps("updateRate", newValue);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
-
-  // refreshListChecked: N/A -> N/A
-  // If checkbox is checked or unchecked then set it to true or false in user.properties
-  @FXML
-  private void refreshChecked() throws IOException {
-    GetSetProps getSetProps = new GetSetProps();
-
-    if (refreshCheckbox.isSelected()) {
-      getSetProps.setAllProps("refreshStatus", "true");
-      Refresh.createAndStartScheduler();
-      System.out.println("refreshCheckbox is True");
-    } else if (!refreshCheckbox.isSelected()) {
-      getSetProps.setAllProps("refreshStatus", "false");
-      Refresh.shutdownScheduler();
-      System.out.println("refreshCheckbox is False");
-    }
   }
 
   // changeLink: N/A -> N/A
@@ -174,8 +129,46 @@ public class Controller {
     currentLink.setText(obj.getLink());
     refreshTextfield.setText(obj.getRefreshRate());
     refreshCheckbox.setSelected(Boolean.parseBoolean(obj.getRefreshStatus()));
-    updateTextfield.setText(obj.getUpdateRate());
     updateCheckbox.setSelected(Boolean.parseBoolean(obj.getUpdateStatus()));
+    runOnStartupCheckbox.setSelected(Boolean.parseBoolean(obj.getRunOnStartupStatus()));
+  }
+
+  // addListener: N/A -> N/A
+  // Adds listener to refreshTextfield in case user changes refrashRate
+  @FXML
+  private void addListener() {
+    GetSetProps obj = new GetSetProps();
+
+    refreshTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d+") && newValue.compareTo(oldValue) != 0) {
+        try {
+          obj.setAllProps("refreshRate", newValue);
+          if (obj.getRefreshStatus().compareTo("true") == 0) {
+            Refresh.shutdownScheduler();
+            Refresh.createAndStartScheduler();
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
+
+  // refreshListChecked: N/A -> N/A
+  // If checkbox is checked or unchecked then set it to true or false in user.properties
+  @FXML
+  private void refreshChecked() throws IOException {
+    GetSetProps getSetProps = new GetSetProps();
+
+    if (refreshCheckbox.isSelected()) {
+      getSetProps.setAllProps("refreshStatus", "true");
+      Refresh.createAndStartScheduler();
+      System.out.println("refreshCheckbox is True");
+    } else if (!refreshCheckbox.isSelected()) {
+      getSetProps.setAllProps("refreshStatus", "false");
+      Refresh.shutdownScheduler();
+      System.out.println("refreshCheckbox is False");
+    }
   }
 
   // updatesChecked: N/A -> N/A
@@ -189,6 +182,20 @@ public class Controller {
     } else {
       obj.setAllProps("updateStatus", "false");
       System.out.println("updateCheckbox changed to FALSE");
+    }
+  }
+
+  // runOnStartUpChecked: N/A -> N/A
+  // Sets runOnStartUpChecked to true or false if the checkbox is checked or not
+  @FXML
+  private void runOnStartupChecked() throws IOException {
+    GetSetProps obj = new GetSetProps();
+    if (runOnStartupCheckbox.isSelected()) {
+      obj.setAllProps("runOnStartup", "true");
+      System.out.println("runOnStartup changed to TRUE");
+    } else {
+      obj.setAllProps("runOnStartup", "false");
+      System.out.println("runOnStartup changed to FALSE");
     }
   }
 

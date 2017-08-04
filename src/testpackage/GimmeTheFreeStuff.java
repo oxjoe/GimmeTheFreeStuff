@@ -98,10 +98,15 @@ class GimmeTheFreeStuff {
   // object
   Document testLink(String link) {
     Document doc = null;
+    boolean state = false;
     try {
       doc = Jsoup.connect(link).get();
+      state = true;
     } catch (IOException e) {
       e.printStackTrace();
+    }
+    if (!state) {
+      doc = null;
     }
     return doc;
   }

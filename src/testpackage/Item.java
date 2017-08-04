@@ -20,14 +20,6 @@ public class Item {
     this.status = status;
   }
 
-  public boolean isStatus() {
-    return status;
-  }
-
-  public void setStatus(boolean status) {
-    this.status = status;
-  }
-
   public String getName() {
     return name;
   }
@@ -52,6 +44,14 @@ public class Item {
     this.urlLink = urlLink;
   }
 
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
+  }
+  
   @Override
   public String toString() {
     return status + " || " + name + " || " + date + " || " + urlLink + "\n";
