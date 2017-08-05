@@ -4,7 +4,9 @@ package testpackage;
  */
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +29,6 @@ import javafx.stage.Stage;
 *
 * MAIN
 * Search TextField
-* Have row highlight green if new
 *
 * SETTINGS
 * Check for app updates every day
@@ -62,7 +63,9 @@ public class Main extends Application {
 
   @Override
   public void stop() throws Exception {
-    Refresh.shutdownScheduler();
+    if (Refresh.isSchedulerState()) {
+      Refresh.shutdownScheduler();
+    }
     System.out.println("*** STAGE CLOSED ***");
     super.stop();
   }
@@ -76,14 +79,14 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
-//    LocalDate aDate = LocalDate.now().minusDays(1);
-//    LocalTime aTime = LocalTime.of(14, 35, 0);
-//    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
-//    setCurrentTime(temp);
+    LocalDate aDate = LocalDate.now().minusDays(1);
+    LocalTime aTime = LocalTime.of(14, 35, 0);
+    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
+    setCurrentTime(temp);
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     setStage(primaryStage);
-    setCurrentTime(LocalDateTime.now());
+//    setCurrentTime(LocalDateTime.now());
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
     Parent root = loader.load();
@@ -103,6 +106,8 @@ public class Main extends Application {
     // Craigslist data
     if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
       Refresh.createAndStartScheduler();
+    } else {
+      Refresh.setSchedulerState(false);
     }
   }
 }

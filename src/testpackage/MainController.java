@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -85,6 +86,7 @@ public class MainController {
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+//    List<Item> oList = parseItemList(temp);
     ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
 
     // If the URL link is clicked then it will open it in the browser
@@ -95,16 +97,44 @@ public class MainController {
         String[] split = a.split("'");
         main.openUrl(split[1]);
       });
-
-//      final PseudoClass newItem = PseudoClass.getPseudoClass("newItem");
-//      final PseudoClass oldItem = PseudoClass.getPseudoClass("oldItem");
-//      tableView.setRowFactory(tableView -> {
-//        TableRow<Item> row = new TableRow<>();
-//        row.pseudoClassStateChanged(newItem, e.isStatus());
-//        row.pseudoClassStateChanged(oldItem, e.isStatus());
-//        return row;
-//      });
     }
+
+    tableView.setRowFactory(tv -> new TableRow<Item>() {
+      @Override
+      public void updateItem(Item item, boolean empty) {
+        super.updateItem(item, empty);
+        if (item == null) {
+          this.setId("rowOldItem");
+        } else if (item.isStatus()) {
+          this.setId("rowNewItem");
+        } else {
+          this.setId("rowOldItem");
+        }
+      }
+    });
+
+//    for (Item e : oList) {
+//      tableView.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
+//        @Override
+//        public TableRow<Item> call(TableView<Item> param) {
+//          final TableRow<Item> row = new TableRow<Item>(){
+//            @Override
+//            protected void updateItem(Item item, boolean state) {
+//              super.updateItem(item, state);
+//              if (e.isStatus()) {
+//                row.pseudoClassStateChanged(newItem, true);
+//                System.out.println("psudeo true");
+//              } else {
+//                tableView.pseudoClassStateChanged(oldItem, false);
+//                System.err.println("psudeo false");
+//              }
+//            }
+//          };
+//          return row;
+//        }
+//      });
+//
+//    }
 
     tableView.getItems().setAll(oList);
     success();

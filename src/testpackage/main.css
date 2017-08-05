@@ -1,12 +1,13 @@
-/*work in progress*/
-
-/*
-.table-row-cell:newItem {
-  -fx-background-color: #007054;
-  -fx-fill: #007054;
+#rowNewItem{
+  /*-fx-background-color: limegreen;*/
+  -fx-border-color: limegreen;
 }
 
-.table-row-cell:oldItem {
-  -fx-background-color: #A30029;
-  -fx-fill: #A30029;
-}*/
+#rowOldItem {
+  /*-fx-background-color: orangered;*/
+  -fx-border-color: orangered;
+}
+
+.table-row-cell:selected {
+  /*-fx-background-color: skyblue;*/
+}

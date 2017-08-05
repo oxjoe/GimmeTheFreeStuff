@@ -14,6 +14,7 @@ import javafx.application.Platform;
 class Refresh {
 
   private static ScheduledExecutorService scheduler;
+  private static boolean schedulerState;
   private static MainController mainController;
 
   public static MainController getMainController() {
@@ -26,20 +27,32 @@ class Refresh {
 
   static void shutdownScheduler() {
     scheduler.shutdown();
+    setSchedulerState(false);
     System.out.println("**** shutdownscheduler **** ");
+  }
+
+  public static boolean isSchedulerState() {
+    return schedulerState;
+  }
+
+  public static void setSchedulerState(boolean schedulerState) {
+    Refresh.schedulerState = schedulerState;
   }
 
   // Question: Could be optimized
   // refreshListWithTimer: N/A -> N/A
   // Repopulates table every "refreshRate from user.properties" amount of minutes
   static void createAndStartScheduler() throws IOException {
+    System.out.println("**** createAndStartScheduler **** ");
+
     GetSetProps getSetProps = new GetSetProps();
     long delay = Long.parseLong(getSetProps.getRefreshRate());
-    System.out.println("**** createAndStartScheduler **** ");
 
 //    long delay = 20;
 
+    setSchedulerState(true);
     scheduler = Executors.newSingleThreadScheduledExecutor();
+
 
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
       System.out.println("repeat every " + delay);
