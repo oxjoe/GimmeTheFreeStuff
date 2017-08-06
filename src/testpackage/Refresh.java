@@ -18,6 +18,8 @@ class Refresh {
   private static MainController mainController;
 
   public static MainController getMainController() {
+    System.err.println("FROM REFRESH: Platform.isFxApplicationThread() = " + Platform
+        .isFxApplicationThread());
     return mainController;
   }
 
@@ -45,10 +47,10 @@ class Refresh {
   static void createAndStartScheduler() throws IOException {
     System.out.println("**** createAndStartScheduler **** ");
 
-    GetSetProps getSetProps = new GetSetProps();
-    long delay = Long.parseLong(getSetProps.getRefreshRate());
+//    GetSetProps getSetProps = new GetSetProps();
+//    long delay = Long.parseLong(getSetProps.getRefreshRate());
 
-//    long delay = 20;
+    long delay = 5;
 
     setSchedulerState(true);
     scheduler = Executors.newSingleThreadScheduledExecutor();

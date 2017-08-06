@@ -98,14 +98,13 @@ class GimmeTheFreeStuff {
   // object
   Document testLink(String link) {
     Document doc = null;
-    boolean state = false;
     try {
       doc = Jsoup.connect(link).get();
-      state = true;
     } catch (IOException e) {
+      System.err.println("jsoup problem while fetching url");
       e.printStackTrace();
-    }
-    if (!state) {
+    } catch (IllegalArgumentException e1) {
+      // Shows Failure
       doc = null;
     }
     return doc;
@@ -175,6 +174,7 @@ class GimmeTheFreeStuff {
           new Hyperlink(itemLinkList.get(i)),
           false));
     }
+    System.out.println("list.size() = " + list.size());
     return list;
   }
 

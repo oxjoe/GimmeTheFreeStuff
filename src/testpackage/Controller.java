@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
@@ -15,7 +12,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
 /**
@@ -52,11 +48,10 @@ public class Controller {
   @FXML // fx:id="updateCheckbox"
   private CheckBox updateCheckbox; // Value injected by FXMLLoader
 
-
   public void initialize() {
+    // notes title not updating b/c of getStage is a different reference or something
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-
     try {
       Main.getStage()
           .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
@@ -75,6 +70,7 @@ public class Controller {
   private void changeLink() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
+    boolean updateMainUI = false;
 
     String url = linkTextfield.getText();
     Document doc = gimmeTheFreeStuff.testLink(url);
@@ -84,6 +80,7 @@ public class Controller {
     } else {
       passOrFailed("Success");
       currentLink.setText(url);
+      updateMainUI = true;
       try {
         getSetProps.setAllProps("link", url);
         if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
@@ -93,6 +90,10 @@ public class Controller {
       } catch (IOException e) {
         e.printStackTrace();
       }
+    }
+    // If link has been changed then reinitialize MainController.java (title and populate table)
+    if (updateMainUI) {
+      Refresh.getMainController().initialize();
     }
   }
 
@@ -113,7 +114,7 @@ public class Controller {
     TimerTask task = new TimerTask() {
       @Override
       public void run() {
-        statusText.setText("Press enter to submit");
+        statusText.setText("");
         statusText.setFill(Color.BLACK);
         timer.cancel();
       }
@@ -134,7 +135,7 @@ public class Controller {
   }
 
   // addListener: N/A -> N/A
-  // Adds listener to refreshTextfield in case user changes refrashRate
+  // Adds listener to refreshTextfield in case user changes refershRate
   @FXML
   private void addListener() {
     GetSetProps obj = new GetSetProps();
@@ -203,18 +204,8 @@ public class Controller {
   // When "Back to Main Screen" button is clicked, it switches stages
   @FXML
   private void gotoMain() throws IOException {
-    Stage stage = (Stage) backButton.getScene().getWindow();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
-    Parent root = loader.load();
-
-    // Sets the current instance of the Controller so Refresh can update it if needed
-    MainController controller = loader.getController();
-    Refresh.setMainController(controller);
-
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    System.out.println("*** Switched Screens ***");
+    Main.getStage().close();
+    System.out.println("*** Going to Main ***");
   }
 
   // Opens GitHub in browser

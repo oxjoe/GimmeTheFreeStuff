@@ -20,19 +20,20 @@ import javafx.stage.Stage;
 * When I run the code in GimmeTheFreeStuff main, the follow exception occurs:
 * Exception in thread "main" java.lang.ExceptionInInitializerError
 *
+* After changing link, the title in MainUI doesn't change with it
 */
 
 /*todo
-* If user enters invalid link, it doesn't show "failure" in testLink (GimmeTheFreeStuff)
-*
-* Doesn't populate table eventide it switches, if user hits refresh list then updates timer with it
-*
-* MAIN
 * Search TextField
-*
+*Use currentTime to Option to start up with a brand new list (what craigslist shows) or when you closed the program.
+*Colors of Posted last 2 days, etc... Current updates to
+Posted today and yestarday: green
+Posted
+
 * SETTINGS
 * Check for app updates every day
 * Start on computer startup
+* Minimize to system tray
 
 */
 
@@ -88,6 +89,9 @@ public class Main extends Application {
     setStage(primaryStage);
 //    setCurrentTime(LocalDateTime.now());
 
+    // First time starting up! Does stuff with properties files
+    gimmeTheFreeStuff.startup();
+
     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
     Parent root = loader.load();
 
@@ -95,8 +99,7 @@ public class Main extends Application {
     primaryStage.setScene(scene);
     primaryStage.show();
 
-    // First time starting up! Does stuff with properties files
-    gimmeTheFreeStuff.startup();
+
 
     // Sets the current instance of the Controller so Refresh can update it if needed
     MainController controller = loader.getController();

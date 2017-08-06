@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
@@ -65,17 +66,16 @@ public class MainController {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     System.out.println(
-        "MainController Init prints main.getCurrentTime = " + Main.getCurrentTime().toString());
-    // testLink is called twice in the try
+        "MainController Inigit t prints main.getCurrentTime = " + Main.getCurrentTime().toString());
     try {
       Main.getStage()
           .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
       populateTable("useCompareLists");
     } catch (IOException e) {
-      System.err.println("Unable to set the title OR Unable to populate table");
       e.printStackTrace();
     }
     System.out.println("*** MainController Initialized ***");
+
   }
 
   // populateTable:  List<Item> -> List<Item>
@@ -112,29 +112,6 @@ public class MainController {
         }
       }
     });
-
-//    for (Item e : oList) {
-//      tableView.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
-//        @Override
-//        public TableRow<Item> call(TableView<Item> param) {
-//          final TableRow<Item> row = new TableRow<Item>(){
-//            @Override
-//            protected void updateItem(Item item, boolean state) {
-//              super.updateItem(item, state);
-//              if (e.isStatus()) {
-//                row.pseudoClassStateChanged(newItem, true);
-//                System.out.println("psudeo true");
-//              } else {
-//                tableView.pseudoClassStateChanged(oldItem, false);
-//                System.err.println("psudeo false");
-//              }
-//            }
-//          };
-//          return row;
-//        }
-//      });
-//
-//    }
 
     tableView.getItems().setAll(oList);
     success();
@@ -186,12 +163,17 @@ public class MainController {
   // When "Settings" button is clicked, it switches stages
   @FXML
   private void gotoSettings() throws IOException {
-    Stage stage = (Stage) settingsButton.getScene().getWindow();
+    Stage stage = new Stage();
     Parent root = FXMLLoader.load(getClass().getResource("SettingsUserInterface.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
-    stage.show();
     System.out.println("Switched to Settings page");
+    // Stage is settingsui.fxml
+
+    stage.initOwner(Main.getStage());
+    stage.initModality(Modality.WINDOW_MODAL);
+    Main.setStage(stage);
+    stage.showAndWait();
   }
 
   // craigslistClicked: N/A -> N/A

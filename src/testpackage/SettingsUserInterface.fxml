@@ -43,7 +43,7 @@
                </font>
             </Label>
             <TextField fx:id="linkTextfield" alignment="CENTER" layoutX="57.0" layoutY="108.0" onKeyPressed="#craigslistTextfieldEnter" prefHeight="25.0" prefWidth="408.0" promptText="Paste Craigslist link here and hit Enter!" />
-            <Text fx:id="statusText" layoutX="239.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" textAlignment="CENTER">
+            <Text fx:id="statusText" layoutX="233.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="16.0" />
                </font>
