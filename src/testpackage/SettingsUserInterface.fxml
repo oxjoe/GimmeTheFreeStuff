@@ -20,11 +20,8 @@
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#gotoMain" prefHeight="40.0" prefWidth="129.0" text="Back to Main Screen" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
-      <Hyperlink fx:id="githubLink" alignment="CENTER" layoutX="473.0" layoutY="23.0" onAction="#openGithub" prefHeight="40.0" prefWidth="107.0" text="GitHub page" textAlignment="CENTER">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Hyperlink>
+      <Label fx:id="newUpdateLabel" alignment="CENTER" layoutX="423.0" layoutY="349.0" prefHeight="48.0" prefWidth="172.0" text="New update available!" textAlignment="CENTER" visible="false" />
+      <Label layoutX="14.0" layoutY="373.0" text="v1.0" />
       <Pane layoutX="9.0" layoutY="54.0" prefHeight="166.0" prefWidth="600.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="25.0" text="Change link from" textAlignment="CENTER">
@@ -50,7 +47,6 @@
             </Text>
          </children>
       </Pane>
-      <Label layoutX="14.0" layoutY="372.0" text="Current Version:" />
       <VBox layoutX="156.0" layoutY="235.0" prefHeight="137.0" prefWidth="242.0">
          <children>
             <HBox prefHeight="40.0" prefWidth="224.0">
@@ -62,6 +58,15 @@
             </HBox>
             <CheckBox fx:id="runOnStartupCheckbox" mnemonicParsing="false" onAction="#runOnStartupChecked" text="Run this program when Windows starts" />
             <CheckBox fx:id="updateCheckbox" mnemonicParsing="false" onAction="#updateChecked" prefHeight="40.0" prefWidth="199.0" text="Automatically check for updates" />
+         </children>
+      </VBox>
+      <VBox layoutX="495.0" layoutY="10.0" prefHeight="59.0" prefWidth="100.0">
+         <children>
+            <Hyperlink fx:id="githubLink" alignment="CENTER" onAction="#openGithub" prefHeight="40.0" prefWidth="107.0" text="GitHub page" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Hyperlink>
          </children>
       </VBox>
    </children>

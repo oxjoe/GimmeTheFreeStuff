@@ -20,20 +20,22 @@ import javafx.stage.Stage;
 * When I run the code in GimmeTheFreeStuff main, the follow exception occurs:
 * Exception in thread "main" java.lang.ExceptionInInitializerError
 *
-* After changing link, the title in MainUI doesn't change with it
+* fx-border-color overlaps with the last new item
 */
 
 /*todo
 * Search TextField
-*Use currentTime to Option to start up with a brand new list (what craigslist shows) or when you closed the program.
+*Use currentTime to Option to start up with a brand new list (what craigslist shows) or when you
+* closed the program.
 *Colors of Posted last 2 days, etc... Current updates to
 Posted today and yestarday: green
-Posted
+Change table limit too
 
 * SETTINGS
+* Minimize to system tray
 * Check for app updates every day
 * Start on computer startup
-* Minimize to system tray
+*
 
 */
 
@@ -77,6 +79,14 @@ public class Main extends Application {
     getHostServices().showDocument(url);
   }
 
+  void checkForUpdate() {
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+    System.err.println(gimmeTheFreeStuff
+        .getTitle("https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/README.md"));
+    Controller controller = new Controller();
+    controller.getNewUpdateLabel().setVisible(true);
+  }
+
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
@@ -87,6 +97,7 @@ public class Main extends Application {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     setStage(primaryStage);
+    checkForUpdate();
 //    setCurrentTime(LocalDateTime.now());
 
     // First time starting up! Does stuff with properties files
@@ -98,8 +109,6 @@ public class Main extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
-
-
 
     // Sets the current instance of the Controller so Refresh can update it if needed
     MainController controller = loader.getController();

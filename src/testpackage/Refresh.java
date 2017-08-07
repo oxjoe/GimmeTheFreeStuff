@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 
+
 class Refresh {
 
   private static ScheduledExecutorService scheduler;
@@ -18,8 +19,6 @@ class Refresh {
   private static MainController mainController;
 
   public static MainController getMainController() {
-    System.err.println("FROM REFRESH: Platform.isFxApplicationThread() = " + Platform
-        .isFxApplicationThread());
     return mainController;
   }
 
@@ -47,7 +46,7 @@ class Refresh {
   static void createAndStartScheduler() throws IOException {
     System.out.println("**** createAndStartScheduler **** ");
 
-//    GetSetProps getSetProps = new GetSetProps();
+    GetSetProps getSetProps = new GetSetProps();
 //    long delay = Long.parseLong(getSetProps.getRefreshRate());
 
     long delay = 5;
@@ -55,11 +54,10 @@ class Refresh {
     setSchedulerState(true);
     scheduler = Executors.newSingleThreadScheduledExecutor();
 
+    getMainController().showProgress(delay);
 
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
       System.out.println("repeat every " + delay);
-      System.out.println("Platform.isFxApplicationThread() = " + Platform
-          .isFxApplicationThread()); // returns True
       try {
         getMainController().populateTable("");
       } catch (IOException e) {

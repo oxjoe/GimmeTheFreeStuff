@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -48,19 +49,32 @@ public class Controller {
   @FXML // fx:id="updateCheckbox"
   private CheckBox updateCheckbox; // Value injected by FXMLLoader
 
+  @FXML // fx:id="newUpdateLabel"
+  private Label newUpdateLabel; // Value injected by FXMLLoader
+
+  public Label getNewUpdateLabel() {
+    return newUpdateLabel;
+  }
+
   public void initialize() {
-    // notes title not updating b/c of getStage is a different reference or something
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
-    GetSetProps getSetProps = new GetSetProps();
     try {
-      Main.getStage()
-          .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+      setTitle();
       fillInUI();
     } catch (IOException e) {
       e.printStackTrace();
     }
     addListener();
     System.out.println("*** Controller Initialized ***");
+  }
+
+  // setTitle: N/A -> N/A
+  // Sets title of Settings UI
+  private void setTitle() throws IOException {
+    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
+    GetSetProps getSetProps = new GetSetProps();
+    MainController.getSettingsStage()
+        .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+    System.err.println("Title" + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
   }
 
   // changeLink: N/A -> N/A
@@ -114,7 +128,7 @@ public class Controller {
     TimerTask task = new TimerTask() {
       @Override
       public void run() {
-        statusText.setText("");
+        statusText.setVisible(false);
         statusText.setFill(Color.BLACK);
         timer.cancel();
       }
@@ -204,7 +218,7 @@ public class Controller {
   // When "Back to Main Screen" button is clicked, it switches stages
   @FXML
   private void gotoMain() throws IOException {
-    Main.getStage().close();
+    MainController.getSettingsStage().close();
     System.out.println("*** Going to Main ***");
   }
 
