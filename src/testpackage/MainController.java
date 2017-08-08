@@ -10,15 +10,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,27 +33,29 @@ import org.jsoup.nodes.Document;
 public class MainController {
 
   private static Stage settingsStage;
+  private Duration countdown;
+
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
-  @FXML // fx:id="craigslistButton"
-  private Button craigslistButton; // Value injected by FXMLLoader
-  @FXML // fx:id="settingsButton"
-  private Button settingsButton; // Value injected by FXMLLoader
-  @FXML // fx:id="updateListButton"
-  private Button updateListButton; // Value injected by FXMLLoader
+
   @FXML // fx:id="successText"
   private Text successText; // Value injected by FXMLLoader
-  @FXML // fx:id="progressLabel"
-  private Label progressLabel; // // Value injected by FXMLLoader
+
+  @FXML // fx:id="countdownLabel"
+  private Label countdownLabel; // // Value injected by FXMLLoader
+
   @FXML // fx:id="tableView"
   private TableView<Item> tableView; // Value injected by FXMLLoader
+
   @FXML // fx:id="statusCol"
   private TableColumn<Item, Boolean> statusCol; // Value injected by FXMLLoader
+
   @FXML // fx:id="dateCol"
-  // USing string to display it because SimpleDateFormat.format returns a string
   private TableColumn<Item, String> dateCol; // Value injected by FXMLLoader
+
   @FXML // fx:id="nameCol"
   private TableColumn<Item, String> nameCol; // Value injected by FXMLLoader
+
   @FXML // fx:id="urlCol"
   private TableColumn<Item, Hyperlink> urlCol; // Value injected by FXMLLoader
 
@@ -68,12 +67,12 @@ public class MainController {
     MainController.settingsStage = settingsStage;
   }
 
-  public Label getProgressLabel() {
-    return progressLabel;
+  public Duration getCountdown() {
+    return countdown;
   }
 
-  public void setProgressLabel(Label progressLabel) {
-    this.progressLabel = progressLabel;
+  public void setCountdown(Duration countdown) {
+    this.countdown = countdown;
   }
 
   public void initialize() {
@@ -90,22 +89,25 @@ public class MainController {
     System.out.println("*** MainController Initialized ***");
   }
 
+  // todo Display user friendly with hours and minutes, might be lagging and getting further apart?
+//  todo need to synchronize threads possibly?
+  // showProgress: N/A -> N/A
+  // Updates countdownLabel with the countdown
   @FXML
-  void showProgress(Long delay) {
-    Duration one = new Duration(1000);
-    Duration dur = Duration.seconds(delay);
-    final Timeline timeline = new Timeline(
-        new KeyFrame(
-            one, event -> {
-          Duration showThis = dur.subtract(one);
-          System.err.println("showThis looks like" + showThis.toString());
-//          getProgressLabel().setText(String.valueOf(showThis));
-        }));
-    timeline.setCycleCount(Timeline.INDEFINITE);
-    timeline.play();
+  void showProgress() throws IOException {
+    Duration oneSecond = Duration.seconds(1);
+    countdownLabel.setText(String.valueOf(getCountdown().toSeconds()));
+    System.out.println(getCountdown().toSeconds());
+    if (getCountdown().compareTo(oneSecond) == 0) {
+      GetSetProps getSetProps = new GetSetProps();
+      Long defaultDelay = Long.parseLong(getSetProps.getRefreshRate());
+      setCountdown(Duration.seconds(defaultDelay));
+    } else {
+      setCountdown(getCountdown().subtract(oneSecond));
+    }
   }
 
-  // populateTable:  List<Item> -> List<Item>
+  // populateTable: List<Item> -> List<Item>
   // Fills in the columns with data
   void populateTable(String temp) throws IOException {
     Main main = new Main();
@@ -113,7 +115,6 @@ public class MainController {
     dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
     urlCol.setCellValueFactory(new PropertyValueFactory<>("urlLink"));
     statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-//    List<Item> oList = parseItemList(temp);
     ObservableList<Item> oList = FXCollections.observableArrayList(parseItemList(temp));
 
     // If the URL link is clicked then it will open it in the browser
@@ -126,6 +127,7 @@ public class MainController {
       });
     }
 
+    // Sets the colors for the row, using the corresponding ID from main.css
     tableView.setRowFactory(tv -> new TableRow<Item>() {
       @Override
       public void updateItem(Item item, boolean empty) {
@@ -147,7 +149,7 @@ public class MainController {
     System.out.println("POPULATED TABLE");
   }
 
-  // parseItemList:  List<Item> ->  List<Item>
+  // parseItemList: List<Item> ->  List<Item>
   // Returns the list by using the url from user.properties
   private List<Item> parseItemList(String temp) throws IOException {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -166,7 +168,7 @@ public class MainController {
     return list;
   }
 
-  // success:  N/A -> N/A
+  // success: N/A -> N/A
   // Shows "Refreshed List!" for a few seconds if table is populated
   private void success() {
     successText.setVisible(true);
@@ -221,7 +223,6 @@ public class MainController {
     GetSetProps getSetProps = new GetSetProps();
     Main.getStage()
         .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
-    System.err.println("Title" + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
   }
 
   // updateListClicked: N/A -> N/A

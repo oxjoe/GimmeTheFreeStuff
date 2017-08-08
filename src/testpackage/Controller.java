@@ -52,10 +52,6 @@ public class Controller {
   @FXML // fx:id="newUpdateLabel"
   private Label newUpdateLabel; // Value injected by FXMLLoader
 
-  public Label getNewUpdateLabel() {
-    return newUpdateLabel;
-  }
-
   public void initialize() {
     try {
       setTitle();
@@ -64,7 +60,21 @@ public class Controller {
       e.printStackTrace();
     }
     addListener();
+    checkForUpdate();
     System.out.println("*** Controller Initialized ***");
+  }
+
+  // checkForUpdate: N/A -> N/A
+  // Checks to see if a new update for GimmeTheFreeStuff is available
+  private void checkForUpdate() {
+    GimmeTheFreeStuff obj = new GimmeTheFreeStuff();
+    String currentVer = "https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/v1.0.txt";
+    Document doc = obj.testLink(currentVer);
+    // If I test the current version and its not there, then that means that I've updated this
+    // app since the new version would be v1.1.txt
+    if (doc == null) {
+      newUpdateLabel.setVisible(true);
+    }
   }
 
   // setTitle: N/A -> N/A
@@ -74,7 +84,6 @@ public class Controller {
     GetSetProps getSetProps = new GetSetProps();
     MainController.getSettingsStage()
         .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
-    System.err.println("Title" + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
   }
 
   // changeLink: N/A -> N/A

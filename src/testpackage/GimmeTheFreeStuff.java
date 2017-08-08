@@ -101,11 +101,9 @@ class GimmeTheFreeStuff {
     try {
       doc = Jsoup.connect(link).get();
     } catch (IOException e) {
-      System.err.println("jsoup problem while fetching url");
-      e.printStackTrace();
+      System.err.println("*** jsoup problem while fetching url ***");
     } catch (IllegalArgumentException e1) {
-      // Shows Failure
-      doc = null;
+      System.err.println("*** invalid link ***");
     }
     return doc;
   }
@@ -174,7 +172,6 @@ class GimmeTheFreeStuff {
           new Hyperlink(itemLinkList.get(i)),
           false));
     }
-    System.out.println("list.size() = " + list.size());
     return list;
   }
 

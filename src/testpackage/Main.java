@@ -32,6 +32,7 @@ Posted today and yestarday: green
 Change table limit too
 
 * SETTINGS
+* REGEX for timer display
 * Minimize to system tray
 * Check for app updates every day
 * Start on computer startup
@@ -79,14 +80,6 @@ public class Main extends Application {
     getHostServices().showDocument(url);
   }
 
-  void checkForUpdate() {
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
-    System.err.println(gimmeTheFreeStuff
-        .getTitle("https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/README.md"));
-    Controller controller = new Controller();
-    controller.getNewUpdateLabel().setVisible(true);
-  }
-
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
@@ -94,18 +87,17 @@ public class Main extends Application {
     LocalTime aTime = LocalTime.of(14, 35, 0);
     LocalDateTime temp = LocalDateTime.of(aDate, aTime);
     setCurrentTime(temp);
+
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     setStage(primaryStage);
-    checkForUpdate();
 //    setCurrentTime(LocalDateTime.now());
 
-    // First time starting up! Does stuff with properties files
+    // First time starting up!
     gimmeTheFreeStuff.startup();
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainUserInterface.fxml"));
     Parent root = loader.load();
-
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -114,7 +106,7 @@ public class Main extends Application {
     MainController controller = loader.getController();
     Refresh.setMainController(controller);
 
-    // Checks to see if refresh rate status is true so it can start a timer to get a get updated
+    // Checks to see if refresh rate status is true so it can start a timer to get updated
     // Craigslist data
     if (getSetProps.getRefreshStatus().compareTo("true") == 0) {
       Refresh.createAndStartScheduler();

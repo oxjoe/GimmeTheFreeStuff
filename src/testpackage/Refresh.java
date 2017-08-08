@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
-
+import javafx.util.Duration;
 
 class Refresh {
 
@@ -40,21 +40,17 @@ class Refresh {
     Refresh.schedulerState = schedulerState;
   }
 
-  // Question: Could be optimized
   // refreshListWithTimer: N/A -> N/A
-  // Repopulates table every "refreshRate from user.properties" amount of minutes
+  // Repopulates table every "refreshRate from user.properties" amount of minutes and shows the
+  // countdown timer
   static void createAndStartScheduler() throws IOException {
     System.out.println("**** createAndStartScheduler **** ");
 
     GetSetProps getSetProps = new GetSetProps();
-//    long delay = Long.parseLong(getSetProps.getRefreshRate());
-
-    long delay = 5;
+    long delay = Long.parseLong(getSetProps.getRefreshRate());
 
     setSchedulerState(true);
-    scheduler = Executors.newSingleThreadScheduledExecutor();
-
-    getMainController().showProgress(delay);
+    scheduler = Executors.newScheduledThreadPool(10);
 
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
       System.out.println("repeat every " + delay);
@@ -64,5 +60,15 @@ class Refresh {
         e.printStackTrace();
       }
     }), delay, delay, TimeUnit.SECONDS);
+
+    // Set number that it will countdown from once it resets
+    getMainController().setCountdown(Duration.seconds(delay));
+    scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
+      try {
+        getMainController().showProgress();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }), 0, 1, TimeUnit.SECONDS);
   }
 }
