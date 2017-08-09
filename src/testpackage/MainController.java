@@ -67,7 +67,11 @@ public class MainController {
     MainController.settingsStage = settingsStage;
   }
 
-//  private Duration countdown;
+  public Label getCountdownLabel() {
+    return countdownLabel;
+  }
+
+  //  private Duration countdown;
 //  public Duration getCountdown() {
 //    return countdown;
 //  }
@@ -76,8 +80,6 @@ public class MainController {
 //  }
 
   public void initialize() {
-    GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
-    GetSetProps getSetProps = new GetSetProps();
     try {
       setTitle();
       populateTable("useCompareLists");
@@ -94,7 +96,7 @@ public class MainController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a");
     LocalTime localTime = LocalTime.now().plusMinutes(delay);
     String niceTime = localTime.format(formatter);
-    countdownLabel.setText(niceTime);
+    getCountdownLabel().setText(niceTime);
     System.out.println(niceTime);
 /* tba timer live update
  //Display user friendly with hours and minutes, might be lagging and getting further apart?

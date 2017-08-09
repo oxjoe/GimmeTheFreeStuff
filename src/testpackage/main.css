@@ -1,13 +1,7 @@
 #rowNewItem{
-  /*-fx-background-color: limegreen;*/
   -fx-border-color: limegreen;
 }
 
 #rowOldItem {
-  /*-fx-background-color: orangered;*/
   -fx-border-color: orangered;
-}
-
-.table-row-cell:selected {
-  /*-fx-background-color: skyblue;*/
 }

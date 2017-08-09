@@ -4,23 +4,23 @@
     <option name="AUTOSCROLL_TO_SOURCE" value="true" />
     <option name="SPLITTER_PROPORTION" value="0.5937896" />
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/testpackage/Refresh.java" line="43" mnemonic="1" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="d6c87ae5-d833-42b9-ba2c-782098efab05" name="Default" comment="minor changes, cleaned up code">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Joseph.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/user.properties" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default.properties" afterPath="$PROJECT_DIR$/default.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/Controller.java" afterPath="$PROJECT_DIR$/src/testpackage/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/GetSetProps.java" afterPath="$PROJECT_DIR$/src/testpackage/GetSetProps.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java" afterPath="$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/Item.java" afterPath="$PROJECT_DIR$/src/testpackage/Item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/Main.java" afterPath="$PROJECT_DIR$/src/testpackage/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/MainController.java" afterPath="$PROJECT_DIR$/src/testpackage/MainController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml" afterPath="$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/Refresh.java" afterPath="$PROJECT_DIR$/src/testpackage/Refresh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml" afterPath="$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user.properties" afterPath="$PROJECT_DIR$/user.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testpackage/main.css" afterPath="$PROJECT_DIR$/src/testpackage/main.css" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\.idea\shelf/" />
@@ -40,16 +40,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/Main.java">
+      <file leaf-file-name="Refresh.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/testpackage/Refresh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+            <state relative-caret-position="175">
+              <caret line="32" column="3" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
               <folding>
-                <element signature="method#stop#0;class#Main#0" expanded="false" />
-                <element signature="method#start#0;class#Main#0" expanded="false" />
-                <element signature="e#1930#1960#0" expanded="false" />
-                <element signature="e#2844#2936#0" expanded="false" />
+                <element signature="e#591#592#0" expanded="true" />
+                <element signature="e#622#623#0" expanded="true" />
+                <element signature="method#setSchedulerState#0;class#Refresh#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,76 +57,31 @@
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/testpackage/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="136">
+              <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
               <folding>
-                <element signature="method#initialize#0;class#MainController#0" expanded="false" />
-                <element signature="method#populateTable#0;class#MainController#0" expanded="false" />
-                <element signature="e#3372#3507#0" expanded="false" />
-                <element signature="e#3511#3585#0" expanded="false" />
+                <element signature="method#setSettingsStage#0;class#MainController#0" expanded="false" />
+                <element signature="e#2102#2103#0" expanded="true" />
+                <element signature="e#2133#2134#0" expanded="true" />
+                <element signature="e#2138#2169#0" expanded="false" />
+                <element signature="e#4267#4402#0" expanded="false" />
                 <element signature="method#parseItemList#0;class#MainController#0" expanded="false" />
-                <element signature="method#success#0;class#MainController#0" expanded="false" />
-                <element signature="e#5172#5204#0" expanded="false" />
-                <element signature="e#5172#5204#0" expanded="false" />
+                <element signature="e#6119#6151#0" expanded="false" />
                 <element signature="method#searchTextfieldEnter#0;class#MainController#0" expanded="false" />
                 <element signature="method#gotoSettings#0;class#MainController#0" expanded="false" />
                 <element signature="method#craigslistClicked#0;class#MainController#0" expanded="false" />
+                <element signature="method#setTitle#0;class#MainController#0" expanded="false" />
                 <element signature="method#updateListClicked#0;class#MainController#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetSetProps.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/GetSetProps.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <element signature="method#getLink#0;class#GetSetProps#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainUserInterface.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GimmeTheFreeStuff.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+            <state relative-caret-position="70">
+              <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
               <folding>
                 <element signature="method#main#0;class#GimmeTheFreeStuff#0" expanded="false" />
                 <element signature="e#1031#1128#0" expanded="false" />
@@ -138,29 +92,37 @@
                 <element signature="method#getTitle#0;class#GimmeTheFreeStuff#0" expanded="false" />
                 <element signature="method#testLink#0;class#GimmeTheFreeStuff#0" expanded="false" />
                 <element signature="method#getData#0;class#GimmeTheFreeStuff#0" expanded="false" />
-                <element signature="e#4008#4101#0" expanded="false" />
-                <element signature="e#4327#4381#0" expanded="false" />
-                <element signature="e#4945#5027#0" expanded="false" />
-                <element signature="e#5240#5331#0" expanded="false" />
-                <element signature="e#5415#5497#0" expanded="false" />
-                <element signature="e#6580#6667#0" expanded="false" />
+                <element signature="e#4056#4149#0" expanded="false" />
+                <element signature="e#4375#4429#0" expanded="false" />
+                <element signature="e#4993#5075#0" expanded="false" />
+                <element signature="e#5288#5379#0" expanded="false" />
+                <element signature="e#5463#5545#0" expanded="false" />
+                <element signature="e#6628#6715#0" expanded="false" />
                 <element signature="method#compareLists#0;class#GimmeTheFreeStuff#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/Item.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/testpackage/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+            <state relative-caret-position="104">
+              <caret line="15" column="59" lean-forward="false" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
               <folding>
-                <element signature="method#Item#0;class#Item#0" expanded="false" />
-                <element signature="e#493#494#0" expanded="true" />
-                <element signature="e#514#515#0" expanded="true" />
-                <element signature="method#toString#0;class#Item#0" expanded="false" />
+                <element signature="method#stop#0;class#Main#0" expanded="false" />
+                <element signature="e#2421#2507#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/testpackage/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,21 +130,21 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/testpackage/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state relative-caret-position="272">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="docComment;class#Controller#0" expanded="false" />
                 <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+                <element signature="method#setTitle#0;class#Controller#0" expanded="false" />
                 <element signature="method#changeLink#0;class#Controller#0" expanded="false" />
                 <element signature="method#passOrFailed#0;class#Controller#0" expanded="false" />
                 <element signature="method#fillInUI#0;class#Controller#0" expanded="false" />
                 <element signature="method#addListener#0;class#Controller#0" expanded="false" />
-                <element signature="e#4329#4759#0" expanded="false" />
+                <element signature="e#5272#5702#0" expanded="false" />
                 <element signature="method#refreshChecked#0;class#Controller#0" expanded="false" />
                 <element signature="method#updateChecked#0;class#Controller#0" expanded="false" />
                 <element signature="method#runOnStartupChecked#0;class#Controller#0" expanded="false" />
                 <element signature="method#gotoMain#0;class#Controller#0" expanded="false" />
-                <element signature="method#openGithub#0;class#Controller#0" expanded="false" />
                 <element signature="method#openCraigslist#0;class#Controller#0" expanded="false" />
                 <element signature="method#craigslistTextfieldEnter#0;class#Controller#0" expanded="false" />
               </folding>
@@ -190,11 +152,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsUserInterface.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml">
+      <file leaf-file-name="default.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/default.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="62" column="105" lean-forward="false" selection-start-line="62" selection-start-column="86" selection-end-line="62" selection-end-column="105" />
+            <state relative-caret-position="51">
+              <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainUserInterface.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="74" lean-forward="false" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -236,6 +208,12 @@
       <find>tostring</find>
       <find>String getLink\(\) throws IOException \{\n    FileInputStream in \= new FileInputStream\(\&quot;user\.properties\&quot;\)\;\n    props\.load\(in\)\;\n    String temp \= props\.getProperty\(\&quot;link\&quot;\)\;\n    in\.close\(\)\;\n    return temp\;\n  \}\n\n  String getRefreshRate\(\) throws IOException \{\n    FileInputStream in \= new FileInputStream\(\&quot;user\.properties\&quot;\)\;\n    props\.load\(in\)\;\n    String temp \= props\.getProperty\(\&quot;refreshRate\&quot;\)\;\n    in\.close\(\)\;\n    return temp\;\n  \}\n\n  String getRefreshStatus\(\) throws IOException \{\n    FileInputStream in \= new FileInputStream\(uP\)\;\n    props\.load\(in\)\;\n    String temp \= props\.getProperty\(\&quot;refreshChecked\&quot;\)\;\n    in\.close\(\)\;\n    return temp\;\n  \}\n\n  String getUpdateStatus\(\) throws IOException \{\n    FileInputStream in \= new FileInputStream\(\&quot;user\.properties\&quot;\)\;\n    props\.load\(in\)\;\n    String temp \= props\.getProperty\(\&quot;updateChecked\&quot;\)\;\n    in\.close\(\)\;\n    return temp\;\n  \}\n\n  String getRunOnStartupStatus\(\) throws IOException \{\n    FileInputStream in \= new FileInputStream\(\&quot;user\.properties\&quot;\)\;\n    props\.load\(in\)\;\n    String temp \= props\.getProperty\(\&quot;runOnStartup\&quot;\)\;\n    in\.close\(\)\;\n    return temp\;\n  \}\n\n  \/\/ setAllProps\: \(String\, String\) \-\&gt; N\/A\n  \/\/ Given a key and a value\, sets all the properties in user\.properties again since you can\'t\n  \/\/ change one value without wiping user\.properties\n  void setAllProps\(String key\, String value\) throws IOException \{\n    GetSetProps obj \= new GetSetProps\(\)\;\n\n    String link \= obj\.getLink\(\)\;\n    String refreshRate \= obj\.getRefreshRate\(\)\;\n    String refreshStatus \= obj\.getRefreshStatus\(\)\;\n    String updateStatus \= obj\.getUpdateStatus\(\)\;\n    String runOnStartupStatus \= obj\.getRunOnStartupStatus\(\)\;\n\n    FileOutputStream out \= new FileOutputStream\(\&quot;user\.properties\&quot;\)\;\n\n    switch \(key\) \{\n      case \&quot;link\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, value\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, refreshRate\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, refreshStatus\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, updateStatus\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, runOnStartupStatus\)\;\n        System\.out\.println\(\&quot;Set link\&quot;\)\;\n        break\;\n      case \&quot;refreshRate\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, link\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, value\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, refreshStatus\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, updateStatus\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, runOnStartupStatus\)\;\n        System\.out\.println\(\&quot;Set refreshRate\&quot;\)\;\n        break\;\n      case \&quot;refreshStatus\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, link\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, refreshRate\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, value\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, updateStatus\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, runOnStartupStatus\)\;\n        System\.out\.println\(\&quot;Set refreshStatus\&quot;\)\;\n        break\;\n      case \&quot;updateRate\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, link\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, refreshRate\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, refreshStatus\)\;\n        props\.setProperty\(\&quot;updateRate\&quot;\, value\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, updateStatus\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, runOnStartupStatus\)\;\n        System\.out\.println\(\&quot;Set updateRate\&quot;\)\;\n        break\;\n      case \&quot;updateStatus\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, link\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, refreshRate\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, refreshStatus\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, value\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, runOnStartupStatus\)\;\n        System\.out\.println\(\&quot;Set updateStatus\&quot;\)\;\n        break\;\n      case \&quot;runOnStartup\&quot;\:\n        props\.setProperty\(\&quot;link\&quot;\, link\)\;\n        props\.setProperty\(\&quot;refreshRate\&quot;\, refreshRate\)\;\n        props\.setProperty\(\&quot;refreshChecked\&quot;\, refreshStatus\)\;\n        props\.setProperty\(\&quot;updateChecked\&quot;\, updateStatus\)\;\n        props\.setProperty\(\&quot;runOnStartup\&quot;\, value\)\;\n        System\.out\.println\(\&quot;Set runOnStartup\&quot;\)\;\n        break\;\n    \}\n    props\.store\(out\, null\)\;\n    out\.close\(\)\;\n  \}</find>
       <find>&quot;user.properties&quot;</find>
+      <find>err</find>
+      <find>timerLabel</find>
+      <find>v1</find>
+      <find>update</find>
+      <find>OLD VE</find>
+      <find>time to compare</find>
     </findStrings>
     <replaceStrings>
       <replace>getProps()</replace>
@@ -273,19 +251,19 @@
         <option value="$PROJECT_DIR$/src/testpackage/Properties.java" />
         <option value="$PROJECT_DIR$/src/testpackage/AccessProperties.java" />
         <option value="$PROJECT_DIR$/src/testpackage/jadfklsdf.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/Refresh.java" />
         <option value="$PROJECT_DIR$/src/testpackage/Item.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/Main.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml" />
-        <option value="$PROJECT_DIR$/default.properties" />
         <option value="$PROJECT_DIR$/example.properties" />
-        <option value="$PROJECT_DIR$/user.properties" />
         <option value="$PROJECT_DIR$/src/testpackage/GetSetProps.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/MainController.java" />
-        <option value="$PROJECT_DIR$/src/testpackage/Controller.java" />
+        <option value="$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java" />
+        <option value="$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml" />
         <option value="$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml" />
+        <option value="$PROJECT_DIR$/src/testpackage/Controller.java" />
+        <option value="$PROJECT_DIR$/src/testpackage/MainController.java" />
+        <option value="$PROJECT_DIR$/src/testpackage/Refresh.java" />
+        <option value="$PROJECT_DIR$/user.properties" />
+        <option value="$PROJECT_DIR$/default.properties" />
         <option value="$PROJECT_DIR$/src/testpackage/main.css" />
+        <option value="$PROJECT_DIR$/src/testpackage/Main.java" />
       </list>
     </option>
   </component>
@@ -383,9 +361,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -408,7 +385,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,23 +395,23 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.XML" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="SearchEverywhereHistoryKey" value="int&#9;FILE&#9;file://C:/Users/Joseph/IdeaProjects/GimmeTheFreeStuff/src/testpackage/SettingsUserInterface.fxml&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow&#10;CITYNAME&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Joseph/IdeaProjects/GimmeTheFreeStuff/src/testpackage/MainController.java&#10;int&#9;FILE&#9;file://C:/Users/Joseph/IdeaProjects/GimmeTheFreeStuff/src/testpackage/SettingsUserInterface.fxml&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow&#10;CITYNAME&#9;null&#9;null" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff" />
+      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\src\com\example" />
+      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\src" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff" />
-      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\src\com\example" />
-      <recent name="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -870,7 +848,17 @@
       <workItem from="1501781591844" duration="2913000" />
       <workItem from="1501786471593" duration="6102000" />
       <workItem from="1501818733339" duration="913000" />
-      <workItem from="1501819983726" duration="7565000" />
+      <workItem from="1501819983726" duration="7657000" />
+      <workItem from="1501884214854" duration="7565000" />
+      <workItem from="1501910902922" duration="1685000" />
+      <workItem from="1501964271080" duration="14206000" />
+      <workItem from="1501980301657" duration="6342000" />
+      <workItem from="1502089126237" duration="9263000" />
+      <workItem from="1502099898936" duration="1452000" />
+      <workItem from="1502119177452" duration="12861000" />
+      <workItem from="1502153103990" duration="3363000" />
+      <workItem from="1502255491622" duration="6658000" />
+      <workItem from="1502302572724" duration="2868000" />
     </task>
     <task id="LOCAL-00001" summary="problem - initialized in controller is called twice b/c switched screens, need to do set website first">
       <created>1499752662254</created>
@@ -918,7 +906,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412532000" />
+    <option name="totallyTimeSpent" value="478887000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -935,39 +923,39 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2567132" sideWeight="0.4855247" order="10" side_tool="false" content_ui="tabs" x="1984" y="58" width="444" height="934" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2878625" sideWeight="0.48777506" order="6" side_tool="false" content_ui="tabs" x="1388" y="419" width="1636" height="211" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33834586" sideWeight="0.4855247" order="10" side_tool="false" content_ui="tabs" x="1984" y="58" width="444" height="934" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2867884" sideWeight="0.48777506" order="6" side_tool="false" content_ui="tabs" x="1388" y="419" width="1636" height="211" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2567132" sideWeight="0.5144753" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35875404" sideWeight="0.42665038" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.48987854" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3243824" sideWeight="0.6992665" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3641246" sideWeight="0.57334965" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27497315" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13510254" sideWeight="0.72254336" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11881785" sideWeight="0.72254336" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32330826" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13630807" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32116005" sideWeight="0.49511003" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12713936" sideWeight="0.27745664" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Notes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28356606" sideWeight="0.4883863" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Notes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2808743" sideWeight="0.4883863" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.48431104" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Key Promoter" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28178483" sideWeight="0.51568896" order="9" side_tool="true" content_ui="tabs" x="2745" y="73" width="297" height="866" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.51568896" order="9" side_tool="true" content_ui="tabs" x="2745" y="73" width="297" height="866" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Time Tracking" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -986,20 +974,20 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13630807" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Notes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28141782" sideWeight="0.4883863" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32116005" sideWeight="0.49511003" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Notes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28356606" sideWeight="0.4883863" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Key Promoter" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2567132" sideWeight="0.4855247" order="10" side_tool="false" content_ui="tabs" x="1984" y="58" width="444" height="934" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29860365" sideWeight="0.4855247" order="10" side_tool="false" content_ui="tabs" x="1984" y="58" width="444" height="934" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2878625" sideWeight="0.48777506" order="6" side_tool="false" content_ui="tabs" x="1388" y="419" width="1636" height="211" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28178483" sideWeight="0.51568896" order="10" side_tool="true" content_ui="tabs" x="2745" y="73" width="297" height="866" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23533008" sideWeight="0.51568896" order="10" side_tool="true" content_ui="tabs" x="2745" y="73" width="297" height="866" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3243824" sideWeight="0.6992665" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27497315" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.6992665" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13510254" sideWeight="0.72254336" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14414957" sideWeight="0.72254336" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32330826" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Time Tracking" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1055,7 +1043,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="100" />
+      <option name="time" value="111" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1064,34 +1052,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/control/Hyperlink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/newfasfda.java" />
-    <entry file="file://$PROJECT_DIR$/src/testpackage/jadfklsdf.java" />
-    <entry file="file://$PROJECT_DIR$/src/testpackage/jfaklsdfjads.java" />
-    <entry file="uml://JAVA/testpackage.GimmeTheFreeStuff">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>testpackage.GimmeTheFreeStuff</OriginalElement>
-          <nodes>
-            <node x="" y="">testpackage.GimmeTheFreeStuff</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="77.0" y="15.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1203,13 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1294,24 +1247,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/util/Duration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/beans/property/DoublePropertyBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/stage/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1330,60 +1269,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/Refresh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="2" lean-forward="false" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
-          <folding>
-            <element signature="method#setMainController#0;class#Refresh#0" expanded="false" />
-            <element signature="method#shutdownScheduler#0;class#Refresh#0" expanded="false" />
-            <element signature="method#createAndStartScheduler#0;class#Refresh#0" expanded="false" />
-            <element signature="e#1364#1683#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/stage/Stage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="258" column="0" lean-forward="false" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+          <folding>
+            <element signature="e#8330#8331#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/beans/property/BooleanPropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/stage/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="921" column="0" lean-forward="false" selection-start-line="921" selection-start-column="0" selection-end-line="921" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/util/Callback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="189" column="16" lean-forward="false" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user.properties">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="196">
+          <caret line="961" column="22" lean-forward="false" selection-start-line="961" selection-start-column="22" selection-end-line="961" selection-end-column="22" />
+          <folding>
+            <element signature="e#41654#41655#0" expanded="false" />
+            <element signature="e#41693#41694#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/util/Duration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="253" column="20" lean-forward="false" selection-start-line="253" selection-start-column="20" selection-end-line="253" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testpackage/GetSetProps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="69" column="64" lean-forward="false" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+          <folding>
+            <element signature="method#getLink#0;class#GetSetProps#0" expanded="false" />
+            <element signature="method#getRefreshRate#0;class#GetSetProps#0" expanded="false" />
+            <element signature="method#getRefreshStatus#0;class#GetSetProps#0" expanded="false" />
+            <element signature="method#getUpdateStatus#0;class#GetSetProps#0" expanded="false" />
+            <element signature="method#getRunOnStartupStatus#0;class#GetSetProps#0" expanded="false" />
+            <element signature="method#setAllProps#0;class#GetSetProps#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testpackage/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding>
-            <element signature="method#Item#0;class#Item#0" expanded="false" />
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-            <element signature="method#toString#0;class#Item#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testpackage/SettingsUserInterface.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="62" column="105" lean-forward="false" selection-start-line="62" selection-start-column="86" selection-end-line="62" selection-end-column="105" />
+        <state relative-caret-position="136">
+          <caret line="26" column="79" lean-forward="true" selection-start-line="26" selection-start-column="79" selection-end-line="26" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -1391,23 +1373,52 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="74" lean-forward="false" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testpackage/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="method#stop#0;class#Main#0" expanded="false" />
-            <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1930#1960#0" expanded="false" />
-            <element signature="e#2844#2936#0" expanded="false" />
+            <element signature="docComment;class#Controller#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#setTitle#0;class#Controller#0" expanded="false" />
+            <element signature="method#changeLink#0;class#Controller#0" expanded="false" />
+            <element signature="method#passOrFailed#0;class#Controller#0" expanded="false" />
+            <element signature="method#fillInUI#0;class#Controller#0" expanded="false" />
+            <element signature="method#addListener#0;class#Controller#0" expanded="false" />
+            <element signature="e#5272#5702#0" expanded="false" />
+            <element signature="method#refreshChecked#0;class#Controller#0" expanded="false" />
+            <element signature="method#updateChecked#0;class#Controller#0" expanded="false" />
+            <element signature="method#runOnStartupChecked#0;class#Controller#0" expanded="false" />
+            <element signature="method#gotoMain#0;class#Controller#0" expanded="false" />
+            <element signature="method#openCraigslist#0;class#Controller#0" expanded="false" />
+            <element signature="method#craigslistTextfieldEnter#0;class#Controller#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testpackage/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testpackage/GimmeTheFreeStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        <state relative-caret-position="70">
+          <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
           <folding>
             <element signature="method#main#0;class#GimmeTheFreeStuff#0" expanded="false" />
             <element signature="e#1031#1128#0" expanded="false" />
@@ -1418,87 +1429,74 @@
             <element signature="method#getTitle#0;class#GimmeTheFreeStuff#0" expanded="false" />
             <element signature="method#testLink#0;class#GimmeTheFreeStuff#0" expanded="false" />
             <element signature="method#getData#0;class#GimmeTheFreeStuff#0" expanded="false" />
-            <element signature="e#4008#4101#0" expanded="false" />
-            <element signature="e#4327#4381#0" expanded="false" />
-            <element signature="e#4945#5027#0" expanded="false" />
-            <element signature="e#5240#5331#0" expanded="false" />
-            <element signature="e#5415#5497#0" expanded="false" />
-            <element signature="e#6580#6667#0" expanded="false" />
+            <element signature="e#4056#4149#0" expanded="false" />
+            <element signature="e#4375#4429#0" expanded="false" />
+            <element signature="e#4993#5075#0" expanded="false" />
+            <element signature="e#5288#5379#0" expanded="false" />
+            <element signature="e#5463#5545#0" expanded="false" />
+            <element signature="e#6628#6715#0" expanded="false" />
             <element signature="method#compareLists#0;class#GimmeTheFreeStuff#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/GetSetProps.java">
+    <entry file="file://$PROJECT_DIR$/src/testpackage/Refresh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="175">
+          <caret line="32" column="3" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
           <folding>
-            <element signature="method#getLink#0;class#GetSetProps#0" expanded="false" />
+            <element signature="e#591#592#0" expanded="true" />
+            <element signature="e#622#623#0" expanded="true" />
+            <element signature="method#setSchedulerState#0;class#Refresh#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testpackage/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="136">
+          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
           <folding>
-            <element signature="method#initialize#0;class#MainController#0" expanded="false" />
-            <element signature="method#populateTable#0;class#MainController#0" expanded="false" />
-            <element signature="e#3372#3507#0" expanded="false" />
-            <element signature="e#3511#3585#0" expanded="false" />
+            <element signature="method#setSettingsStage#0;class#MainController#0" expanded="false" />
+            <element signature="e#2102#2103#0" expanded="true" />
+            <element signature="e#2133#2134#0" expanded="true" />
+            <element signature="e#2138#2169#0" expanded="false" />
+            <element signature="e#4267#4402#0" expanded="false" />
             <element signature="method#parseItemList#0;class#MainController#0" expanded="false" />
-            <element signature="method#success#0;class#MainController#0" expanded="false" />
-            <element signature="e#5172#5204#0" expanded="false" />
-            <element signature="e#5172#5204#0" expanded="false" />
+            <element signature="e#6119#6151#0" expanded="false" />
             <element signature="method#searchTextfieldEnter#0;class#MainController#0" expanded="false" />
             <element signature="method#gotoSettings#0;class#MainController#0" expanded="false" />
             <element signature="method#craigslistClicked#0;class#MainController#0" expanded="false" />
+            <element signature="method#setTitle#0;class#MainController#0" expanded="false" />
             <element signature="method#updateListClicked#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/testpackage/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+        <state relative-caret-position="104">
+          <caret line="15" column="59" lean-forward="false" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
           <folding>
-            <element signature="docComment;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-            <element signature="method#changeLink#0;class#Controller#0" expanded="false" />
-            <element signature="method#passOrFailed#0;class#Controller#0" expanded="false" />
-            <element signature="method#fillInUI#0;class#Controller#0" expanded="false" />
-            <element signature="method#addListener#0;class#Controller#0" expanded="false" />
-            <element signature="e#4329#4759#0" expanded="false" />
-            <element signature="method#refreshChecked#0;class#Controller#0" expanded="false" />
-            <element signature="method#updateChecked#0;class#Controller#0" expanded="false" />
-            <element signature="method#runOnStartupChecked#0;class#Controller#0" expanded="false" />
-            <element signature="method#gotoMain#0;class#Controller#0" expanded="false" />
-            <element signature="method#openGithub#0;class#Controller#0" expanded="false" />
-            <element signature="method#openCraigslist#0;class#Controller#0" expanded="false" />
-            <element signature="method#craigslistTextfieldEnter#0;class#Controller#0" expanded="false" />
+            <element signature="method#stop#0;class#Main#0" expanded="false" />
+            <element signature="e#2421#2507#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/MainUserInterface.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testpackage/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>

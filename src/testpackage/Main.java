@@ -4,9 +4,7 @@ package testpackage;
  */
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,12 +16,6 @@ import javafx.stage.Stage;
 * up the following exception occurs: javafx.fxml.FXMLLoader$ValueElement processValue
 *
 * fx-border-color overlaps with the last new item
-*/
-
-/*todo
-* SETTINGS
-* Minimize to system tray
-* Start on computer startup
 */
 
 public class Main extends Application {
@@ -69,15 +61,15 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
-    LocalDate aDate = LocalDate.now().minusDays(2);
-    LocalTime aTime = LocalTime.of(14, 35, 0);
-    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
-    setCurrentTime(temp);
+//    LocalDate aDate = LocalDate.now().minusDays(2);
+//    LocalTime aTime = LocalTime.of(14, 35, 0);
+//    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
+//    setCurrentTime(temp);
 
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     setStage(primaryStage);
-//    setCurrentTime(LocalDateTime.now());
+    setCurrentTime(LocalDateTime.now());
 
     // First time starting up!
     gimmeTheFreeStuff.startup();

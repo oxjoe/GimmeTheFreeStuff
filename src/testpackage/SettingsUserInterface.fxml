@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testpackage.Controller">
   <children>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="11.0" prefHeight="59.0" prefWidth="139.0" text="Settings" textAlignment="CENTER">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="11.0" prefHeight="59.0" prefWidth="139.0" text="Settings" textAlignment="CENTER">
       <font>
         <Font name="Arial" size="28.0" />
       </font>
@@ -34,17 +34,17 @@
             <Font size="16.0" />
           </font>
         </Label>
-        <Hyperlink fx:id="currentLink" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="50.0" onAction="#openCraigslist" prefHeight="33.0" prefWidth="578.0" text="https://bloomington.craigslist.org/search/zip?search_distance=10&amp;postal=47405" textAlignment="CENTER">
+        <Hyperlink fx:id="currentLink" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="50.0" onAction="#openCraigslist" prefHeight="33.0" prefWidth="578.0" text="https://bloomington.craigslist.org/search/zip?search_distance=10&amp;postal=47405">
           <font>
             <Font name="System Italic" size="13.0" />
           </font>
         </Hyperlink>
-        <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="243.0" layoutY="75.0" prefHeight="33.0" prefWidth="35.0" text="to" textAlignment="CENTER">
+        <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="260.0" layoutY="75.0" prefHeight="33.0" prefWidth="35.0" text="to" textAlignment="CENTER">
           <font>
             <Font size="16.0" />
           </font>
         </Label>
-        <TextField fx:id="linkTextfield" alignment="CENTER" layoutX="57.0" layoutY="108.0" onKeyPressed="#craigslistTextfieldEnter" prefHeight="25.0" prefWidth="408.0" promptText="Paste Craigslist link here and hit Enter!" />
+        <TextField fx:id="linkTextfield" alignment="CENTER" layoutX="91.0" layoutY="108.0" onKeyPressed="#craigslistTextfieldEnter" prefHeight="25.0" prefWidth="408.0" promptText="Paste Craigslist link here and hit Enter!" />
         <Text fx:id="statusText" layoutX="233.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0">
           <font>
             <Font size="16.0" />
@@ -52,7 +52,7 @@
         </Text>
       </children>
     </Pane>
-    <VBox layoutX="156.0" layoutY="235.0" prefHeight="137.0" prefWidth="242.0">
+    <VBox layoutX="157.0" layoutY="253.0" prefHeight="137.0" prefWidth="242.0">
       <children>
         <HBox prefHeight="40.0" prefWidth="224.0">
           <children>
@@ -61,7 +61,7 @@
             <Label alignment="CENTER" prefHeight="57.0" prefWidth="51.0" text="minutes" />
           </children>
         </HBox>
-        <CheckBox fx:id="runOnStartupCheckbox" mnemonicParsing="false" onAction="#runOnStartupChecked" text="Run this program when Windows starts" />
+        <CheckBox fx:id="runOnStartupCheckbox" mnemonicParsing="false" onAction="#runOnStartupChecked" text="Run this program when Windows starts" visible="false" />
         <CheckBox fx:id="updateCheckbox" mnemonicParsing="false" onAction="#updateChecked" prefHeight="40.0" prefWidth="237.0" text="Future Use" visible="false" />
       </children>
     </VBox>

@@ -26,6 +26,7 @@ class Refresh {
   }
 
   static void shutdownScheduler() {
+    getMainController().getCountdownLabel().setText("N/A");
     scheduler.shutdown();
     setSchedulerState(false);
     System.out.println("**** shutdownscheduler **** ");
