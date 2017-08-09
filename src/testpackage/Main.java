@@ -61,8 +61,9 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
-//    LocalDate aDate = LocalDate.now().minusDays(2);
-//    LocalTime aTime = LocalTime.of(14, 35, 0);
+//    LocalDate aDate = LocalDate.now().minusDays(1);
+////    LocalTime aTime = LocalTime.of(14, 35, 0);
+//    LocalTime aTime = LocalTime.now();
 //    LocalDateTime temp = LocalDateTime.of(aDate, aTime);
 //    setCurrentTime(temp);
 
