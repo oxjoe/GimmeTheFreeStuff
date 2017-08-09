@@ -7,6 +7,8 @@ package testpackage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,13 +29,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.jsoup.nodes.Document;
 
 public class MainController {
 
   private static Stage settingsStage;
-  private Duration countdown;
 
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
@@ -67,19 +67,17 @@ public class MainController {
     MainController.settingsStage = settingsStage;
   }
 
-  public Duration getCountdown() {
-    return countdown;
-  }
-
-  public void setCountdown(Duration countdown) {
-    this.countdown = countdown;
-  }
+//  private Duration countdown;
+//  public Duration getCountdown() {
+//    return countdown;
+//  }
+//  public void setCountdown(Duration countdown) {
+//    this.countdown = countdown;
+//  }
 
   public void initialize() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    System.out.println(
-        "MainController Init prints main.getCurrentTime = " + Main.getCurrentTime().toString());
     try {
       setTitle();
       populateTable("useCompareLists");
@@ -89,22 +87,28 @@ public class MainController {
     System.out.println("*** MainController Initialized ***");
   }
 
-  // todo Display user friendly with hours and minutes, might be lagging and getting further apart?
-//  todo need to synchronize threads possibly?
   // showProgress: N/A -> N/A
   // Updates countdownLabel with the countdown
   @FXML
-  void showProgress() throws IOException {
-    Duration oneSecond = Duration.seconds(1);
-    countdownLabel.setText(String.valueOf(getCountdown().toSeconds()));
-    System.out.println(getCountdown().toSeconds());
+  void showProgress(long delay) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a");
+    LocalTime localTime = LocalTime.now().plusMinutes(delay);
+    String niceTime = localTime.format(formatter);
+    countdownLabel.setText(niceTime);
+    System.out.println(niceTime);
+/* tba timer live update
+ //Display user friendly with hours and minutes, might be lagging and getting further apart?
+//need to synchronize threads possibly?
+Duration oneSecond = Duration.seconds(1);
+    countdownLabel.setText(String.valueOf(getCountdown().toString()));
+    System.out.println(getCountdown().toString());
     if (getCountdown().compareTo(oneSecond) == 0) {
       GetSetProps getSetProps = new GetSetProps();
       Long defaultDelay = Long.parseLong(getSetProps.getRefreshRate());
-      setCountdown(Duration.seconds(defaultDelay));
+      setCountdown(Duration.minutes(defaultDelay));
     } else {
       setCountdown(getCountdown().subtract(oneSecond));
-    }
+    }*/
   }
 
   // populateTable: List<Item> -> List<Item>
@@ -135,10 +139,8 @@ public class MainController {
         if (item == null) {
           this.setId("rowOldItem");
         } else if (item.isStatus()) {
-          this.setId("clearStyle");
           this.setId("rowNewItem");
         } else if (!item.isStatus()) {
-          this.setId("clearStyle");
           this.setId("rowOldItem");
         }
       }
@@ -147,6 +149,7 @@ public class MainController {
     tableView.getItems().setAll(oList);
     success();
     System.out.println("POPULATED TABLE");
+    System.out.println(LocalTime.now().toString());
   }
 
   // parseItemList: List<Item> ->  List<Item>
@@ -160,7 +163,6 @@ public class MainController {
     List<Item> list = gimmeTheFreeStuff.getData(doc, url);
 
     if (temp.compareTo("useCompareLists") == 0) {
-      System.out.println("OLD VERSION = " + Main.getCurrentTime());
       List<Item> tempList = gimmeTheFreeStuff.compareLists(list, Main.getCurrentTime());
       Main.setCurrentTime(LocalDateTime.now());
       return tempList;
@@ -177,7 +179,6 @@ public class MainController {
       @Override
       public void run() {
         successText.setVisible(false);
-        ;
         timer.cancel();
       }
     };

@@ -14,30 +14,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /*bugs
-* Whenever it changes stages (between the Main UI and the Settings UI) including when it starts
+* Whenever it changes stages (between the Main UI and the Settings UI), including when it starts
 * up the following exception occurs: javafx.fxml.FXMLLoader$ValueElement processValue
-*
-* When I run the code in GimmeTheFreeStuff main, the follow exception occurs:
-* Exception in thread "main" java.lang.ExceptionInInitializerError
 *
 * fx-border-color overlaps with the last new item
 */
 
 /*todo
-* Search TextField
-*Use currentTime to Option to start up with a brand new list (what craigslist shows) or when you
-* closed the program.
-*Colors of Posted last 2 days, etc... Current updates to
-Posted today and yestarday: green
-Change table limit too
-
 * SETTINGS
-* REGEX for timer display
 * Minimize to system tray
-* Check for app updates every day
 * Start on computer startup
-*
-
 */
 
 public class Main extends Application {
@@ -83,7 +69,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
 ////    Used for testing timer
-    LocalDate aDate = LocalDate.now().minusDays(1);
+    LocalDate aDate = LocalDate.now().minusDays(2);
     LocalTime aTime = LocalTime.of(14, 35, 0);
     LocalDateTime temp = LocalDateTime.of(aDate, aTime);
     setCurrentTime(temp);

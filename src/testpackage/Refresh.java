@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
-import javafx.util.Duration;
 
 class Refresh {
 
@@ -52,23 +51,28 @@ class Refresh {
     setSchedulerState(true);
     scheduler = Executors.newScheduledThreadPool(10);
 
+    // bugs I think timer might be off by a few seconds, make sure thread is synced?
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
-      System.out.println("repeat every " + delay);
+      System.out.println("repeat every " + delay + "min");
+      getMainController().showProgress(delay);
       try {
         getMainController().populateTable("");
       } catch (IOException e) {
         e.printStackTrace();
       }
-    }), delay, delay, TimeUnit.SECONDS);
+    }), delay, delay, TimeUnit.MINUTES);
+    // Need to show once it will update b/c of the DELAY before it starts scheduler
+    getMainController().showProgress(delay);
 
-    // Set number that it will countdown from once it resets
-    getMainController().setCountdown(Duration.seconds(delay));
+/* tba timer live update
+// Set number that it will countdown from once it resets
+    getMainController().setCountdown(Duration.minutes(delay));
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
       try {
         getMainController().showProgress();
       } catch (IOException e) {
         e.printStackTrace();
       }
-    }), 0, 1, TimeUnit.SECONDS);
+    }), 0, 1, TimeUnit.SECONDS);*/
   }
 }

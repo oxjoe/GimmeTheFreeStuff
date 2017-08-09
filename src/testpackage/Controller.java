@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -50,7 +49,7 @@ public class Controller {
   private CheckBox updateCheckbox; // Value injected by FXMLLoader
 
   @FXML // fx:id="newUpdateLabel"
-  private Label newUpdateLabel; // Value injected by FXMLLoader
+  private Hyperlink newUpdateHyperlink; // Value injected by FXMLLoader
 
   public void initialize() {
     try {
@@ -71,9 +70,9 @@ public class Controller {
     String currentVer = "https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/v1.0.txt";
     Document doc = obj.testLink(currentVer);
     // If I test the current version and its not there, then that means that I've updated this
-    // app since the new version would be v1.1.txt
+    // app since the new version would be v1."new version number".txt
     if (doc == null) {
-      newUpdateLabel.setVisible(true);
+      newUpdateHyperlink.setVisible(true);
     }
   }
 
