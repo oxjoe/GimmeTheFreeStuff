@@ -1,9 +1,4 @@
-package testpackage;
-
-/**
- * Created by Joseph on 7/24/2017. Purpose of Refresh.java: Provides the methods that will get a new
- * a list from Craigslist every x amount of minutes
- */
+package freestuff;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -11,6 +6,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 
+/**
+ * Created by Joseph on 7/24/2017.
+ */
+
+// Purpose of Refresh.java: Provides the methods that will get a new a list from Craigslist every
+// x amount of minutes
 class Refresh {
 
   private static ScheduledExecutorService scheduler;
@@ -40,9 +41,8 @@ class Refresh {
     Refresh.schedulerState = schedulerState;
   }
 
-  // refreshListWithTimer: N/A -> N/A
-  // Repopulates table every "refreshRate from user.properties" amount of minutes and shows the
-  // countdown timer
+  // createAndStartScheduler: N/A -> N/A
+  // Repopulates table every x amount of minutes and shows the next time at which it would refresh
   static void createAndStartScheduler() throws IOException {
     System.out.println("**** createAndStartScheduler **** ");
 
@@ -51,6 +51,9 @@ class Refresh {
 
     setSchedulerState(true);
     scheduler = Executors.newScheduledThreadPool(10);
+
+    // Need to show b/c of the one time delay before starting the timer
+    getMainController().showProgress(delay);
 
     // bugs I think timer might be off by a few seconds, make sure thread is synced?
     scheduler.scheduleAtFixedRate(() -> Platform.runLater(() -> {
@@ -62,8 +65,6 @@ class Refresh {
         e.printStackTrace();
       }
     }), delay, delay, TimeUnit.MINUTES);
-    // Need to show once it will update b/c of the DELAY before it starts scheduler
-    getMainController().showProgress(delay);
 
 /* tba timer live update
 // Set number that it will countdown from once it resets

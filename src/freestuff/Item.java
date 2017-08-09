@@ -1,11 +1,12 @@
-package testpackage;
-
-/**
- * Created by Joseph on 6/27/2017. Purpose of Item.java: Class to store each Craigslist item
- */
+package freestuff;
 
 import javafx.scene.control.Hyperlink;
 
+/**
+ * Created by Joseph on 6/27/2017.
+ */
+
+// Purpose of Item.java: Class to store each Craigslist item
 public class Item {
 
   private String name;

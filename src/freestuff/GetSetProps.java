@@ -1,16 +1,16 @@
-package testpackage;
-
-/**
- * Created by Joseph on 7/15/2017. Purpose of GetSetProps.java: To get the keys and set the values
- * in user.properties
- */
+package freestuff;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-class GetSetProps {
+/**
+ * Created by Joseph on 7/15/2017.
+ */
+
+// Purpose of GetSetProps.java: To get the keys and set the values in user.properties
+public class GetSetProps {
 
   private Properties props;
   private final String uP = "user.properties";

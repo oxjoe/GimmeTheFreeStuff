@@ -1,8 +1,7 @@
-package testpackage;
+package freestuff;
 
 /**
- * Created by Joseph on 6/26/2017. Purpose of GimmeTheFreeStuff.java: Handles the majority of the
- * code to scrap data from Craigslist
+ * Created by Joseph on 6/26/2017.
  */
 
 import java.io.FileInputStream;
@@ -25,6 +24,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+// Purpose of GimmeTheFreeStuff.java: Handles the majority of the code to scrap data from Craigslist
 class GimmeTheFreeStuff {
 
   private final String uP = "user.properties";
@@ -44,7 +44,7 @@ class GimmeTheFreeStuff {
 
   // startup: N/A -> N/A
   // Runs the very first time when the application starts up. Checks to see if user.properties
-  // exist, if they don't then it copies over the contents of default.properties to a newly
+  // exists, if they don't then it copies over the contents of default.properties to a newly
   // created user.properties
   void startup() throws IOException {
     GetSetProps obj = new GetSetProps();
@@ -71,7 +71,7 @@ class GimmeTheFreeStuff {
     }
   }
 
-  // createUserProps: N/A - > N/A
+  // createUserProps: N/A - > user.properties
   // Creates user.properties file
   private void createUserProps() throws FileNotFoundException, UnsupportedEncodingException {
     PrintWriter writer = new PrintWriter(uP, "UTF-8");
@@ -167,8 +167,6 @@ class GimmeTheFreeStuff {
       list.add(new Item(
           nameList.get(i),
           dateList.get(i),
-          // Converts each element of type string in dateTimeList to type Date while adding it to
-          // the list so it can be sorted easier later as well + be displayed more user friendly
           new Hyperlink(itemLinkList.get(i)),
           false));
     }

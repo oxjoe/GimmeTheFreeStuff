@@ -1,10 +1,9 @@
-package testpackage;
+package freestuff;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
@@ -15,17 +14,11 @@ import javafx.scene.text.Text;
 import org.jsoup.nodes.Document;
 
 /**
- * Created by Joseph on 7/6/2017. Purpose of Controller.java: Handles I/O for
- * SettingsUserInterface.fxml
+ * Created by Joseph on 7/6/2017.
  */
 
+// Purpose of Controller.java: Handles I/O for SettingsUserInterface.fxml
 public class Controller {
-
-  @FXML // fx:id="backButton"
-  private Button backButton; // Value injected by FXMLLoader
-
-  @FXML // fx:id="githubLink"
-  private Hyperlink githubLink; // Value injected by FXMLLoader
 
   @FXML // fx:id="currentLink"
   private Hyperlink currentLink; // Value injected by FXMLLoader
@@ -92,10 +85,10 @@ public class Controller {
   private void changeLink() {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
-    boolean updateMainUI = false;
 
     String url = linkTextfield.getText();
     Document doc = gimmeTheFreeStuff.testLink(url);
+    boolean updateMainUI = false;
 
     if (doc == null) {
       passOrFailed("Failed");
@@ -157,7 +150,7 @@ public class Controller {
   }
 
   // addListener: N/A -> N/A
-  // Adds listener to refreshTextfield in case user changes refershRate
+  // Adds listener to refreshTextfield in case user changes refreshRate
   @FXML
   private void addListener() {
     GetSetProps obj = new GetSetProps();

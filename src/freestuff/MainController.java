@@ -1,9 +1,4 @@
-package testpackage;
-
-/**
- * Created by Joseph on 7/6/2017. Purpose of MainController.java: Handles I/O for
- * MainUserInterface.fxml
- */
+package freestuff;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -31,10 +26,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jsoup.nodes.Document;
 
+/**
+ * Created by Joseph on 7/6/2017.
+ */
+
+// Purpose of MainController.java: Handles I/O for MainUserInterface.fxml
 public class MainController {
 
   private static Stage settingsStage;
 
+  // tba
   @FXML // fx:id="searchTextfield"
   private TextField searchTextfield; // Value injected by FXMLLoader
 
@@ -89,7 +90,7 @@ public class MainController {
     System.out.println("*** MainController Initialized ***");
   }
 
-  // showProgress: N/A -> N/A
+  // showProgress: long -> N/A
   // Updates countdownLabel with the countdown
   @FXML
   void showProgress(long delay) {
@@ -98,6 +99,7 @@ public class MainController {
     String niceTime = localTime.format(formatter);
     getCountdownLabel().setText(niceTime);
     System.out.println(niceTime);
+
 /* tba timer live update
  //Display user friendly with hours and minutes, might be lagging and getting further apart?
 //need to synchronize threads possibly?
@@ -111,10 +113,11 @@ Duration oneSecond = Duration.seconds(1);
     } else {
       setCountdown(getCountdown().subtract(oneSecond));
     }*/
+
   }
 
-  // populateTable: List<Item> -> List<Item>
-  // Fills in the columns with data
+  // populateTable: String -> List<Item>
+  // Fills in the columns with data and sets row colors
   void populateTable(String temp) throws IOException {
     Main main = new Main();
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -154,7 +157,7 @@ Duration oneSecond = Duration.seconds(1);
     System.out.println(LocalTime.now().toString());
   }
 
-  // parseItemList: List<Item> ->  List<Item>
+  // parseItemList: String ->  List<Item>
   // Returns the list by using the url from user.properties
   private List<Item> parseItemList(String temp) throws IOException {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
@@ -198,11 +201,10 @@ Duration oneSecond = Duration.seconds(1);
   private void gotoSettings() throws IOException {
     Stage stage = new Stage();
     setSettingsStage(stage);
-    Parent root = FXMLLoader.load(getClass().getResource("SettingsUserInterface.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("userinterface/SettingsUserInterface.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     System.out.println("Switched to Settings page");
-    // Stage is settingsui.fxml
 
     stage.initOwner(Main.getStage());
     stage.initModality(Modality.WINDOW_MODAL);
