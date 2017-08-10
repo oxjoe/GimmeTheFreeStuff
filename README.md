@@ -11,18 +11,15 @@ Shows you the newest listings of Craigslist by occasionally refreshing the sites
 - Automatically checks for new updates
 
 ## Screenshots
-Main UI: 
 ![alt text](https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/screenshots/MainUI.png "Main UI")
 
-Settings UI: 
 ![alt text](https://github.com/oxjoe/GimmeTheFreeStuff/blob/master/screenshots/SettingsUI.png "Settings UI")
 
 
 ## Notes
-
 1. Table contains at most 120 listings, because the 121<sup>st</sup> listing is probably already gone.
-
 2. Finally, if you are familiar with Java please do critique my code! (wrote this so I could learn how to Java)
+
 
 ### Program Data
 Size: 369 KB
