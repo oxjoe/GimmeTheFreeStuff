@@ -1,8 +1,3 @@
-package freestuff;
-
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
@@ -13,11 +8,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Joseph on 7/6/2017.
  */
 
-// Purpose of Controller.java: Handles I/O for SettingsUserInterface.fxml
+// Purpose of Controller.java: Handles I/O for Settings.fxml
 public class Controller {
 
   @FXML // fx:id="currentLink"
@@ -75,7 +74,7 @@ public class Controller {
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     MainController.getSettingsStage()
-        .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+            .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
   }
 
   // changeLink: N/A -> N/A

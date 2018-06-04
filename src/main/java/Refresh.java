@@ -1,10 +1,9 @@
-package freestuff;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javafx.application.Platform;
 
 /**
  * Created by Joseph on 7/24/2017.

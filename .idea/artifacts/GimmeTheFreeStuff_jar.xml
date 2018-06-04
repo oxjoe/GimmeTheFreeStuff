@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact name="GimmeTheFreeStuff:jar">
+    <output-path>$USER_HOME$/Desktop/GimmeTheFreeStuff</output-path>
+    <root id="root">
+      <element id="archive" name="GimmeTheFreeStuff.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$USER_HOME$/Desktop/GimmeTheFreeStuff/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="GimmeTheFreeStuff" />
+      </element>
+      <element id="library" level="project" name="jsoup-1.10.3" />
+      <element id="library" level="project" name="jsoup-1.10.3-javadoc" />
+    </root>
+  </artifact>
+</component>

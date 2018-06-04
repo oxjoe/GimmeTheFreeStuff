@@ -1,4 +1,16 @@
-package freestuff;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -7,30 +19,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.jsoup.nodes.Document;
 
 /**
  * Created by Joseph on 7/6/2017.
  */
 
-// Purpose of MainController.java: Handles I/O for MainUserInterface.fxml
+// Purpose of MainController.java: Handles I/O for Main.fxml
 public class MainController {
 
   private static Stage settingsStage;
@@ -201,7 +195,7 @@ Duration oneSecond = Duration.seconds(1);
   private void gotoSettings() throws IOException {
     Stage stage = new Stage();
     setSettingsStage(stage);
-    Parent root = FXMLLoader.load(getClass().getResource("userinterface/SettingsUserInterface.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     System.out.println("Switched to Settings page");
@@ -227,7 +221,7 @@ Duration oneSecond = Duration.seconds(1);
     GimmeTheFreeStuff gimmeTheFreeStuff = new GimmeTheFreeStuff();
     GetSetProps getSetProps = new GetSetProps();
     Main.getStage()
-        .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
+            .setTitle("GimmeTheFreeStuff - " + gimmeTheFreeStuff.getTitle(getSetProps.getLink()));
   }
 
   // updateListClicked: N/A -> N/A

@@ -1,0 +1,7 @@
+#rowNewItem{
+  -fx-border-color: limegreen;
+}
+
+#rowOldItem {
+  -fx-border-color: orangered;
+}

@@ -1,5 +1,3 @@
-package freestuff;
-
 import javafx.scene.control.Hyperlink;
 
 /**
@@ -52,7 +50,7 @@ public class Item {
   public void setStatus(boolean status) {
     this.status = status;
   }
-  
+
   @Override
   public String toString() {
     return status + " || " + name + " || " + date + " || " + urlLink + "\n";

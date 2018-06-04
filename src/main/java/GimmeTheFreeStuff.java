@@ -1,15 +1,14 @@
-package freestuff;
-
 /**
  * Created by Joseph on 6/26/2017.
  */
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import javafx.scene.control.Hyperlink;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -18,11 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Properties;
-import javafx.scene.control.Hyperlink;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 // Purpose of GimmeTheFreeStuff.java: Handles the majority of the code to scrap data from Craigslist
 class GimmeTheFreeStuff {
@@ -165,10 +159,10 @@ class GimmeTheFreeStuff {
     // Loops through the other lists and adds each element into the new List<Item>
     for (int i = 0; i < nameList.size(); i++) {
       list.add(new Item(
-          nameList.get(i),
-          dateList.get(i),
-          new Hyperlink(itemLinkList.get(i)),
-          false));
+              nameList.get(i),
+              dateList.get(i),
+              new Hyperlink(itemLinkList.get(i)),
+              false));
     }
     return list;
   }

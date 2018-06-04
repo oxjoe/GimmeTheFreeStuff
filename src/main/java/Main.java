@@ -1,26 +1,25 @@
-package freestuff;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 /**
  * Created by Joseph on 7/6/2017.
  */
 
 /*bugs - Documented
-* Whenever it changes stages (between the Main UI and the Settings UI), including when it starts
-* up the following exception occurs: javafx.fxml.FXMLLoader$ValueElement processValue
-*
-* fx-border-color overlaps with the last new item
-*/
+ * Whenever it changes stages (between the Main UI and the Settings UI), including when it starts
+ * up the following exception occurs: javafx.fxml.FXMLLoader$ValueElement processValue
+ *
+ * fx-border-color overlaps with the last new item
+ */
 
 /*bugs - Undocumented
-*/
+ */
 
 // Purpose of Main.java: Starting point of JavaFX application
 public class Main extends Application {
@@ -81,7 +80,7 @@ public class Main extends Application {
     gimmeTheFreeStuff.startup();
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource(
-        "userinterface/MainUserInterface.fxml"));
+            "/Main.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
