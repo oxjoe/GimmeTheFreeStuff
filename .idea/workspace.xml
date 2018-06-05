@@ -10,15 +10,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6c87ae5-d833-42b9-ba2c-782098efab05" name="Default" comment="minor changes, cleaned up code">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GimmeTheFreeStuff.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GimmeTheFreeStuff.iml" afterDir="false" />
+    <list default="true" id="d6c87ae5-d833-42b9-ba2c-782098efab05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/GimmeTheFreeStuff-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/GimmeTheFreeStuff-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/GimmeTheFreeStuff-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Users\Joseph\IdeaProjects\GimmeTheFreeStuff\.idea\shelf/" />
@@ -113,8 +106,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+            <state relative-caret-position="212">
+              <caret line="40" column="20" lean-forward="true" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -731,7 +724,7 @@
       <workItem from="1527571628661" duration="340000" />
       <workItem from="1528000099939" duration="59000" />
       <workItem from="1528064798136" duration="5758000" />
-      <workItem from="1528177425309" duration="2754000" />
+      <workItem from="1528177425309" duration="2923000" />
     </task>
     <task id="LOCAL-00001" summary="problem - initialized in controller is called twice b/c switched screens, need to do set website first">
       <created>1499752662254</created>
@@ -775,11 +768,18 @@
       <option name="project" value="LOCAL" />
       <updated>1501104303785</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="using javafx-maven-plugin, should convert to maven assembly&#10;later on">
+      <created>1528180335350</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1528180335350</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="498489000" />
+    <option name="totallyTimeSpent" value="498658000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -800,8 +800,8 @@
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.34535453" side_tool="true" weight="0.25080732" />
       <window_info anchor="right" id="Maven Projects" order="11" sideWeight="0.48914355" visible="true" weight="0.21028744" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.2744887" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.6546455" visible="true" weight="0.32289952" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.184514" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.6546455" weight="0.32289952" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49816626" weight="0.32784185" />
       <window_info id="Designer" order="4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.72254336" visible="true" weight="0.17473525" />
@@ -909,7 +909,8 @@
     <MESSAGE value="added GetSetProps for get/set keys and values in user.properties" />
     <MESSAGE value="minor changes, cleaned up code" />
     <MESSAGE value="minor changes, more cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes, more cleanup" />
+    <MESSAGE value="using javafx-maven-plugin, should convert to maven assembly&#10;later on" />
+    <option name="LAST_COMMIT_MESSAGE" value="using javafx-maven-plugin, should convert to maven assembly&#10;later on" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1271,8 +1272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+        <state relative-caret-position="212">
+          <caret line="40" column="20" lean-forward="true" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
         </state>
       </provider>
     </entry>
